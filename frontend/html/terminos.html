@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Condiciones - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/terminos.css">
+
+    <!-- Configuración Tailwind personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'minimal-gray': '#f8f9fa',
+                        'minimal-dark': '#2c3e50',
+                        'minimal-accent': '#34495e',
+                        'minimal-light': '#ecf0f1'
+                    },
+                    fontFamily: {
+                        'minimal': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-minimal-gray min-h-screen font-minimal">
+
+<!-- Fondo animado sutil -->
+<div class="animated-background">
+    <div class="bg-layer"></div>
+    <div class="floating-icons">
+        <span class="floating-icon paper-icon"></span>
+        <span class="floating-icon document-icon"></span>
+        <span class="floating-icon folder-icon"></span>
+        <span class="floating-icon file-icon"></span>
+        <span class="floating-icon contract-icon"></span>
+        <span class="floating-icon legal-icon"></span>
+        <span class="floating-icon paper-icon"></span>
+        <span class="floating-icon document-icon"></span>
+    </div>
+</div>
+
+<!-- Logo flotante -->
+<div class="floating-logo">
+    <a href="../html/index.html" class="logo-link">
+        <div class="logo-icon">
+            <span>M</span>
+        </div>
+        <span class="logo-text">MinimalStore</span>
+    </a>
+</div>
+
+<!-- Contenedor principal -->
+<div class="main-container">
+
+    <!-- Header con ícono animado -->
+    <div class="terms-header">
+
+        <!-- Ícono de documento animado -->
+        <div class="document-icon-container">
+            <section class="relative group flex flex-col items-center justify-center w-full h-full">
+                <div class="file relative w-60 h-40 cursor-pointer origin-bottom" style="perspective: 1500px;">
+                    <div class="work-5 bg-minimal-accent w-full h-full origin-top rounded-2xl rounded-tl-none transition-all ease duration-500 relative document-shadow"></div>
+                    <div class="work-4 absolute inset-1 bg-gray-400 rounded-2xl transition-all ease duration-500 origin-bottom select-none document-layer"></div>
+                    <div class="work-3 absolute inset-1 bg-gray-300 rounded-2xl transition-all ease duration-500 origin-bottom document-layer"></div>
+                    <div class="work-2 absolute inset-1 bg-gray-200 rounded-2xl transition-all ease duration-500 origin-bottom document-layer"></div>
+                    <div class="work-1 absolute bottom-0 bg-gradient-to-t from-minimal-accent to-minimal-dark w-full h-40 rounded-2xl rounded-tr-none transition-all ease duration-500 origin-bottom flex items-end document-front"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Título con efecto glass -->
+        <h1 class="terms-title" id="main-title">
+            <span class="title-text">Términos y Condiciones</span>
+            <div class="title-glass-effect"></div>
+        </h1>
+
+        <!-- Subtítulo -->
+        <p class="terms-subtitle">
+            Conoce nuestras políticas y términos de uso
+        </p>
+    </div>
+
+    <!-- Contenedor del contenido -->
+    <div class="terms-content-container">
+
+        <!-- Sección de contenido principal -->
+        <div class="terms-content">
+
+            <section class="terms-section" data-section="1">
+                <h2 class="section-title">1. Aceptación de los Términos</h2>
+                <div class="section-content">
+                    <p>Al acceder y utilizar MinimalStore, usted acepta estar vinculado por estos Términos y Condiciones de uso. Si no está de acuerdo con alguna parte de estos términos, no debe utilizar nuestro servicio.</p>
+                    <p>Estos términos se aplican a todos los visitantes, usuarios y otras personas que accedan o utilicen el servicio.</p>
+                </div>
+            </section>
+
+            <section class="terms-section" data-section="2">
+                <h2 class="section-title">2. Descripción del Servicio</h2>
+                <div class="section-content">
+                    <p>MinimalStore es una plataforma de comercio electrónico minimalista que conecta compradores y vendedores. Proporcionamos un espacio digital donde los usuarios pueden:</p>
+                    <ul class="terms-list">
+                        <li>Navegar y comprar productos en categorías como Tecnología, Hogar, Moda, Mascotas y Manualidades</li>
+                        <li>Registrarse como compradores o vendedores</li>
+                        <li>Gestionar carritos de compras y realizar transacciones</li>
+                        <li>Acceder a un catálogo curado de productos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="terms-section" data-section="3">
+                <h2 class="section-title">3. Registro de Usuario</h2>
+                <div class="section-content">
+                    <p>Para utilizar ciertas funciones de nuestro servicio, debe registrarse para obtener una cuenta. Al registrarse, usted se compromete a:</p>
+                    <ul class="terms-list">
+                        <li>Proporcionar información precisa, actual y completa</li>
+                        <li>Mantener y actualizar su información de registro</li>
+                        <li>Mantener la confidencialidad de su contraseña</li>
+                        <li>Ser responsable de todas las actividades que ocurran bajo su cuenta</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="terms-section" data-section="4">
+                <h2 class="section-title">4. Política de Privacidad</h2>
+                <div class="section-content">
+                    <p>Su privacidad es importante para nosotros. Recopilamos y utilizamos su información de acuerdo con nuestra Política de Privacidad, que incluye:</p>
+                    <ul class="terms-list">
+                        <li>Información personal: nombre, email, teléfono y dirección</li>
+                        <li>Datos de uso: patrones de navegación y preferencias</li>
+                        <li>Información de transacciones: historial de compras y pagos</li>
+                        <li>Cookies y tecnologías similares para mejorar la experiencia del usuario</li>
+                    </ul>
+                    <p>No vendemos ni compartimos su información personal con terceros sin su consentimiento explícito.</p>
+                </div>
+            </section>
+
+            <section class="terms-section" data-section="5">
+                <h2 class="section-title">5. Términos de Compra</h2>
+                <div class="section-content">
+                    <p>Al realizar una compra en MinimalStore, usted acepta:</p>
+                    <ul class="terms-list">
+                        <li>Los precios mostrados son los vigentes al momento de la compra</li>
+                        <li>Todos los pagos deben completarse antes del envío</li>
+                        <li>La disponibilidad de productos está sujeta a stock</li>
+                        <li>Los tiempos de entrega son estimados y pueden variar</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="terms-section" data-section="6">
+                <h2 class="section-title">6. Responsabilidades del Usuario</h2>
+                <div class="section-content">
+                    <p>Como usuario de MinimalStore, usted se compromete a:</p>
+                    <ul class="terms-list">
+                        <li>Utilizar el servicio únicamente para fines legales</li>
+                        <li>No interferir con el funcionamiento del servicio</li>
+                        <li>Respetar los derechos de otros usuarios</li>
+                        <li>No cargar contenido malicioso o inapropiado</li>
+                        <li>Cumplir con todas las leyes y regulaciones aplicables</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="terms-section" data-section="7">
+                <h2 class="section-title">7. Limitación de Responsabilidad</h2>
+                <div class="section-content">
+                    <p>MinimalStore no será responsable por:</p>
+                    <ul class="terms-list">
+                        <li>Daños indirectos o consecuentes derivados del uso del servicio</li>
+                        <li>Interrupciones temporales del servicio por mantenimiento</li>
+                        <li>Problemas técnicos fuera de nuestro control</li>
+                        <li>Transacciones entre usuarios que no cumplan las expectativas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="terms-section" data-section="8">
+                <h2 class="section-title">8. Modificaciones a los Términos</h2>
+                <div class="section-content">
+                    <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Las modificaciones entrarán en vigor inmediatamente después de su publicación en el sitio web.</p>
+                    <p>Es su responsabilidad revisar periódicamente estos términos para estar al tanto de cualquier cambio.</p>
+                </div>
+            </section>
+
+            <section class="terms-section" data-section="9">
+                <h2 class="section-title">9. Contacto</h2>
+                <div class="section-content">
+                    <p>Si tiene preguntas sobre estos Términos y Condiciones, puede contactarnos a través de:</p>
+                    <ul class="terms-list">
+                        <li>Email: legal@minimalstore.com</li>
+                        <li>Teléfono: +1 (555) 123-4567</li>
+                        <li>Dirección: CALLE 22, Montería, Córdoba, Colombia, 230001</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- Navegación lateral -->
+        <div class="terms-navigation">
+            <div class="nav-container">
+                <h3 class="nav-title">Índice</h3>
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link" data-target="1">Aceptación de Términos</a></li>
+                    <li><a href="#" class="nav-link" data-target="2">Descripción del Servicio</a></li>
+                    <li><a href="#" class="nav-link" data-target="3">Registro de Usuario</a></li>
+                    <li><a href="#" class="nav-link" data-target="4">Política de Privacidad</a></li>
+                    <li><a href="#" class="nav-link" data-target="5">Términos de Compra</a></li>
+                    <li><a href="#" class="nav-link" data-target="6">Responsabilidades</a></li>
+                    <li><a href="#" class="nav-link" data-target="7">Limitación de Responsabilidad</a></li>
+                    <li><a href="#" class="nav-link" data-target="8">Modificaciones</a></li>
+                    <li><a href="#" class="nav-link" data-target="9">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="terms-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 MinimalStore. Todos los derechos reservados.</p>
+            <p class="footer-date">Última actualización: Junio 2025</p>
+        </div>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="../js/terminos.js"></script>
+</body>
+</html>

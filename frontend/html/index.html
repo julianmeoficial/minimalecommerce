@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinimalEcommerce - En Construcción</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/loader.css">
+</head>
+<body>
+
+<!-- Pantalla de Carga Principal (TU CSS ORIGINAL) -->
+<div id="loader-container">
+    <main>
+        <div class="preloader">
+            <div class="preloader__square"></div>
+            <div class="preloader__square"></div>
+            <div class="preloader__square"></div>
+            <div class="preloader__square"></div>
+        </div>
+        <div class="status">Cargando MinimalStore<span class="status__dot">.</span><span class="status__dot">.</span><span class="status__dot">.</span></div>
+    </main>
+</div>
+
+<!-- Pantalla de Construcción (oculta inicialmente) -->
+<div id="construction-container" style="display: none;">
+    <main>
+        <!-- TU LOADER ORIGINAL PERO MÁS PEQUEÑO -->
+        <div class="construction-preloader">
+            <div class="preloader__square"></div>
+            <div class="preloader__square"></div>
+            <div class="preloader__square"></div>
+            <div class="preloader__square"></div>
+        </div>
+
+        <!-- Texto de Construcción -->
+        <div class="construction-text">
+            <h1 class="construction-title">MinimalStore</h1>
+            <p class="construction-subtitle">Sitio en proceso de construcción</p>
+            <div class="construction-dots">
+                <span class="construction-dot"></span>
+                <span class="construction-dot"></span>
+                <span class="construction-dot"></span>
+            </div>
+            <p class="construction-info">
+                Estamos trabajando para ofrecerte la mejor experiencia de compra minimalista
+            </p>
+        </div>
+    </main>
+</div>
+
+<!-- Scripts -->
+<script src="../js/loader.js"></script>
+</body>
+</html>

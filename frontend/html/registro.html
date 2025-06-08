@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="registro-page">
+
+<!-- Fondo animado con degradado diferente -->
+<div class="animated-background">
+    <div class="bg-layer-1"></div>
+    <div class="bg-layer-2"></div>
+    <div class="bg-layer-3"></div>
+</div>
+
+<!-- Partículas flotantes más dinámicas -->
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<!-- Elementos glass flotantes -->
+<div class="glass-elements">
+    <div class="glass-bubble glass-bubble-1"></div>
+    <div class="glass-bubble glass-bubble-2"></div>
+    <div class="glass-bubble glass-bubble-3"></div>
+    <div class="glass-bubble glass-bubble-4"></div>
+</div>
+
+<!-- Overlay oscuro para enfatizar formulario -->
+<div class="dark-overlay"></div>
+
+<!-- Contenedor principal -->
+<div class="main-container">
+
+    <!-- Logo flotante -->
+    <div class="floating-logo">
+        <a href="../html/index.html" class="logo-link">
+            <div class="logo-icon">
+                <span>M</span>
+            </div>
+            <span class="logo-text">MinimalStore</span>
+        </a>
+    </div>
+
+    <!-- Formulario de Registro -->
+    <div class="form-container registro-container" id="registro-container">
+
+        <!-- Header del formulario -->
+        <div class="form-header">
+            <h1 class="form-title">Crear Cuenta</h1>
+            <p class="form-subtitle">Únete a la experiencia minimalista</p>
+        </div>
+
+        <!-- Formulario -->
+        <form id="registro-form" class="auth-form">
+
+            <!-- Campos en dos columnas -->
+            <div class="two-columns">
+                <!-- Campo Nombre -->
+                <div class="field-group">
+                    <div class="input-wrapper">
+                        <input type="text" id="nombre" required class="form-input" autocomplete="name">
+                        <label for="nombre" class="form-label">Nombre completo</label>
+                        <div class="input-line"></div>
+                    </div>
+                    <span class="field-error" id="nombre-error"></span>
+                </div>
+
+                <!-- Campo Email -->
+                <div class="field-group">
+                    <div class="input-wrapper">
+                        <input type="email" id="email" required class="form-input" autocomplete="email">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <div class="input-line"></div>
+                    </div>
+                    <span class="field-error" id="email-error"></span>
+                </div>
+            </div>
+
+            <div class="two-columns">
+                <!-- Campo Teléfono -->
+                <div class="field-group">
+                    <div class="input-wrapper">
+                        <input type="tel" id="telefono" required class="form-input" autocomplete="tel">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <div class="input-line"></div>
+                    </div>
+                    <span class="field-error" id="telefono-error"></span>
+                </div>
+
+                <!-- Campo Dirección -->
+                <div class="field-group">
+                    <div class="input-wrapper">
+                        <input type="text" id="direccion" required class="form-input" autocomplete="address-line1">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <div class="input-line"></div>
+                    </div>
+                    <span class="field-error" id="direccion-error"></span>
+                </div>
+            </div>
+
+            <div class="two-columns">
+                <!-- Campo Password -->
+                <div class="field-group">
+                    <div class="input-wrapper">
+                        <input type="password" id="password" required class="form-input" autocomplete="new-password">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <div class="input-line"></div>
+                        <button type="button" class="password-toggle" id="toggle-password">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="field-error" id="password-error"></span>
+                </div>
+
+                <!-- Confirmar Password -->
+                <div class="field-group">
+                    <div class="input-wrapper">
+                        <input type="password" id="confirm-password" required class="form-input" autocomplete="new-password">
+                        <label for="confirm-password" class="form-label">Confirmar contraseña</label>
+                        <div class="input-line"></div>
+                    </div>
+                    <span class="field-error" id="confirm-password-error"></span>
+                </div>
+            </div>
+
+            <!-- Tipo de Usuario con animaciones smooth -->
+            <div class="field-group">
+                <label class="user-types-label">Tipo de cuenta</label>
+                <div class="user-types">
+                    <label class="user-type-option comprador-option">
+                        <input type="radio" name="tipoUsuario" value="COMPRADOR" checked class="sr-only">
+                        <div class="user-type-card comprador-card">
+                            <!-- Patrón animado de fondo para comprador -->
+                            <div class="pattern-bg comprador-pattern">
+                                <div class="pattern-element cart-icon"></div>
+                                <div class="pattern-element bag-icon"></div>
+                                <div class="pattern-element heart-icon"></div>
+                                <div class="pattern-element star-icon"></div>
+                                <div class="pattern-element gift-icon"></div>
+                                <div class="pattern-element credit-card-icon"></div>
+                            </div>
+
+                            <div class="card-content">
+                                <div class="user-type-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                    </svg>
+                                </div>
+                                <span class="user-type-text">Comprador</span>
+                                <div class="user-type-subtitle">Explora y compra productos</div>
+                            </div>
+
+                            <div class="selection-indicator">
+                                <div class="check-mark">✓</div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="user-type-option vendedor-option">
+                        <input type="radio" name="tipoUsuario" value="VENDEDOR" class="sr-only">
+                        <div class="user-type-card vendedor-card">
+                            <!-- Patrón animado de fondo para vendedor -->
+                            <div class="pattern-bg vendedor-pattern">
+                                <div class="pattern-element store-icon"></div>
+                                <div class="pattern-element graph-icon"></div>
+                                <div class="pattern-element box-icon"></div>
+                                <div class="pattern-element tag-icon"></div>
+                                <div class="pattern-element money-icon"></div>
+                                <div class="pattern-element truck-icon"></div>
+                            </div>
+
+                            <div class="card-content">
+                                <div class="user-type-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                    </svg>
+                                </div>
+                                <span class="user-type-text">Vendedor</span>
+                                <div class="user-type-subtitle">Vende tus productos</div>
+                            </div>
+
+                            <div class="selection-indicator">
+                                <div class="check-mark">✓</div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Términos y condiciones -->
+            <div class="terms-wrapper">
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="terms" required class="checkbox-input">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">
+                            Acepto los <a href="terminos" class="terms-link">términos y condiciones</a>
+                            y la <a href="#" class="terms-link">política de privacidad</a>
+                        </span>
+                </label>
+            </div>
+
+            <!-- Botón Submit -->
+            <button type="submit" class="submit-btn" id="registro-btn">
+                    <span class="btn-content">
+                        <span class="btn-text">Crear Cuenta</span>
+                        <div class="btn-loader">
+                            <div class="spinner"></div>
+                        </div>
+                    </span>
+                <div class="btn-bg"></div>
+            </button>
+
+            <!-- Error general -->
+            <div id="general-error" class="general-error"></div>
+        </form>
+
+        <!-- Footer del formulario -->
+        <div class="form-footer">
+            <p class="footer-text">
+                ¿Ya tienes una cuenta?
+                <a href="login" class="footer-link">Inicia sesión aquí</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="../js/auth.js"></script>
+</body>
+</html>

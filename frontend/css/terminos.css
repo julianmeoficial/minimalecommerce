@@ -1,0 +1,556 @@
+/* Términos y Condiciones - Estilo Minimalista */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --minimal-gray: #f8f9fa;
+    --minimal-dark: #2c3e50;
+    --minimal-accent: #34495e;
+    --minimal-light: #ecf0f1;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #e5e7eb;
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--minimal-gray);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Fondo animado sutil */
+.animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--minimal-light) 0%, var(--minimal-gray) 100%);
+    opacity: 0.3;
+}
+
+.floating-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.floating-icon {
+    position: absolute;
+    color: var(--minimal-accent);
+    opacity: 0.15;
+    pointer-events: none;
+    user-select: none;
+    font-size: 2.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: opacity 0.3s ease;
+}
+
+.floating-icon:nth-child(odd) {
+    opacity: 0.12;
+}
+
+.floating-icon:nth-child(even) {
+    opacity: 0.18;
+}
+
+.paper-icon::before {
+    content: "📄";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.document-icon::before {
+    content: "📋";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.folder-icon::before {
+    content: "📁";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.file-icon::before {
+    content: "🗂️";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.contract-icon::before {
+    content: "📜";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.legal-icon::before {
+    content: "⚖️";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo flotante */
+.floating-logo {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 50;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: translateY(-2px);
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--minimal-dark), var(--minimal-accent));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-medium);
+}
+
+.logo-icon span {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.logo-text {
+    color: var(--minimal-dark);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Contenedor principal */
+.main-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+/* Header con ícono */
+.terms-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-top: 2rem;
+}
+
+.document-icon-container {
+    margin-bottom: 2rem;
+}
+
+/* Estilos del ícono de documento adaptados */
+.file {
+    position: relative;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.work-5 {
+    position: relative;
+}
+
+.work-5::after {
+    content: '';
+    position: absolute;
+    bottom: 99%;
+    left: 0;
+    width: 5rem;
+    height: 1rem;
+    background-color: var(--minimal-accent);
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.work-5::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 75.5px;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--minimal-accent);
+    clip-path: polygon(0 35%, 0% 100%, 50% 100%);
+}
+
+.work-1::after {
+    content: '';
+    position: absolute;
+    bottom: 99%;
+    right: 0;
+    width: 146px;
+    height: 16px;
+    background-color: var(--minimal-accent);
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.work-1::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 142px;
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: var(--minimal-accent);
+    clip-path: polygon(100% 14%, 50% 100%, 100% 100%);
+}
+
+.document-shadow {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.document-layer {
+    transform: rotateX(0deg);
+}
+
+.group:hover .document-layer:nth-child(2) {
+    transform: rotateX(-20deg);
+}
+
+.group:hover .document-layer:nth-child(3) {
+    transform: rotateX(-30deg);
+}
+
+.group:hover .document-layer:nth-child(4) {
+    transform: rotateX(-38deg);
+}
+
+.document-front {
+    box-shadow: inset 0 20px 40px rgba(52, 73, 94, 0.1), inset 0 -20px 40px rgba(44, 62, 80, 0.1);
+}
+
+.group:hover .document-front {
+    transform: rotateX(-46deg) translateY(1px);
+}
+
+/* Título con efectos */
+.terms-title {
+    position: relative;
+    display: inline-block;
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--minimal-dark) !important;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    letter-spacing: -0.02em;
+    transition: all 0.3s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.terms-title:hover {
+    color: var(--minimal-accent);
+}
+
+.terms-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--minimal-dark), var(--minimal-accent));
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+}
+
+.terms-title:hover::after {
+    width: 100%;
+}
+
+.title-text {
+    position: relative;
+    z-index: 3;
+    transition: all 0.3s ease;
+}
+
+.title-glass-effect {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(52, 73, 94, 0.1) 50%,
+    transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.title-flash-effect {
+    display: none; /* No lo usamos más */
+}
+
+.terms-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+/* Contenedor del contenido */
+.terms-content-container {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+/* Contenido principal */
+.terms-content {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: var(--shadow-medium);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.terms-section {
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.section-content {
+    color: var(--text-primary);
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.section-content p {
+    margin-bottom: 1rem;
+}
+
+.terms-list {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.terms-list li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.terms-list li::marker {
+    color: var(--minimal-accent);
+}
+
+/* Navegación lateral */
+.terms-navigation {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+}
+
+.nav-container {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.nav-list {
+    list-style: none;
+}
+
+.nav-list li {
+    margin-bottom: 0.75rem;
+}
+
+.nav-link {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: var(--minimal-accent);
+    color: white;
+    transform: translateX(5px);
+}
+
+/* Footer */
+.terms-footer {
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 3rem;
+}
+
+.footer-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-date {
+    font-weight: 300;
+    opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .terms-content-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .terms-navigation {
+        position: static;
+        order: -1;
+    }
+
+    .nav-container {
+        padding: 1.5rem;
+    }
+
+    .nav-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+
+    .terms-content {
+        padding: 2rem;
+        border-radius: 20px;
+    }
+
+    .terms-title {
+        font-size: 2.5rem;
+    }
+
+    .floating-logo {
+        top: 1rem;
+        left: 1rem;
+    }
+
+    .document-icon-container .file {
+        width: 200px;
+        height: 133px;
+    }
+
+    .floating-word {
+        font-size: 1rem;
+        opacity: 0.05;
+    }
+}
+
+@media (max-width: 480px) {
+    .terms-title {
+        font-size: 2rem;
+    }
+
+    .terms-content {
+        padding: 1.5rem;
+    }
+
+    .nav-list {
+        grid-template-columns: 1fr;
+    }
+
+    .document-icon-container .file {
+        width: 160px;
+        height: 107px;
+    }
+}
+
+/* Animaciones adicionales */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Efectos de scroll suaves */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .floating-word {
+        animation: none;
+    }
+}
+

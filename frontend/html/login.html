@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+
+<!-- Fondo animado con degradado -->
+<div class="animated-background">
+    <div class="bg-layer-1"></div>
+    <div class="bg-layer-2"></div>
+    <div class="bg-layer-3"></div>
+</div>
+
+<!-- Partículas flotantes -->
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<!-- Overlay oscuro para enfatizar formulario -->
+<div class="dark-overlay"></div>
+
+<!-- Contenedor principal -->
+<div class="main-container">
+
+    <!-- Logo flotante -->
+    <div class="floating-logo">
+        <a href="../html/index.html" class="logo-link">
+            <div class="logo-icon">
+                <span>M</span>
+            </div>
+            <span class="logo-text">MinimalStore</span>
+        </a>
+    </div>
+
+    <!-- Formulario de Login -->
+    <div class="form-container" id="login-container">
+
+        <!-- Header del formulario -->
+        <div class="form-header">
+            <h1 class="form-title">Bienvenido</h1>
+            <p class="form-subtitle">Inicia sesión en tu cuenta</p>
+        </div>
+
+        <!-- Formulario -->
+        <form id="login-form" class="auth-form">
+
+            <!-- Campo Email -->
+            <div class="field-group">
+                <div class="input-wrapper">
+                    <input type="email" id="email" required class="form-input" autocomplete="email">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <div class="input-line"></div>
+                </div>
+                <span class="field-error" id="email-error"></span>
+            </div>
+
+            <!-- Campo Password -->
+            <div class="field-group">
+                <div class="input-wrapper">
+                    <input type="password" id="password" required class="form-input" autocomplete="current-password">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <div class="input-line"></div>
+                    <button type="button" class="password-toggle" id="toggle-password">
+                        <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </button>
+                </div>
+                <span class="field-error" id="password-error"></span>
+            </div>
+
+            <!-- Opciones -->
+            <div class="form-options">
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="remember" class="checkbox-input">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Recordarme</span>
+                </label>
+                <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <!-- Botón Submit -->
+            <button type="submit" class="submit-btn" id="login-btn">
+                    <span class="btn-content">
+                        <span class="btn-text">Iniciar Sesión</span>
+                        <div class="btn-loader">
+                            <div class="spinner"></div>
+                        </div>
+                    </span>
+                <div class="btn-bg"></div>
+            </button>
+
+            <!-- Error general -->
+            <div id="general-error" class="general-error"></div>
+        </form>
+
+        <!-- Footer del formulario -->
+        <div class="form-footer">
+            <p class="footer-text">
+                ¿No tienes una cuenta?
+                <a href="registro" class="footer-link">Regístrate aquí</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="../js/auth.js"></script>
+</body>
+</html>

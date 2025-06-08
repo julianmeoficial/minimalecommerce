@@ -1,0 +1,93 @@
+/* Estilos principales minimalistas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+    --color-primary: #2c3e50;
+    --color-secondary: #34495e;
+    --color-accent: #95a5a6;
+    --color-light: #ecf0f1;
+    --color-white: #ffffff;
+    --color-text: #2c3e50;
+    --color-text-light: #7f8c8d;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+    --transition: all 0.2s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-light);
+}
+
+/* Utilidades de transición */
+.transition-smooth {
+    transition: var(--transition);
+}
+
+/* Productos Grid */
+.producto-card {
+    background: var(--color-white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.producto-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.producto-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.producto-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Botones minimalistas */
+.btn-minimal {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 0.875rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-minimal:hover {
+    background: var(--color-secondary);
+    transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .preloader {
+        width: 8em;
+        height: 8em;
+    }
+
+    .status {
+        font-size: 0.9em;
+    }
+}
