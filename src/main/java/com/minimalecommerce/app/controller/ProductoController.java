@@ -1,15 +1,22 @@
 package com.minimalecommerce.app.controller;
 
 import com.minimalecommerce.app.model.Producto;
+import com.minimalecommerce.app.model.Categoria;
 import com.minimalecommerce.app.service.ProductoService;
+import com.minimalecommerce.app.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/productos")
@@ -17,6 +24,9 @@ public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
+
+    @Autowired
+    private CategoriaService categoriaService;
 
     // Obtener todos los productos activos
     @GetMapping
@@ -28,9 +38,13 @@ public class ProductoController {
     // Obtener producto por ID
     @GetMapping("/{id}")
     public ResponseEntity<Producto> obtenerProductoPorId(@PathVariable Long id) {
-        Optional<Producto> producto = productoService.obtenerProductoPorId(id);
-        return producto.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Producto producto = productoService.obtenerProductoPorId(id); // ✅ CORRECTO
+
+        if (producto != null) {
+            return ResponseEntity.ok(producto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // Obtener productos por categoría
@@ -103,4 +117,110 @@ public class ProductoController {
         response.put("message", "Stock actualizado correctamente");
         return ResponseEntity.ok(response);
     }
+
+    //Subir imagenes y crear producto con imagen
+
+    @PostMapping("/crear-con-imagen")
+    public ResponseEntity<Map<String, Object>> crearProductoConImagen(
+            @RequestParam("archivo") MultipartFile archivo,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("descripcion") String descripcion,
+            @RequestParam("precio") BigDecimal precio,
+            @RequestParam("stock") Integer stock,
+            @RequestParam("categoriaId") Long categoriaId) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        try {
+            // Lógica de subida de imagen
+            String nombreImagen = null;
+            if (!archivo.isEmpty()) {
+                String UPLOAD_DIR = "src/main/resources/static/imagenes-productos/";
+                File uploadDir = new File(UPLOAD_DIR);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
+                }
+
+                String originalFileName = archivo.getOriginalFilename();
+                String fileExtension = "";
+                if (originalFileName != null && originalFileName.contains(".")) {
+                    fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+                }
+
+                nombreImagen = UUID.randomUUID().toString() + fileExtension;
+                Path rutaArchivo = Paths.get(UPLOAD_DIR + nombreImagen);
+                Files.copy(archivo.getInputStream(), rutaArchivo, StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            // Crear producto con categoría correcta
+            Producto producto = new Producto();
+            producto.setNombre(nombre);
+            producto.setDescripcion(descripcion);
+            producto.setPrecio(precio);
+            producto.setStock(stock);
+            producto.setImagen(nombreImagen);
+
+            // CORREGIR: Buscar y asignar categoría
+            Optional<Categoria> categoria = categoriaService.obtenerCategoriaPorId(categoriaId);
+            if (categoria.isPresent()) {
+                producto.setCategoria(categoria.get());
+            } else {
+                response.put("error", "Categoría no encontrada");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            // Guardar producto
+            Producto productoGuardado = productoService.crearProducto(producto);
+
+            response.put("success", true);
+            response.put("producto", productoGuardado);
+            response.put("rutaImagen", nombreImagen != null ? "/imagenes-productos/" + nombreImagen : null);
+
+            return ResponseEntity.ok(response);
+
+        } catch (IOException e) {
+            response.put("error", "Error al subir imagen: " + e.getMessage());
+            return ResponseEntity.status(500).body(response);
+        } catch (Exception e) {
+            response.put("error", "Error al crear producto: " + e.getMessage());
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
+    // Obtener productos por vendedor
+    @GetMapping("/vendedor/{vendedorId}")
+    public ResponseEntity<List<Producto>> obtenerProductosPorVendedor(@PathVariable Long vendedorId) {
+        try {
+            List<Producto> productos = productoService.obtenerProductosPorVendedor(vendedorId);
+            return ResponseEntity.ok(productos);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // Eliminar producto completamente de la base de datos
+    @DeleteMapping("/eliminar-completo/{id}")
+    public ResponseEntity<Map<String, String>> eliminarProductoCompleto(@PathVariable Long id) {
+        try {
+            productoService.eliminarProductoCompleto(id);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Producto eliminado completamente de la base de datos");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Error al eliminar producto: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    @GetMapping("/preorden")
+    public ResponseEntity<List<Producto>> obtenerProductosPreorden() {
+        try {
+            List<Producto> productos = productoService.obtenerProductosPreorden();
+            return ResponseEntity.ok(productos);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 }

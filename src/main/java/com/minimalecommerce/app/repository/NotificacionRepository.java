@@ -1,35 +1,44 @@
 package com.minimalecommerce.app.repository;
 
 import com.minimalecommerce.app.model.Notificacion;
-import com.minimalecommerce.app.model.Usuario;
 import com.minimalecommerce.app.model.TipoNotificacion;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface NotificacionRepository extends JpaRepository<Notificacion, Long> {
 
-    // Notificaciones por usuario
-    List<Notificacion> findByUsuario(Usuario usuario);
-    List<Notificacion> findByUsuarioId(Long usuarioId);
+    // MÉTODOS EXISTENTES
+    List<Notificacion> findByUsuarioIdOrderByFechacreacionDesc(Long usuarioId);
 
-    // Notificaciones no leídas
     List<Notificacion> findByUsuarioIdAndLeidaFalse(Long usuarioId);
 
-    // Notificaciones por tipo
-    List<Notificacion> findByUsuarioIdAndTipo(Long usuarioId, TipoNotificacion tipo);
-
-    // Contar notificaciones no leídas
     Long countByUsuarioIdAndLeidaFalse(Long usuarioId);
 
-    // Notificaciones ordenadas por fecha
-    @Query("SELECT n FROM Notificacion n WHERE n.usuario.id = :usuarioId ORDER BY n.fechacreacion DESC")
-    List<Notificacion> findByUsuarioIdOrderByFechacreacionDesc(@Param("usuarioId") Long usuarioId);
+    List<Notificacion> findByUsuarioIdAndTipo(Long usuarioId, TipoNotificacion tipo);
 
-    // Marcar todas como leídas
-    @Query("UPDATE Notificacion n SET n.leida = true WHERE n.usuario.id = :usuarioId AND n.leida = false")
+    Optional<Notificacion> findByIdAndUsuarioId(Long id, Long usuarioId);
+
+    // NUEVOS MÉTODOS para vendedores
+    List<Notificacion> findByRemitenteId(Long remitenteId);
+
+    List<Notificacion> findByRemitenteIdOrderByFechacreacionDesc(Long remitenteId);
+
+    List<Notificacion> findByRemitenteIdAndFechacreacionAfter(Long remitenteId, LocalDateTime fecha);
+
+    Long countByRemitenteId(Long remitenteId);
+
+    Long countByRemitenteIdAndLeidaTrue(Long remitenteId);
+
+    Long countByRemitenteIdAndFechacreacionAfter(Long remitenteId, LocalDateTime fecha);
+
+    @Modifying
+    @Query("UPDATE Notificacion n SET n.leida = true, n.fechaLectura = CURRENT_TIMESTAMP WHERE n.usuario.id = :usuarioId AND n.leida = false")
     void marcarTodasComoLeidas(@Param("usuarioId") Long usuarioId);
 }

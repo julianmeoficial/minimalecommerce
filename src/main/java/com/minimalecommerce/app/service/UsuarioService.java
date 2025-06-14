@@ -4,7 +4,9 @@ import com.minimalecommerce.app.model.Usuario;
 import com.minimalecommerce.app.model.TipoUsuario;
 import com.minimalecommerce.app.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +15,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // Registrar nuevo usuario (por defecto COMPRADOR)
     public Usuario registrarUsuario(Usuario usuario) {
@@ -50,7 +55,8 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> obtenerUsuarioPorEmail(String email) {
-        return usuarioRepository.findByEmail(email);
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        return usuario;
     }
 
     public Optional<Usuario> obtenerUsuarioPorId(Long id) {
@@ -112,5 +118,30 @@ public class UsuarioService {
 
     public boolean existeEmail(String email) {
         return usuarioRepository.existsByEmail(email);
+    }
+
+    // MÉTODO PARA AUTENTICACIÓN (SIN DTOs)
+    public Usuario authenticateUser(String email, String password) {
+        try {
+            Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(email);
+
+            if (usuarioOpt.isPresent()) {
+                Usuario usuario = usuarioOpt.get();
+
+                // Para desarrollo local - sin encriptación
+                if (password.equals(usuario.getPassword())) {
+                    return usuario;
+                }
+
+                // Si quieres usar encriptación más tarde, descomenta:
+                // if (passwordEncoder.matches(password, usuario.getPassword())) {
+                //     return usuario;
+                // }
+            }
+
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException("Error autenticando usuario: " + e.getMessage());
+        }
     }
 }

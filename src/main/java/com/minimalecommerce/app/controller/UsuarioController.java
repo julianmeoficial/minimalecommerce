@@ -108,9 +108,22 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        Usuario usuarioActualizado = usuarioService.actualizarUsuario(id, usuario);
-        return ResponseEntity.ok(usuarioActualizado);
+    public ResponseEntity<Map<String, Object>> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Usuario usuarioActualizado = usuarioService.actualizarUsuario(id, usuario);
+            // Limpiar contraseña antes de enviar
+            usuarioActualizado.setPassword(null);
+
+            response.put("success", true);
+            response.put("message", "Usuario actualizado correctamente");
+            response.put("usuario", usuarioActualizado);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Error al actualizar usuario: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
 
     @DeleteMapping("/{id}")

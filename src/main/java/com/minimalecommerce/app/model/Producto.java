@@ -37,6 +37,21 @@ public class Producto {
     @JoinColumn(name = "categoriaid", nullable = false)
     private Categoria categoria;
 
+
+    // Campo vendedor
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "vendedorid", nullable = false)
+    private Usuario vendedor;
+
+    // Getter y Setter para vendedor
+    public Usuario getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Usuario vendedor) {
+        this.vendedor = vendedor;
+    }
+
     @Column(name = "fechacreacion")
     private LocalDateTime fechacreacion;
 
@@ -46,5 +61,17 @@ public class Producto {
     @PrePersist
     protected void onCreate() {
         fechacreacion = LocalDateTime.now();
+    }
+
+    @Column(name = "espreorden", nullable = false)
+    private Boolean espreorden = false;
+
+    // Getter y Setter
+    public Boolean getEspreorden() {
+        return espreorden;
+    }
+
+    public void setEspreorden(Boolean espreorden) {
+        this.espreorden = espreorden;
     }
 }

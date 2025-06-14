@@ -27,6 +27,37 @@ public class FavoritoController {
         return ResponseEntity.ok(favorito);
     }
 
+    @PostMapping("/toggle")
+    public ResponseEntity<Map<String, Object>> toggleFavorito(@RequestBody Map<String, Object> request) {
+        try {
+            Long usuarioId = Long.valueOf(request.get("usuarioId").toString());
+            Long productoId = Long.valueOf(request.get("productoId").toString());
+
+            Map<String, Object> response = new HashMap<>();
+
+            boolean estaEnFavoritos = favoritoService.estaEnFavoritos(usuarioId, productoId);
+
+            if (estaEnFavoritos) {
+                favoritoService.eliminarDeFavoritos(usuarioId, productoId);
+                response.put("accion", "eliminado");
+                response.put("esFavorito", false);
+                response.put("mensaje", "Producto eliminado de favoritos");
+            } else {
+                Favorito favorito = favoritoService.agregarAFavoritos(usuarioId, productoId, false);
+                response.put("accion", "agregado");
+                response.put("esFavorito", true);
+                response.put("favorito", favorito);
+                response.put("mensaje", "Producto agregado a favoritos");
+            }
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<List<Favorito>> obtenerFavoritosPorUsuario(@PathVariable Long usuarioId) {
         List<Favorito> favoritos = favoritoService.obtenerFavoritosPorUsuario(usuarioId);

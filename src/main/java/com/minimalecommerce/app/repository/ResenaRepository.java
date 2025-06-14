@@ -12,20 +12,55 @@ import java.util.List;
 @Repository
 public interface ResenaRepository extends JpaRepository<Resena, Long> {
 
+    // Métodos básicos
     List<Resena> findByProducto(Producto producto);
     List<Resena> findByProductoId(Long productoId);
     List<Resena> findByUsuario(Usuario usuario);
-
-    // AGREGAR ESTE MÉTODO QUE FALTA:
     List<Resena> findByUsuarioId(Long usuarioId);
+    List<Resena> findByCalificacion(Integer calificacion);
 
+    // Contadores
+    Long countByUsuarioId(Long usuarioId);
+    Long countByProductoId(Long productoId);
+
+    // Verificaciones de existencia
+    boolean existsByUsuarioIdAndProductoId(Long usuarioId, Long productoId);
+
+    // Promedios
     @Query("SELECT AVG(r.calificacion) FROM Resena r WHERE r.producto.id = :productoId")
     Double obtenerPromedioCalificacion(@Param("productoId") Long productoId);
 
-    // MÉTODO ADICIONAL: Contar reseñas por usuario
-    Long countByUsuarioId(Long usuarioId);
+    @Query("SELECT AVG(r.calificacion) FROM Resena r")
+    Double obtenerPromedioCalificacionGeneral();
 
-    // MÉTODO ADICIONAL: Reseñas ordenadas por fecha
-    @Query("SELECT r FROM Resena r WHERE r.usuario.id = :usuarioId ORDER BY r.fecharesena DESC")
-    List<Resena> findByUsuarioIdOrderByFecharesenaDesc(@Param("usuarioId") Long usuarioId);
+    // Métodos para compradores (usando usuarioid como comprador)
+    @Query("SELECT COUNT(r) > 0 FROM Resena r WHERE r.usuario.id = :compradorId AND r.producto.id = :productoId")
+    boolean existeResenaDelCompradorParaProducto(@Param("compradorId") Long compradorId, @Param("productoId") Long productoId);
+
+    @Query("SELECT r FROM Resena r WHERE r.usuario.id = :compradorId ORDER BY r.fecharesena DESC")
+    List<Resena> findResenasEscritasPorComprador(@Param("compradorId") Long compradorId);
+
+    @Query("SELECT COUNT(r) FROM Resena r WHERE r.usuario.id = :compradorId")
+    Long countByCompradorId(@Param("compradorId") Long compradorId);
+
+    // Métodos para vendedores (usando la relación producto->vendedor)
+    @Query("SELECT r FROM Resena r WHERE r.producto.vendedor.id = :vendedorId ORDER BY r.fecharesena DESC")
+    List<Resena> findResenasRecibidasPorVendedor(@Param("vendedorId") Long vendedorId);
+
+    @Query("SELECT AVG(r.calificacion) FROM Resena r WHERE r.producto.vendedor.id = :vendedorId")
+    Double obtenerPromedioCalificacionVendedor(@Param("vendedorId") Long vendedorId);
+
+    @Query("SELECT COUNT(r) FROM Resena r WHERE r.producto.vendedor.id = :vendedorId")
+    Long countByVendedorId(@Param("vendedorId") Long vendedorId);
+
+    // Para reseñas verificadas (cuando agregues el campo)
+    @Query("SELECT r FROM Resena r WHERE r.producto.id = :productoId")
+    List<Resena> findResenasVerificadasPorProducto(@Param("productoId") Long productoId);
+
+    @Query("SELECT COUNT(r) FROM Resena r WHERE r.producto.vendedor.id = :vendedorId")
+    Long countByVendedorIdAndVerificadaTrue(@Param("vendedorId") Long vendedorId);
+
+    // Métodos adicionales
+    @Query("SELECT r FROM Resena r WHERE r.producto.id = :productoId ORDER BY r.fecharesena DESC")
+    List<Resena> findTopByProductoIdOrderByFecharesenaDesc(@Param("productoId") Long productoId, int limite);
 }

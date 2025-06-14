@@ -1,14 +1,15 @@
 package com.minimalecommerce.app.service;
 
 import com.minimalecommerce.app.model.Pedido;
-import com.minimalecommerce.app.model.Usuario;
 import com.minimalecommerce.app.model.EstadoPedido;
 import com.minimalecommerce.app.repository.PedidoRepository;
-import com.minimalecommerce.app.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 @Service
 public class PedidoService {
@@ -16,75 +17,100 @@ public class PedidoService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    // ==================== MÉTODOS BÁSICOS ====================
 
-    // Obtener todos los pedidos
     public List<Pedido> obtenerTodosPedidos() {
         return pedidoRepository.findAll();
     }
 
-    // Obtener pedido por ID
     public Optional<Pedido> obtenerPedidoPorId(Long id) {
         return pedidoRepository.findById(id);
     }
 
-    // Crear nuevo pedido
     public Pedido crearPedido(Pedido pedido) {
-        if (pedido.getUsuario() == null || pedido.getUsuario().getId() == null) {
-            throw new RuntimeException("Debe especificar un usuario válido");
-        }
-
-        Optional<Usuario> usuario = usuarioRepository.findById(pedido.getUsuario().getId());
-        if (!usuario.isPresent()) {
-            throw new RuntimeException("Usuario no encontrado");
-        }
-
-        pedido.setUsuario(usuario.get());
-        if (pedido.getEstado() == null) {
-            pedido.setEstado(EstadoPedido.PENDIENTE);
-        }
-
         return pedidoRepository.save(pedido);
     }
 
-    // Obtener pedidos por usuario
     public List<Pedido> obtenerPedidosPorUsuario(Long usuarioId) {
         return pedidoRepository.findByUsuarioIdOrderByFechapedidoDesc(usuarioId);
     }
 
-    // Obtener pedidos por estado
     public List<Pedido> obtenerPedidosPorEstado(EstadoPedido estado) {
-        return pedidoRepository.findByEstado(estado);
+        return pedidoRepository.findByEstadoOrderByFechapedidoDesc(estado);
     }
 
-    // Actualizar estado del pedido
-    public Pedido actualizarEstadoPedido(Long pedidoId, EstadoPedido nuevoEstado) {
-        Optional<Pedido> pedido = pedidoRepository.findById(pedidoId);
-        if (pedido.isPresent()) {
-            pedido.get().setEstado(nuevoEstado);
-            return pedidoRepository.save(pedido.get());
+    // ==================== MÉTODOS PARA VENDEDORES ====================
+
+    public List<Map<String, Object>> obtenerPedidosPorVendedor(Long vendedorId) {
+        List<Object[]> resultados = pedidoRepository.findPedidosByVendedorId(vendedorId);
+
+        Map<Long, Map<String, Object>> pedidosMap = new HashMap<>();
+
+        for (Object[] resultado : resultados) {
+            Long pedidoId = (Long) resultado[0];
+
+            if (!pedidosMap.containsKey(pedidoId)) {
+                Map<String, Object> pedidoData = new HashMap<>();
+                pedidoData.put("pedidoId", resultado[0]);
+                pedidoData.put("fechaPedido", resultado[1]);
+                pedidoData.put("total", resultado[2]);
+                pedidoData.put("estado", resultado[3]);
+                pedidoData.put("compradorNombre", resultado[4]);
+                pedidoData.put("direccionEntrega", resultado[5]);
+
+                pedidosMap.put(pedidoId, pedidoData);
+            }
         }
-        throw new RuntimeException("Pedido no encontrado");
+
+        return new ArrayList<>(pedidosMap.values());
     }
 
-    // Actualizar pedido
+    // ==================== GESTIÓN DE ESTADOS ====================
+
+    public Pedido actualizarEstadoPedido(Long id, EstadoPedido estado) {
+        Optional<Pedido> pedidoOpt = pedidoRepository.findById(id);
+
+        if (pedidoOpt.isPresent()) {
+            Pedido pedido = pedidoOpt.get();
+            pedido.setEstado(estado);
+            return pedidoRepository.save(pedido);
+        }
+
+        throw new RuntimeException("Pedido no encontrado con ID: " + id);
+    }
+
     public Pedido actualizarPedido(Long id, Pedido pedido) {
-        Optional<Pedido> pedidoExistente = pedidoRepository.findById(id);
-        if (pedidoExistente.isPresent()) {
+        if (pedidoRepository.existsById(id)) {
             pedido.setId(id);
             return pedidoRepository.save(pedido);
         }
-        throw new RuntimeException("Pedido no encontrado");
+        throw new RuntimeException("Pedido no encontrado con ID: " + id);
     }
 
-    // Eliminar pedido
     public void eliminarPedido(Long id) {
         pedidoRepository.deleteById(id);
     }
 
-    // Contar pedidos por usuario
-    public Long contarPedidosPorUsuario(Long usuarioId) {
-        return pedidoRepository.countByUsuarioId(usuarioId);
+    // ==================== MÉTODOS ADICIONALES ====================
+
+    public List<Pedido> obtenerPedidosPorUsuarioYEstado(Long usuarioId, EstadoPedido estado) {
+        return pedidoRepository.findByUsuarioIdAndEstado(usuarioId, estado);
+    }
+
+    public Pedido cancelarPedido(Long pedidoId, String motivo) {
+        Pedido pedido = pedidoRepository.findById(pedidoId)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        if (pedido.getEstado() == EstadoPedido.ENTREGADO) {
+            throw new RuntimeException("No se puede cancelar un pedido ya entregado");
+        }
+
+        pedido.setEstado(EstadoPedido.CANCELADO);
+        return pedidoRepository.save(pedido);
+    }
+
+    public List<Pedido> obtenerPedidosRecientesPorUsuario(Long usuarioId, int limite) {
+        List<Pedido> todosPedidos = pedidoRepository.findByUsuarioIdOrderByFechapedidoDesc(usuarioId);
+        return todosPedidos.stream().limit(limite).toList();
     }
 }

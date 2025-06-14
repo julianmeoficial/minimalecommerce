@@ -28,4 +28,21 @@ public interface PreordenRepository extends JpaRepository<Preorden, Long> {
 
     Long countByUsuarioId(Long usuarioId);
     Long countByProductoId(Long productoId);
+
+    // ==================== CONSULTAS ADICIONALES ====================
+
+    @Query("SELECT p FROM Preorden p WHERE p.producto.vendedor.id = :vendedorId ORDER BY p.fechapreorden DESC")
+    List<Preorden> findPreordenesByVendedorId(@Param("vendedorId") Long vendedorId);
+
+    long countByUsuarioIdAndEstado(Long usuarioId, EstadoPreorden estado);
+
+    @Query("SELECT COALESCE(SUM(p.preciopreorden * p.cantidad), 0) FROM Preorden p WHERE p.usuario.id = :usuarioId")
+    BigDecimal calcularTotalTodasPreordenesPorUsuario(@Param("usuarioId") Long usuarioId);
+
+    @Query("SELECT COALESCE(SUM(p.preciopreorden * p.cantidad), 0) FROM Preorden p WHERE p.producto.id = :productoId")
+    BigDecimal calcularTotalVentasProducto(@Param("productoId") Long productoId);
+
+    @Query("SELECT p FROM Preorden p WHERE p.usuario.id = :usuarioId AND p.estado = :estado ORDER BY p.fechapreorden DESC")
+    List<Preorden> findByUsuarioIdAndEstadoOrderByFechapreordenDesc(@Param("usuarioId") Long usuarioId, @Param("estado") EstadoPreorden estado);
+
 }

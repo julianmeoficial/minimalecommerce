@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -116,6 +117,71 @@ public class PreordenService {
             return preordenRepository.save(preorden);
         }
         throw new RuntimeException("Preorden no encontrada");
+    }
+
+    // ==================== MÉTODOS ADICIONALES NECESARIOS ====================
+
+    public Preorden crearPreordenCompleta(Long usuarioId, Long productoId, Integer cantidad,
+                                          LocalDateTime fechaEntrega, String notas) {
+
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        Producto producto = productoRepository.findById(productoId)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        // Validar que el producto esté disponible para preorden
+        if (!producto.getActivo()) {
+            throw new RuntimeException("El producto no está disponible para preorden");
+        }
+
+        Preorden preorden = new Preorden();
+        preorden.setUsuario(usuario);
+        preorden.setProducto(producto);
+        preorden.setCantidad(cantidad);
+        preorden.setFechaestimadaentrega(fechaEntrega);
+        preorden.setNotas(notas);
+        preorden.setPreciopreorden(producto.getPrecio());
+        preorden.setEstado(EstadoPreorden.PENDIENTE);
+
+        return preordenRepository.save(preorden);
+    }
+
+    public List<Preorden> obtenerPreordenesPorVendedor(Long vendedorId) {
+        return preordenRepository.findPreordenesByVendedorId(vendedorId);
+    }
+
+    public long contarPreordenesPorUsuarioYEstado(Long usuarioId, EstadoPreorden estado) {
+        return preordenRepository.countByUsuarioIdAndEstado(usuarioId, estado);
+    }
+
+    public BigDecimal calcularTotalTodasPreordenes(Long usuarioId) {
+        return preordenRepository.calcularTotalTodasPreordenesPorUsuario(usuarioId);
+    }
+
+    public long contarPreordenesPorProducto(Long productoId) {
+        return preordenRepository.countByProductoId(productoId);
+    }
+
+    public BigDecimal calcularTotalVentasProducto(Long productoId) {
+        return preordenRepository.calcularTotalVentasProducto(productoId);
+    }
+
+    public Preorden cancelarPreorden(Long preordenId, String motivo) {
+        Preorden preorden = preordenRepository.findById(preordenId)
+                .orElseThrow(() -> new RuntimeException("Preorden no encontrada"));
+
+        if (preorden.getEstado() == EstadoPreorden.ENTREGADA) {
+            throw new RuntimeException("No se puede cancelar una preorden ya entregada");
+        }
+
+        preorden.setEstado(EstadoPreorden.CANCELADA);
+        if (motivo != null && !motivo.isEmpty()) {
+            String notasActuales = preorden.getNotas() != null ? preorden.getNotas() : "";
+            preorden.setNotas(notasActuales + "\nCancelada: " + motivo);
+        }
+
+        return preordenRepository.save(preorden);
     }
 
     // Eliminar preorden

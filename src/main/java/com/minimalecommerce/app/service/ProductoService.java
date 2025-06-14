@@ -24,11 +24,6 @@ public class ProductoService {
         return productoRepository.findByActivoTrue();
     }
 
-    // Obtener producto por ID
-    public Optional<Producto> obtenerProductoPorId(Long id) {
-        return productoRepository.findById(id);
-    }
-
     // Obtener productos por categoría
     public List<Producto> obtenerProductosPorCategoria(Long categoriaId) {
         return productoRepository.findByCategoriaIdAndStockDisponible(categoriaId);
@@ -79,6 +74,10 @@ public class ProductoService {
         return productoRepository.findByNombreContainingIgnoreCase(nombre);
     }
 
+    public List<Producto> obtenerProductosPreorden() {
+        return productoRepository.findByEspreordenTrueAndActivoTrue();
+    }
+
     // Buscar productos por rango de precio
     public List<Producto> buscarProductosPorPrecio(BigDecimal precioMin, BigDecimal precioMax) {
         return productoRepository.findByPrecioBetween(precioMin, precioMax);
@@ -97,4 +96,31 @@ public class ProductoService {
             productoRepository.save(producto.get());
         }
     }
+
+    public List<Producto> obtenerProductosPorVendedor(Long vendedorId) {
+        // Traer TODOS los productos del vendedor (activos y pausados)
+        return productoRepository.findByVendedorId(vendedorId);
+    }
+
+    // Eliminar producto completamente
+    public void eliminarProductoCompleto(Long id) {
+        Optional<Producto> producto = productoRepository.findById(id);
+        if (producto.isPresent()) {
+            productoRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Producto no encontrado");
+        }
+    }
+
+    // Método para obtener producto por ID
+    public Producto obtenerProductoPorId(Long id) {
+        Optional<Producto> producto = productoRepository.findById(id);
+        return producto.orElse(null);
+    }
+
+    // O si prefieres mantener la consistencia con Optional:
+    public Optional<Producto> obtenerPorId(Long id) {
+        return productoRepository.findById(id);
+    }
+
 }

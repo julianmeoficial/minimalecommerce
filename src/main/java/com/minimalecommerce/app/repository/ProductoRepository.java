@@ -42,4 +42,16 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     // Buscar productos por categoría y con stock
     @Query("SELECT p FROM Producto p WHERE p.categoria.id = :categoriaId AND p.stock > 0 AND p.activo = true")
     List<Producto> findByCategoriaIdAndStockDisponible(@Param("categoriaId") Long categoriaId);
+
+
+    // Buscar productos activos por vendedor
+    List<Producto> findByVendedorIdAndActivoTrue(Long vendedorId);
+
+    // Contar productos por vendedor
+    Long countByVendedorId(Long vendedorId);
+
+    // Buscar todos los productos de un vendedor (activos y pausados)
+    List<Producto> findByVendedorId(Long vendedorId);
+
+    List<Producto> findByEspreordenTrueAndActivoTrue();
 }
