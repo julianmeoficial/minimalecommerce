@@ -1,0 +1,697 @@
+/* Historia - Timeline con Neumorphism y Fondo Cósmico */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --minimal-gray: #f8f9fa;
+    --minimal-dark: #2c3e50;
+    --minimal-accent: #34495e;
+    --minimal-light: #ecf0f1;
+    --primary-blue: #3498db;
+    --cosmic-purple: #6c5ce7;
+    --cosmic-pink: #fd79a8;
+    --cosmic-blue: #74b9ff;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #e5e7eb;
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --neumorphism-shadow:
+            12px 12px 24px rgba(163, 177, 198, 0.6),
+            -12px -12px 24px rgba(255, 255, 255, 0.8);
+    --neumorphism-inset:
+            inset 8px 8px 16px rgba(163, 177, 198, 0.4),
+            inset -8px -8px 16px rgba(255, 255, 255, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.4) 50%, rgba(240, 147, 251, 0.3) 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Fondo animado con agujero negro */
+.black-hole-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+}
+
+.cosmic-container {
+    position: relative;
+    animation: cosmicRotation 20s linear infinite;
+}
+
+.ring-3 {
+    box-shadow: 0px 0px 30px 40px rgba(108, 92, 231, 0.8);
+    border-radius: 50%;
+    padding: 6px;
+    animation: ringPulse 4s ease-in-out infinite;
+}
+
+.ring-2 {
+    box-shadow: 0px 0px 15px 30px rgba(44, 62, 80, 0.9);
+    border-radius: 50%;
+    padding: 6px;
+    animation: ringPulse 3s ease-in-out infinite reverse;
+}
+
+.ring-1 {
+    box-shadow: 0px 0px 30px 40px rgba(116, 185, 255, 0.8);
+    border-radius: 50%;
+    padding: 6px;
+    animation: ringPulse 5s ease-in-out infinite;
+}
+
+.black-hole {
+    height: 200px;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, #000 30%, #1a1a2e 70%, #16213e 100%);
+    border-radius: 50%;
+    box-shadow:
+            0px 0px 40px 20px rgba(0, 0, 0, 0.8),
+            inset 0px 0px 20px rgba(108, 92, 231, 0.3);
+    animation: blackHolePulse 6s ease-in-out infinite;
+}
+
+.glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(
+            circle,
+            rgba(108, 92, 231, 0.2) 5%,
+            rgba(116, 185, 255, 0.1) 20%,
+            rgba(253, 121, 168, 0.1) 40%,
+            rgba(255, 255, 255, 0) 70%
+    );
+    border-radius: 50%;
+    z-index: -1;
+    animation: glowPulse 8s ease-in-out infinite;
+}
+
+.crescent-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(75deg);
+}
+
+.crescent {
+    filter: drop-shadow(0px 0px 10px rgba(108, 92, 231, 0.8))
+    drop-shadow(0px 0px 20px rgba(116, 185, 255, 0.6))
+    drop-shadow(0px 0px 30px rgba(253, 121, 168, 0.4));
+    position: absolute;
+    color: transparent !important;
+    top: 50%;
+    left: 50%;
+    transform: rotate(180deg);
+    width: 300px;
+    height: 18px;
+    clip-path: ellipse(60% 100% at 100% 50%);
+    offset-path: path("M 0,-150 A 150,150 0 1,1 0,150 A 150,150 0 1,1 0,-150 Z");
+    offset-distance: 0%;
+    opacity: 0;
+}
+
+.crescent-1 { animation: moveOval 3000ms ease-in-out 0ms infinite; }
+.crescent-2 { animation: moveOval 3000ms ease-in-out 500ms infinite; }
+.crescent-3 { animation: moveOval 3000ms ease-in-out 1000ms infinite; }
+.crescent-4 { animation: moveOval 3000ms ease-in-out 1500ms infinite; }
+.crescent-5 { animation: moveOval 3000ms ease-in-out 2000ms infinite; }
+.crescent-6 { animation: moveOval 3000ms ease-in-out 2500ms infinite; }
+
+@keyframes cosmicRotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.6; }
+}
+
+@keyframes blackHolePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes moveOval {
+    18% { offset-distance: 25%; opacity: 0; }
+    25% { opacity: 0.8; }
+    75% { opacity: 0.8; }
+    100% { offset-distance: 90%; opacity: 0; }
+}
+
+/* Logo flotante */
+.floating-logo {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 50;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: translateY(-2px);
+}
+
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-blue));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.logo-icon span {
+    color: white;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.logo-text {
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor principal */
+.main-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+/* Header */
+.history-header {
+    text-align: center;
+    margin-bottom: 6rem;
+    padding-top: 3rem;
+}
+
+.history-title {
+    font-size: 5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-pink), var(--cosmic-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.history-subtitle {
+    font-size: 1.4rem;
+    color: white;
+    font-weight: 300;
+    margin-top: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Timeline */
+.timeline-container {
+    position: relative;
+    margin: 6rem 0;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--cosmic-purple), var(--cosmic-pink), var(--cosmic-blue));
+    transform: translateX(-50%);
+    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(108, 92, 231, 0.5);
+}
+
+.timeline-events {
+    position: relative;
+}
+
+.timeline-event {
+    position: relative;
+    margin: 6rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-left {
+    justify-content: flex-end;
+}
+
+.timeline-right {
+    justify-content: flex-start;
+}
+
+.timeline-content {
+    width: 45%;
+    position: relative;
+}
+
+.timeline-left .timeline-content {
+    padding-right: 3rem;
+}
+
+.timeline-right .timeline-content {
+    padding-left: 3rem;
+}
+
+.timeline-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--neumorphism-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.timeline-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+            16px 16px 32px rgba(163, 177, 198, 0.8),
+            -16px -16px 32px rgba(255, 255, 255, 0.9),
+            0 0 40px rgba(108, 92, 231, 0.3);
+}
+
+.timeline-icon {
+    position: absolute;
+    top: -20px;
+    left: 2rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: var(--neumorphism-shadow);
+    z-index: 20;
+    transition: all 0.3s ease;
+}
+
+.timeline-card:hover .timeline-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow:
+            12px 12px 24px rgba(163, 177, 198, 0.6),
+            -12px -12px 24px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(108, 92, 231, 0.4);
+}
+
+.timeline-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin: 1.5rem 0 1rem 0;
+}
+
+.timeline-text {
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+/* Badge de año integrado dentro del card */
+.timeline-year-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-pink));
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    box-shadow:
+            inset 2px 2px 4px rgba(255, 255, 255, 0.2),
+            inset -2px -2px 4px rgba(0, 0, 0, 0.2),
+            0 4px 8px rgba(108, 92, 231, 0.3);
+    z-index: 15;
+    transition: all 0.3s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    transform: scale(1);
+}
+
+.timeline-card:hover .timeline-year-badge {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow:
+            inset 2px 2px 6px rgba(255, 255, 255, 0.3),
+            inset -2px -2px 6px rgba(0, 0, 0, 0.3),
+            0 8px 16px rgba(108, 92, 231, 0.5);
+    background: linear-gradient(135deg, var(--cosmic-pink), var(--cosmic-blue));
+}
+
+/* Efecto especial para el badge infinito - SIN animación bouncy */
+.timeline-year-badge.infinite {
+    background: linear-gradient(135deg, #ffd700, #ff6b6b, #4ecdc4);
+    box-shadow:
+            inset 2px 2px 6px rgba(255, 255, 255, 0.4),
+            inset -2px -2px 6px rgba(0, 0, 0, 0.2),
+            0 6px 15px rgba(255, 215, 0, 0.4);
+}
+
+.timeline-card:hover .timeline-year-badge.infinite {
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #ffd700);
+    transform: translateY(-2px) scale(1.05);
+}
+
+@keyframes infinitePulse {
+    0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+/* Regla para mejorar la transición*/
+.timeline-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--neumorphism-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 10;
+}
+
+.timeline-event:hover .timeline-card {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+            16px 16px 32px rgba(163, 177, 198, 0.8),
+            -16px -16px 32px rgba(255, 255, 255, 0.9),
+            0 0 40px rgba(108, 92, 231, 0.3);
+    z-index: 25;
+}
+
+/* Sección de valores */
+.values-section {
+    margin: 8rem 0;
+    padding: 4rem 0;
+}
+
+.values-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 4rem;
+    box-shadow: var(--neumorphism-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.values-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+.value-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--neumorphism-inset);
+    transition: all 0.4s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.value-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.value-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1rem;
+}
+
+.value-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Footer */
+.history-footer {
+    text-align: center;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 4rem;
+}
+
+.footer-content p {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.footer-quote {
+    font-style: italic;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .timeline-left .timeline-content,
+    .timeline-right .timeline-content {
+        width: 100%;
+        padding: 0 2rem;
+    }
+
+    .timeline-event {
+        justify-content: center !important;
+    }
+
+    .timeline-line {
+        left: 2rem;
+    }
+
+    .timeline-year {
+        left: 2rem;
+        top: -20px;
+    }
+
+    .timeline-event:hover .timeline-year {
+        top: calc(100% + 10px);
+        left: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+
+    .history-title {
+        font-size: 3rem;
+    }
+
+    .timeline-container {
+        margin: 3rem 0;
+    }
+
+    .timeline-event {
+        margin: 3rem 0;
+    }
+
+    .timeline-card {
+        padding: 2rem;
+    }
+
+    .values-container {
+        padding: 2rem;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .black-hole {
+        height: 120px;
+    }
+
+    .ring-3, .ring-2, .ring-1 {
+        padding: 2px;
+    }
+}
+
+@media (max-width: 768px) {
+    .timeline-year-badge {
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+    }
+
+    .timeline-icon {
+        left: 1rem;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .timeline-card {
+        padding: 2rem 1.5rem;
+        margin-top: 1rem;
+    }
+}
+
+/* Forzar visibilidad */
+.history-title,
+.timeline-title,
+.values-title {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* FORZAR VISIBILIDAD PERMANENTE DE ELEMENTOS CRÍTICOS */
+.timeline-container,
+.timeline-card,
+.timeline-content,
+.values-container,
+.value-card,
+.history-header {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.timeline-events {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.timeline-event {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+/* Mejorar contraste del agujero negro */
+.black-hole {
+    background: radial-gradient(circle, #000000 20%, #1a1a2e 60%, #16213e 100%);
+    box-shadow:
+            0px 0px 50px 30px rgba(0, 0, 0, 0.9),
+            inset 0px 0px 30px rgba(108, 92, 231, 0.6),
+            0 0 100px rgba(108, 92, 231, 0.4);
+}
+
+.glow {
+    background: radial-gradient(
+            circle,
+            rgba(108, 92, 231, 0.4) 5%,
+            rgba(116, 185, 255, 0.3) 20%,
+            rgba(253, 121, 168, 0.3) 40%,
+            rgba(255, 255, 255, 0.1) 70%
+    );
+    opacity: 0.8;
+}
+
+/* Mejorar visibilidad de los crescents */
+.crescent {
+    filter: drop-shadow(0px 0px 15px rgba(108, 92, 231, 1))
+    drop-shadow(0px 0px 25px rgba(116, 185, 255, 0.8))
+    drop-shadow(0px 0px 35px rgba(253, 121, 168, 0.6));
+}
+
+/* FORZAR VISIBILIDAD DE TODOS LOS BADGES DE AÑO */
+.timeline-year-badge {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Asegurar que cada badge específico sea visible */
+[data-year="2024"] .timeline-year-badge,
+[data-year="2025"] .timeline-year-badge,
+[data-year="2026"] .timeline-year-badge,
+[data-year="Futuro"] .timeline-year-badge {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    transform: scale(1) !important;
+}

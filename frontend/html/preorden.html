@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preórdenes - MinimalStore</title>
+
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/preorden.css">
+</head>
+<body>
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p>Cargando preórdenes...</p>
+    </div>
+</div>
+
+<!-- Navigation Header -->
+<nav class="nav-header">
+    <div class="nav-container">
+        <div class="nav-left">
+            <button class="nav-btn back-btn" onclick="window.location.href='/perfil'">
+                <span class="btn-icon">←</span>
+                <span>Volver al Perfil</span>
+            </button>
+        </div>
+        <div class="nav-center">
+            <h1 class="page-title">
+                <span class="title-icon">⏳</span>
+                Mis Preórdenes
+            </h1>
+        </div>
+        <div class="nav-right">
+            <button class="nav-btn primary" id="btnNuevaPreorden">
+                <span class="btn-icon">+</span>
+                <span>Nueva Preorden</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Container -->
+<div class="preorden-container">
+
+    <!-- Stats Cards -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📋</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalPreordenes">0</span>
+                    <span class="stat-label">Total Preórdenes</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏳</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="preordenesPendientes">0</span>
+                    <span class="stat-label">Pendientes</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="preordenesConfirmadas">0</span>
+                    <span class="stat-label">Confirmadas</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="montoTotal">$0</span>
+                    <span class="stat-label">Monto Total</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section">
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="filtroEstado">Estado:</label>
+                <select id="filtroEstado" class="filter-select">
+                    <option value="">Todos los estados</option>
+                    <option value="PENDIENTE">Pendiente</option>
+                    <option value="CONFIRMADA">Confirmada</option>
+                    <option value="PRODUCCION">En Producción</option>
+                    <option value="LISTA">Lista</option>
+                    <option value="ENTREGADA">Entregada</option>
+                    <option value="CANCELADA">Cancelada</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filtroFecha">Período:</label>
+                <select id="filtroFecha" class="filter-select">
+                    <option value="">Todas las fechas</option>
+                    <option value="ultima-semana">Última semana</option>
+                    <option value="ultimo-mes">Último mes</option>
+                    <option value="ultimos-3-meses">Últimos 3 meses</option>
+                </select>
+            </div>
+            <button class="filter-btn reset" id="btnResetFiltros">
+                <span class="btn-icon">🔄</span>
+                Limpiar
+            </button>
+        </div>
+    </section>
+
+    <!-- Preordenes List -->
+    <section class="preordenes-section">
+        <div class="section-header">
+            <h2>Mis Preórdenes</h2>
+            <div class="view-controls">
+                <button class="view-btn active" data-view="list">
+                    <span class="btn-icon">☰</span>
+                </button>
+                <button class="view-btn" data-view="grid">
+                    <span class="btn-icon">⊞</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="preordenesContainer" class="preordenes-container list-view">
+            <!-- Las preórdenes se cargarán aquí dinámicamente -->
+        </div>
+    </section>
+</div>
+
+<!-- Modal Nueva Preorden -->
+<div id="modalNuevaPreorden" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>
+                <span class="modal-icon">⏳</span>
+                Nueva Preorden
+            </h3>
+            <button class="modal-close" onclick="cerrarModal('modalNuevaPreorden')">×</button>
+        </div>
+
+        <form id="formNuevaPreorden" class="modal-form">
+            <div class="form-step active" id="step1">
+                <h4>Seleccionar Producto</h4>
+
+                <div class="search-container">
+                    <input type="text" id="buscarProducto" placeholder="Buscar producto..." class="search-input">
+                    <div class="search-icon">🔍</div>
+                </div>
+
+                <div id="productosDisponibles" class="productos-grid">
+                    <!-- Productos se cargarán aquí -->
+                </div>
+
+                <input type="hidden" id="productoSeleccionado" required>
+            </div>
+
+            <div class="form-step" id="step2">
+                <h4>Detalles de la Preorden</h4>
+
+                <div class="producto-seleccionado" id="productoSeleccionadoInfo">
+                    <!-- Info del producto seleccionado -->
+                </div>
+
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <div class="quantity-input">
+                        <button type="button" class="qty-btn minus">-</button>
+                        <input type="number" id="cantidad" name="cantidad" min="1" value="1" required>
+                        <button type="button" class="qty-btn plus">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaEntrega">Fecha Estimada de Entrega</label>
+                    <input type="date" id="fechaEntrega" name="fechaEntrega" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="notas">Notas Adicionales</label>
+                    <textarea id="notas" name="notas" placeholder="Especificaciones, colores, tallas, etc." maxlength="500"></textarea>
+                    <div class="char-counter">
+                        <span id="notasCounter">0</span>/500
+                    </div>
+                </div>
+
+                <div class="precio-resumen">
+                    <div class="precio-item">
+                        <span>Precio unitario:</span>
+                        <span id="precioUnitario">$0.00</span>
+                    </div>
+                    <div class="precio-item">
+                        <span>Cantidad:</span>
+                        <span id="cantidadMostrada">1</span>
+                    </div>
+                    <div class="precio-total">
+                        <span>Total:</span>
+                        <span id="precioTotal">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="modal-btn secondary" id="btnAnterior" style="display: none;">
+                    <span class="btn-icon">←</span>
+                    Anterior
+                </button>
+                <button type="button" class="modal-btn primary" id="btnSiguiente">
+                    Siguiente
+                    <span class="btn-icon">→</span>
+                </button>
+                <button type="submit" class="modal-btn success" id="btnCrearPreorden" style="display: none;">
+                    <span class="btn-icon">✓</span>
+                    Crear Preorden
+                </button>
+                <button type="button" class="modal-btn tertiary" onclick="cerrarModal('modalNuevaPreorden')">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Detalle Preorden -->
+<div id="modalDetallePreorden" class="modal">
+    <div class="modal-content large">
+        <div class="modal-header">
+            <h3>
+                <span class="modal-icon">📋</span>
+                Detalle de Preorden
+            </h3>
+            <button class="modal-close" onclick="cerrarModal('modalDetallePreorden')">×</button>
+        </div>
+
+        <div class="detalle-content" id="detallePreordenContent">
+            <!-- Contenido del detalle se cargará aquí -->
+        </div>
+
+        <div class="modal-actions">
+            <button type="button" class="modal-btn primary" id="btnEditarPreorden">
+                <span class="btn-icon">✏️</span>
+                Editar
+            </button>
+            <button type="button" class="modal-btn danger" id="btnCancelarPreorden">
+                <span class="btn-icon">❌</span>
+                Cancelar Preorden
+            </button>
+            <button type="button" class="modal-btn tertiary" onclick="cerrarModal('modalDetallePreorden')">
+                Cerrar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- JavaScript -->
+<script src="/js/preorden.js"></script>
+</body>
+</html>

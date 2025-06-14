@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misión y Visión - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/mision-vision.css">
+
+    <!-- Configuración Tailwind personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'minimal-gray': '#f8f9fa',
+                        'minimal-dark': '#2c3e50',
+                        'minimal-accent': '#34495e',
+                        'minimal-light': '#ecf0f1'
+                    },
+                    fontFamily: {
+                        'minimal': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-minimal-gray min-h-screen font-minimal">
+
+<!-- Fondo animado con círculos concéntricos -->
+<div class="ripple-background">
+    <div class="ripple-container">
+        <i class="ripple-circle"></i>
+        <i class="ripple-circle"></i>
+        <i class="ripple-circle"></i>
+        <i class="ripple-circle"></i>
+        <i class="ripple-circle"></i>
+        <i class="ripple-circle"></i>
+        <i class="ripple-circle"></i>
+        <i class="ripple-circle"></i>
+        <i class="ripple-circle"></i>
+        <i class="ripple-circle"></i>
+    </div>
+</div>
+
+<!-- Logo flotante -->
+<div class="floating-logo">
+    <a href="dashboard" class="logo-link">
+        <div class="logo-icon">
+            <span>M</span>
+        </div>
+        <span class="logo-text">MinimalStore</span>
+    </a>
+</div>
+
+<!-- Contenedor principal -->
+<div class="main-container">
+
+    <!-- Header con título ScrambleText -->
+    <div class="mission-header">
+        <h1 class="mission-title" id="scramble-title">
+            <span class="title-text">Misión y Visión</span>
+        </h1>
+        <p class="mission-subtitle split-subtitle">
+            Nuestro propósito y el futuro que construimos juntos
+        </p>
+    </div>
+
+    <!-- Contenedor principal con neumorphism -->
+    <div class="mission-content-container">
+
+        <!-- Sección de Misión -->
+        <div class="mission-section">
+            <div class="mission-card">
+                <div class="card-header">
+                    <div class="card-icon mission-icon">
+                        <span>🎯</span>
+                    </div>
+                    <h2 class="card-title split-title">Nuestra Misión</h2>
+                </div>
+
+                <div class="card-content">
+                    <div class="mission-text split-content">
+                        <p class="highlight-text">Democratizar el comercio electrónico a través del diseño minimalista y la innovación tecnológica.</p>
+
+                        <p>En MinimalStore, nos dedicamos a crear experiencias de compra que eliminan la complejidad innecesaria, permitiendo que tanto compradores como vendedores se concentren en lo que realmente importa: productos de calidad y relaciones comerciales auténticas.</p>
+
+                        <p>Nuestro compromiso es ofrecer una plataforma que combine la elegancia del diseño neumórfico con la funcionalidad robusta, garantizando que cada interacción sea intuitiva, rápida y memorable.</p>
+
+                        <div class="mission-points">
+                            <div class="point-item split-point">
+                                <span class="point-icon">✨</span>
+                                <span class="point-text">Simplificar sin comprometer la funcionalidad</span>
+                            </div>
+                            <div class="point-item split-point">
+                                <span class="point-icon">🤝</span>
+                                <span class="point-text">Conectar vendedores y compradores de manera auténtica</span>
+                            </div>
+                            <div class="point-item split-point">
+                                <span class="point-icon">🚀</span>
+                                <span class="point-text">Innovar constantemente en experiencia de usuario</span>
+                            </div>
+                            <div class="point-item split-point">
+                                <span class="point-icon">🌱</span>
+                                <span class="point-text">Promover prácticas comerciales sostenibles</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Visión -->
+        <div class="vision-section">
+            <div class="vision-card">
+                <div class="card-header">
+                    <div class="card-icon vision-icon">
+                        <span>🌟</span>
+                    </div>
+                    <h2 class="card-title split-title">Nuestra Visión</h2>
+                </div>
+
+                <div class="card-content">
+                    <div class="vision-text split-content">
+                        <p class="highlight-text">Ser la plataforma de ecommerce preferida globalmente por su simplicidad, elegancia y eficiencia.</p>
+
+                        <p>Visualizamos un futuro donde el comercio digital sea tan natural como una conversación, donde cada pixel tenga un propósito y donde la tecnología sirva para acercar a las personas, no para complicar sus vidas.</p>
+
+                        <p>Para 2030, aspiramos a ser reconocidos como los pioneros que redefinieron los estándares de la industria, demostrando que el minimalismo y la sofisticación tecnológica pueden coexistir para crear experiencias extraordinarias.</p>
+
+                        <div class="vision-goals">
+                            <div class="goal-item split-goal">
+                                <span class="goal-number">2025</span>
+                                <span class="goal-text">Consolidar el diseño neumórfico como estándar en ecommerce</span>
+                            </div>
+                            <div class="goal-item split-goal">
+                                <span class="goal-number">2026</span>
+                                <span class="goal-text">Expandir a mercados internacionales manteniendo la esencia minimalista</span>
+                            </div>
+                            <div class="goal-item split-goal">
+                                <span class="goal-number">2027</span>
+                                <span class="goal-text">Liderar la revolución de interfaces adaptativas e inteligentes</span>
+                            </div>
+                            <div class="goal-item split-goal">
+                                <span class="goal-number">2030</span>
+                                <span class="goal-text">Ser el referente mundial en experiencias de compra conscientes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Valores Conectores -->
+        <div class="connector-section">
+            <div class="connector-card">
+                <h3 class="connector-title split-title">Lo que nos une</h3>
+                <div class="connector-grid">
+                    <div class="connector-item" data-value="1">
+                        <div class="connector-icon">💡</div>
+                        <h4 class="connector-name split-text">Innovación Consciente</h4>
+                        <p class="connector-description split-text">Cada nueva característica debe mejorar la vida del usuario, no complicarla.</p>
+                    </div>
+
+                    <div class="connector-item" data-value="2">
+                        <div class="connector-icon">🎨</div>
+                        <h4 class="connector-name split-text">Belleza Funcional</h4>
+                        <p class="connector-description split-text">El diseño hermoso debe servir a un propósito práctico y mejorar la usabilidad.</p>
+                    </div>
+
+                    <div class="connector-item" data-value="3">
+                        <div class="connector-icon">🌍</div>
+                        <h4 class="connector-name split-text">Impacto Global</h4>
+                        <p class="connector-description split-text">Nuestras decisiones locales tienen el poder de influir positivamente a nivel mundial.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación a páginas relacionadas -->
+    <div class="navigation-section">
+        <div class="nav-grid">
+            <a href="historia" class="nav-card">
+                <div class="nav-icon">📚</div>
+                <h3 class="nav-title split-text">Nuestra Historia</h3>
+                <p class="nav-description split-text">Descubre cómo comenzó nuestro viaje hacia la simplicidad</p>
+            </a>
+
+            <a href="soporte" class="nav-card">
+                <div class="nav-icon">🤝</div>
+                <h3 class="nav-title split-text">Centro de Soporte</h3>
+                <p class="nav-description split-text">Estamos aquí para ayudarte en cada paso del camino</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mission-footer">
+        <div class="footer-content split-footer">
+            <p>&copy; 2025 MinimalStore. Construyendo el futuro del ecommerce, una experiencia a la vez.</p>
+            <p class="footer-quote">"La simplicidad es la clave de la verdadera elegancia" - Coco Chanel</p>
+        </div>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="../js/mision-vision.js"></script>
+</body>
+</html>

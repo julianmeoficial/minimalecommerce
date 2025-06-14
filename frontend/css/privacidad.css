@@ -1,0 +1,419 @@
+/* Política de Privacidad - Estilo Minimalista con Iconos de Seguridad */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --minimal-gray: #f8f9fa;
+    --minimal-dark: #2c3e50;
+    --minimal-accent: #34495e;
+    --minimal-light: #ecf0f1;
+    --security-blue: #3498db;
+    --security-green: #27ae60;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #e5e7eb;
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--minimal-gray);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Fondo animado con íconos de seguridad */
+.animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--minimal-light) 0%, var(--minimal-gray) 100%);
+    opacity: 0.3;
+}
+
+.security-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.security-icon {
+    position: absolute;
+    opacity: 0.08;
+    pointer-events: none;
+    user-select: none;
+    font-size: 2rem;
+    color: var(--security-blue);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: opacity 0.3s ease;
+}
+
+.security-icon:nth-child(odd) {
+    color: var(--security-green);
+    opacity: 0.1;
+}
+
+.security-icon:nth-child(even) {
+    opacity: 0.12;
+}
+
+/* Íconos específicos de seguridad */
+.lock-icon::before {
+    content: "🔒";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.shield-icon::before {
+    content: "🛡️";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.key-icon::before {
+    content: "🔑";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.secure-icon::before {
+    content: "🔐";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.privacy-icon::before {
+    content: "👁️";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.protection-icon::before {
+    content: "🛡️";
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo flotante (igual que términos) */
+.floating-logo {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 50;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: translateY(-2px);
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--minimal-dark), var(--minimal-accent));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-medium);
+}
+
+.logo-icon span {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.logo-text {
+    color: var(--minimal-dark);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Contenedor principal */
+.main-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+/* Header */
+.privacy-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-top: 2rem;
+}
+
+/* Título con ScrambleText */
+.privacy-title {
+    position: relative;
+    display: inline-block;
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--minimal-dark) !important;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    letter-spacing: -0.02em;
+    transition: all 0.3s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.privacy-title:hover {
+    color: var(--security-blue) !important;
+    transform: scale(1.02);
+}
+
+.privacy-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-top: 1rem;
+}
+
+/* Contenedor del contenido */
+.privacy-content-container {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+/* Contenido principal */
+.privacy-content {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: var(--shadow-medium);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.privacy-section {
+    margin-bottom: 2.5rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.section-content {
+    color: var(--text-primary);
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.section-content p {
+    margin-bottom: 1rem;
+}
+
+.privacy-list {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.privacy-list li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.privacy-list li::marker {
+    color: var(--security-blue);
+}
+
+/* Navegación lateral */
+.privacy-navigation {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+}
+
+.nav-container {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.nav-list {
+    list-style: none;
+}
+
+.nav-list li {
+    margin-bottom: 0.75rem;
+}
+
+.nav-link {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: var(--security-blue);
+    color: white;
+    transform: translateX(5px);
+}
+
+/* Footer */
+.privacy-footer {
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 3rem;
+}
+
+.footer-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-date {
+    font-weight: 300;
+    opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .privacy-content-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .privacy-navigation {
+        position: static;
+        order: -1;
+    }
+
+    .nav-container {
+        padding: 1.5rem;
+    }
+
+    .nav-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+
+    .privacy-content {
+        padding: 2rem;
+        border-radius: 20px;
+    }
+
+    .privacy-title {
+        font-size: 2.5rem;
+    }
+
+    .floating-logo {
+        top: 1rem;
+        left: 1rem;
+    }
+
+    .security-icon {
+        font-size: 1.5rem;
+        opacity: 0.05;
+    }
+}
+
+@media (max-width: 480px) {
+    .privacy-title {
+        font-size: 2rem;
+    }
+
+    .privacy-content {
+        padding: 1.5rem;
+    }
+
+    .nav-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Forzar visibilidad de elementos críticos */
+.privacy-title,
+.privacy-content,
+.privacy-navigation,
+.floating-logo,
+.section-title,
+.section-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Efectos de scroll suaves */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .security-icon {
+        animation: none;
+    }
+}

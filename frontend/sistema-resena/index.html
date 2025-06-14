@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Reseñas - Nuevo</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Local -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <header class="header">
+        <h1><i class="fas fa-star"></i> Sistema de Reseñas</h1>
+
+        <!-- Selector de Rol -->
+        <div class="role-selector">
+            <button id="btn-comprador" class="role-btn active">
+                <i class="fas fa-shopping-cart"></i> Comprador
+            </button>
+            <button id="btn-vendedor" class="role-btn">
+                <i class="fas fa-store"></i> Vendedor
+            </button>
+        </div>
+    </header>
+
+    <!-- Vista Comprador -->
+    <section id="vista-comprador" class="view active">
+        <div class="card">
+            <h2><i class="fas fa-plus"></i> Nueva Reseña</h2>
+
+            <form id="form-resena" class="form">
+                <div class="form-group">
+                    <label>Tu ID de Comprador:</label>
+                    <input type="number" id="comprador-id" placeholder="123" required>
+                </div>
+
+                <div class="form-group">
+                    <label>ID del Producto:</label>
+                    <input type="number" id="producto-id" placeholder="456" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Calificación:</label>
+                    <div class="rating">
+                        <span class="star" data-rating="1">☆</span>
+                        <span class="star" data-rating="2">☆</span>
+                        <span class="star" data-rating="3">☆</span>
+                        <span class="star" data-rating="4">☆</span>
+                        <span class="star" data-rating="5">☆</span>
+                    </div>
+                    <input type="hidden" id="rating-value" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Comentario:</label>
+                    <textarea id="comentario" placeholder="Escribe tu opinión..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="btn-verificar" class="btn btn-secondary">
+                        <i class="fas fa-check"></i> Verificar
+                    </button>
+                    <button type="submit" id="btn-enviar" class="btn btn-primary" disabled>
+                        <i class="fas fa-paper-plane"></i> Enviar
+                    </button>
+                </div>
+            </form>
+
+            <div id="mensaje" class="message"></div>
+        </div>
+
+        <!-- Mis Reseñas -->
+        <div class="card">
+            <h2><i class="fas fa-list"></i> Mis Reseñas</h2>
+            <div id="mis-resenas" class="resenas-list">
+                <p class="loading">Cargando...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vista Vendedor -->
+    <section id="vista-vendedor" class="view">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="promedio">0.0</span>
+                    <span class="stat-label">Promedio</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="total-resenas">0</span>
+                    <span class="stat-label">Total Reseñas</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <i class="fas fa-shield-check"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="verificadas">0</span>
+                    <span class="stat-label">Verificadas</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-cog"></i> Configuración</h2>
+            <div class="form-group">
+                <label>Tu ID de Vendedor:</label>
+                <input type="number" id="vendedor-id" placeholder="789">
+                <button id="btn-cargar" class="btn btn-primary">
+                    <i class="fas fa-sync"></i> Cargar Datos
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-inbox"></i> Reseñas Recibidas</h2>
+            <div id="resenas-recibidas" class="resenas-list">
+                <p class="empty">Ingresa tu ID para ver las reseñas</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Loading Overlay -->
+<div id="loading" class="loading-overlay hidden">
+    <div class="spinner"></div>
+    <p>Cargando...</p>
+</div>
+
+<!-- JavaScript Local -->
+<script src="script.js"></script>
+</body>
+</html>

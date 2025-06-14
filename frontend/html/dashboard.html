@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+    <!-- Configuración Tailwind personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'minimal-gray': '#f8f9fa',
+                        'minimal-dark': '#2c3e50',
+                        'minimal-accent': '#34495e',
+                        'minimal-light': '#ecf0f1'
+                    },
+                    fontFamily: {
+                        'minimal': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-minimal-gray min-h-screen font-minimal">
+
+<!-- Header -->
+<header class="header-container">
+    <div class="header-content">
+
+        <!-- Logo y Nombre -->
+        <div class="logo-section">
+            <div class="logo-icon" id="animated-logo">
+                <span>M</span>
+            </div>
+            <span class="logo-text" id="logo-text">MinimalStore</span>
+        </div>
+
+        <!-- Navegación Principal -->
+        <nav class="main-navigation">
+            <ul class="nav-list">
+                <li>
+                    <button class="nav-button active" data-section="inicio">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9,22 9,12 15,12 15,22"/>
+                        </svg>
+                        Inicio
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button" data-section="categorias">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                        Categorías
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button" data-section="cupones">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21,12 L21,6 C21,4.895 20.105,4 19,4 L5,4 C3.895,4 3,4.895 3,6 L3,7 C4.105,7 5,7.895 5,9 C5,10.105 4.105,11 3,11 L3,18 C3,19.105 3.895,20 5,20 L19,20 C20.105,20 21,19.105 21,18 L21,13 C19.895,13 19,12.105 19,11 C19,9.895 19.895,9 21,9 L21,12 Z"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                        </svg>
+                        Cupones
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button" data-section="blog">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                            <line x1="8" y1="7" x2="16" y2="7"/>
+                            <line x1="8" y1="11" x2="16" y2="11"/>
+                            <line x1="8" y1="15" x2="12" y2="15"/>
+                        </svg>
+                        Blog
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button" data-section="eventos">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                            <path d="m9 16 2 2 4-4"/>
+                        </svg>
+                        Eventos
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Sección de Usuario y Acciones -->
+        <div class="user-actions">
+
+            <!-- Perfil de Usuario -->
+            <div class="profile-section">
+                <button class="profile-button-simple" id="profile-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="user-icon">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    <span class="profile-text" id="user-name">Usuario</span>
+                </button>
+            </div>
+
+            <!-- Carrito -->
+            <div class="cart-section">
+                <button data-quantity="0" class="cart-button" id="cart-btn">
+                    <svg class="cart-icon" viewBox="0 0 24.38 30.52" height="30.52" width="24.38">
+                        <title>icon-cart</title>
+                        <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.74-.64H23.58l-.46-2.73a.75.75,0,0,0-.74-.64H4.11a.75.75,0,0,0,0,1.5H21.8l.39,2.27H5.49a.75.75,0,0,0-.74.64L2.89,27.3a.75.75,0,0,0,.74.86H27.28A.75.75,0,0,0,28,27.3ZM4.11,9H24.73l1.61,18.41H5.72Zm7.47,5a.75.75,0,0,0-1.5,0v8a.75.75,0,0,0,1.5,0Zm8,0a.75.75,0,0,0-1.5,0v8a.75.75,0,0,0,1.5,0Z"></path>
+                    </svg>
+                    <span class="cart-quantity"></span>
+                </button>
+            </div>
+
+            <!-- Favoritos -->
+            <div class="favorites-section">
+                <button class="favorites-button" id="favorites-btn">
+                    <svg class="heart-empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5 2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+                    </svg>
+                    <svg class="heart-filled" height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5 2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Notificaciones -->
+            <div class="notifications-section">
+                <button class="notification-button" id="notification-btn">
+                    <svg viewBox="0 0 448 512" class="bell-icon">
+                        <path d="M224 0c-17.7 0-32 14.3-32 32v19.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416h384c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.8 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Contenido Principal -->
+<main class="main-content">
+
+    <!-- Carrusel de Ofertas -->
+    <section class="carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-track" id="carousel-track">
+
+                <div class="carousel-slide active" data-slide="0">
+                    <div class="slide-content">
+                        <div class="slide-text">
+                            <h2 class="slide-title">Ofertas Exclusivas</h2>
+                            <p class="slide-description">Descubre nuestras mejores ofertas en tecnología</p>
+                            <button class="slide-button" onclick="window.location.href='/categorias?categoria=tecnologia'">Ver Ofertas</button>
+                        </div>
+                        <div class="slide-image">
+                            <div class="image-placeholder gradient-tech">
+                                <span class="carousel-emoji">📱</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide" data-slide="1">
+                    <div class="slide-content">
+                        <div class="slide-text">
+                            <h2 class="slide-title">Nuevos Cupones</h2>
+                            <p class="slide-description">Cupones de descuento hasta 50% en categorías seleccionadas</p>
+                            <button class="slide-button" onclick="window.location.href='/cupones'">Obtener Cupones</button>
+                        </div>
+                        <div class="slide-image">
+                            <div class="image-placeholder gradient-cupones">
+                                <span class="carousel-emoji">🎫</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide" data-slide="2">
+                    <div class="slide-content">
+                        <div class="slide-text">
+                            <h2 class="slide-title">Blog y Noticias</h2>
+                            <p class="slide-description">Artículos, consejos y las últimas tendencias en compras</p>
+                            <button class="slide-button" onclick="window.location.href='/blog'">Leer Blog</button>
+                        </div>
+                        <div class="slide-image">
+                            <div class="image-placeholder gradient-blog">
+                                <span class="carousel-emoji">📝</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controles de Navegación del Carrusel -->
+                <div class="carousel-controls">
+                    <button class="carousel-nav-btn prev-btn" id="prevSlide">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                    </button>
+
+                    <!-- Indicadores del Carrusel -->
+                    <div class="carousel-indicators">
+                        <button class="indicator active" data-slide="0"></button>
+                        <button class="indicator" data-slide="1"></button>
+                        <button class="indicator" data-slide="2"></button>
+                    </div>
+
+                    <button class="carousel-nav-btn next-btn" id="nextSlide">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+        </div>
+    </section>
+
+    <!-- Sección de Categorías -->
+    <section class="categories-section">
+        <div class="categories-grid">
+
+            <div class="category-card" data-category="tecnologia">
+                <!-- Patrón animado de fondo para tecnología -->
+                <div class="pattern-bg tecnologia-pattern">
+                    <div class="pattern-element tech-icon cpu"></div>
+                    <div class="pattern-element tech-icon chip"></div>
+                    <div class="pattern-element tech-icon circuit"></div>
+                    <div class="pattern-element tech-icon wifi"></div>
+                    <div class="pattern-element tech-icon bluetooth"></div>
+                    <div class="pattern-element tech-icon battery"></div>
+                </div>
+
+                <div class="card-content">
+                    <div class="category-icon">📱</div>
+                    <h3 class="category-name">Tecnología</h3>
+                    <p class="category-description">Gadgets y dispositivos innovadores</p>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="hogar">
+                <!-- Patrón animado de fondo para hogar -->
+                <div class="pattern-bg hogar-pattern">
+                    <div class="pattern-element home-icon sofa"></div>
+                    <div class="pattern-element home-icon lamp"></div>
+                    <div class="pattern-element home-icon table"></div>
+                    <div class="pattern-element home-icon plant"></div>
+                    <div class="pattern-element home-icon frame"></div>
+                    <div class="pattern-element home-icon cushion"></div>
+                </div>
+
+                <div class="card-content">
+                    <div class="category-icon">🏠</div>
+                    <h3 class="category-name">Hogar</h3>
+                    <p class="category-description">Productos para tu espacio ideal</p>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="moda">
+                <!-- Patrón animado de fondo para moda -->
+                <div class="pattern-bg moda-pattern">
+                    <div class="pattern-element fashion-icon shirt"></div>
+                    <div class="pattern-element fashion-icon shoes"></div>
+                    <div class="pattern-element fashion-icon bag"></div>
+                    <div class="pattern-element fashion-icon hat"></div>
+                    <div class="pattern-element fashion-icon accessories"></div>
+                    <div class="pattern-element fashion-icon dress"></div>
+                </div>
+
+                <div class="card-content">
+                    <div class="category-icon">👗</div>
+                    <h3 class="category-name">Moda</h3>
+                    <p class="category-description">Estilo minimalista y elegante</p>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="mascotas">
+                <!-- Patrón animado de fondo para mascotas -->
+                <div class="pattern-bg mascotas-pattern">
+                    <div class="pattern-element pet-icon paw"></div>
+                    <div class="pattern-element pet-icon bone"></div>
+                    <div class="pattern-element pet-icon ball"></div>
+                    <div class="pattern-element pet-icon collar"></div>
+                    <div class="pattern-element pet-icon food"></div>
+                    <div class="pattern-element pet-icon toy"></div>
+                </div>
+
+                <div class="card-content">
+                    <div class="category-icon">🐕</div>
+                    <h3 class="category-name">Mascotas</h3>
+                    <p class="category-description">Todo para tus compañeros fieles</p>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="manualidades">
+                <!-- Patrón animado de fondo para manualidades -->
+                <div class="pattern-bg manualidades-pattern">
+                    <div class="pattern-element craft-icon brush"></div>
+                    <div class="pattern-element craft-icon scissors"></div>
+                    <div class="pattern-element craft-icon glue"></div>
+                    <div class="pattern-element craft-icon paper"></div>
+                    <div class="pattern-element craft-icon pencil"></div>
+                    <div class="pattern-element craft-icon palette"></div>
+                </div>
+
+                <div class="card-content">
+                    <div class="category-icon">🎨</div>
+                    <h3 class="category-name">Manualidades</h3>
+                    <p class="category-description">Creatividad sin límites</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer-container">
+    <div class="footer-content">
+
+        <!-- Información Principal -->
+        <div class="footer-main">
+            <div class="footer-section">
+                <h3 class="footer-title">MinimalStore</h3>
+                <p class="footer-text">Ecommerce minimalista diseñado para la simplicidad y elegancia.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4 class="footer-subtitle">Acerca de Nosotros</h4>
+                <ul class="footer-links">
+                    <li><a href="historia" class="footer-link">Nuestra Historia</a></li>
+                    <li><a href="mision-vision" class="footer-link">Misión y Visión</a></li>
+                    <li><a href="equipo" class="footer-link">Equipo</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4 class="footer-subtitle">Contacto</h4>
+                <ul class="footer-links">
+                    <li><a href="soporte" class="footer-link">Centro de Soporte</a></li>
+                    <li><a href="envios" class="footer-link">Envíos</a></li>
+                    <li><a href="devoluciones" class="footer-link">Devoluciones</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4 class="footer-subtitle">Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="privacidad" class="footer-link">Política de Privacidad</a></li>
+                    <li><a href="terminos" class="footer-link">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Botón de Redes Sociales Centrado -->
+        <div class="social-button-container">
+            <div class="social-main" id="social-share">
+                <div class="social-card" data-social="instagram">
+                    <svg fill-rule="nonzero" height="30px" width="30px" viewBox="0,0,256,256" class="instagram">
+                        <g transform="scale(8,8)">
+                            <path d="M11.46875,5c-3.55078,0 -6.46875,2.91406 -6.46875,6.46875v9.0625c0,3.55078 2.91797,6.46875 6.46875,6.46875h9.0625c3.55078,0 6.46875,-2.91797 6.46875,-6.46875v-9.0625c0,-3.55469 -2.91797,-6.46875 -6.46875,-6.46875zM11.46875,7h9.0625c2.47266,0 4.46875,1.99609 4.46875,4.46875v9.0625c0,2.47266 -1.99609,4.46875 -4.46875,4.46875h-9.0625c-2.47266,0 -4.46875,-1.99609 -4.46875,-4.46875v-9.0625c0,-2.47266 1.99609,-4.46875 4.46875,-4.46875zM16,10c-3.30078,0 -6,2.69922 -6,6c0,3.30078 2.69922,6 6,6c3.30078,0 6,-2.69922 6,-6c0,-3.30078 -2.69922,-6 -6,-6zM16,12c2.22266,0 4,1.77734 4,4c0,2.22266 -1.77734,4 -4,4c-2.22266,0 -4,-1.77734 -4,-4c0,-2.22266 1.77734,-4 4,-4zM22.5,9.5c-0.82812,0 -1.5,0.67188 -1.5,1.5c0,0.82812 0.67188,1.5 1.5,1.5c0.82812,0 1.5,-0.67188 1.5,-1.5c0,-0.82812 -0.67188,-1.5 -1.5,-1.5z"></path>
+                        </g>
+                    </svg>
+                </div>
+                <div class="social-card" data-social="twitter">
+                    <svg height="30px" width="30px" viewBox="0 0 48 48" class="twitter">
+                        <path d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"></path>
+                    </svg>
+                </div>
+                <div class="social-card" data-social="facebook">
+                    <svg height="30px" width="30px" viewBox="0 0 24 24" class="facebook">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </div>
+                <div class="social-card" data-social="telegram">
+                    <svg height="30px" width="30px" viewBox="0 0 48 48" class="telegram">
+                        <path d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z"></path>
+                        <path d="M33.95,15l-3.746,19.126c0,0-0.161,0.874-1.245,0.874c-0.576,0-0.873-0.274-0.873-0.274l-8.114-6.733l-3.97-2.001l-5.095-1.355c0,0-0.907-0.262-0.907-1.012c0-0.625,0.933-0.923,0.933-0.923l21.316-8.468c-0.001-0.001,0.651-0.235,1.126-0.234C33.667,14,34,14.125,34,14.5C34,14.75,33.95,15,33.95,15z" fill="#fff"></path>
+                        <path d="M23,30.505l-3.426,3.374c0,0-0.149,0.115-0.348,0.12c-0.069,0.002-0.143-0.009-0.219-0.043l0.964-5.965L23,30.505z" fill="#b0bec5"></path>
+                        <path d="M29.897,18.196c-0.169-0.22-0.481-0.26-0.701-0.093L16,26c0,0,2.106,5.892,2.427,6.912c0.322,1.021,0.58,1.045,0.58,1.045l0.964-5.965l9.832-9.096C30.023,18.729,30.064,18.416,29.897,18.196z" fill="#cfd8dc"></path>
+                    </svg>
+                </div>
+                <div class="social-card" data-social="whatsapp">
+                    <svg height="30px" width="30px" viewBox="0 0 24 24" class="whatsapp">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+                    </svg>
+                </div>
+                <div class="social-card" data-social="github">
+                    <svg height="30px" width="30px" viewBox="0 0 30 30" class="github">
+                        <path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path>
+                    </svg>
+                </div>
+                <p class="social-text">COMPARTIR<br/><br/>EN<br/><br/>REDES</p>
+                <div class="social-main-back"></div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 MinimalStore. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="../js/dashboard.js"></script>
+</body>
+</html>

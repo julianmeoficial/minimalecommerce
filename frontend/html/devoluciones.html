@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Políticas de Devoluciones - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/devoluciones.css">
+
+    <!-- Configuración Tailwind personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'minimal-gray': '#f8f9fa',
+                        'minimal-dark': '#2c3e50',
+                        'minimal-accent': '#34495e',
+                        'minimal-light': '#ecf0f1'
+                    },
+                    fontFamily: {
+                        'minimal': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-minimal-gray min-h-screen font-minimal">
+
+<!-- Patrones de fondo animados -->
+<div class="returns-bg-pattern">
+    <div class="pattern-element refund-pattern"></div>
+    <div class="pattern-element money-pattern"></div>
+    <div class="pattern-element return-pattern"></div>
+    <div class="pattern-element check-pattern"></div>
+    <div class="pattern-element card-pattern"></div>
+    <div class="pattern-element shield-pattern"></div>
+</div>
+
+<!-- Logo flotante -->
+<div class="floating-logo">
+    <a href="dashboard" class="logo-link">
+        <div class="logo-icon">
+            <span>M</span>
+        </div>
+        <span class="logo-text">MinimalStore</span>
+    </a>
+</div>
+
+<!-- Contenedor principal -->
+<div class="main-container">
+
+    <!-- Header con título ScrambleText -->
+    <div class="returns-header">
+        <h1 class="returns-title" id="scramble-title">
+            <span class="title-text">Políticas de Devoluciones</span>
+        </h1>
+        <p class="returns-subtitle split-subtitle">
+            Proceso simple y transparente para devolver tus productos
+        </p>
+    </div>
+
+    <!-- Contenedor del contenido con neumorphism -->
+    <div class="returns-content-container">
+
+        <!-- Animación de la moneda -->
+        <div class="coin-animation-section">
+            <div class="coin-loader">
+                <div class="coin-wrapper">
+                    <div class="coin-border"></div>
+                    <div class="coin-symbol">$</div>
+                </div>
+            </div>
+            <div class="coin-text">
+                <h3 class="coin-title split-text">¡Reembolso garantizado!</h3>
+                <p class="coin-description split-text">Devoluciones rápidas y seguras</p>
+            </div>
+        </div>
+
+        <!-- Contenido de información -->
+        <div class="returns-content">
+
+            <section class="returns-section" data-section="1">
+                <h2 class="section-title split-title">Condiciones para Devoluciones</h2>
+                <div class="section-content split-content">
+                    <p>En MinimalStore aceptamos devoluciones bajo las siguientes condiciones:</p>
+                    <ul class="returns-list split-list">
+                        <li><strong>Tiempo límite:</strong> 30 días calendario desde la fecha de entrega</li>
+                        <li><strong>Estado del producto:</strong> Debe estar en condiciones originales y sin usar</li>
+                        <li><strong>Empaque original:</strong> Con todas las etiquetas, manuales y accesorios</li>
+                        <li><strong>Comprobante de compra:</strong> Factura o recibo de compra requerido</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="returns-section" data-section="2">
+                <h2 class="section-title split-title">Proceso de Devolución</h2>
+                <div class="section-content split-content">
+                    <p>Sigue estos sencillos pasos para devolver tu producto:</p>
+                    <ul class="returns-list split-list">
+                        <li><strong>Paso 1:</strong> Inicia la solicitud desde tu cuenta en "Mis Pedidos"</li>
+                        <li><strong>Paso 2:</strong> Selecciona el motivo de la devolución y agrega comentarios</li>
+                        <li><strong>Paso 3:</strong> Empaca el producto con todos sus accesorios originales</li>
+                        <li><strong>Paso 4:</strong> Programa la recolección gratuita en tu domicilio</li>
+                        <li><strong>Paso 5:</strong> Recibe tu reembolso en 3-5 días hábiles</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="returns-section" data-section="3">
+                <h2 class="section-title split-title">Productos No Retornables</h2>
+                <div class="section-content split-content">
+                    <p>Por políticas de higiene y seguridad, los siguientes productos no pueden devolverse:</p>
+                    <ul class="returns-list split-list">
+                        <li><strong>Productos personalizados:</strong> Artículos hechos a medida o personalizados</li>
+                        <li><strong>Productos de higiene personal:</strong> Cosméticos, productos de cuidado personal</li>
+                        <li><strong>Alimentos y bebidas:</strong> Productos perecederos y comestibles</li>
+                        <li><strong>Software digital:</strong> Licencias de software y productos digitales</li>
+                        <li><strong>Productos usados:</strong> Artículos que muestren signos de uso</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="returns-section" data-section="4">
+                <h2 class="section-title split-title">Tipos de Reembolso</h2>
+                <div class="section-content split-content">
+                    <p>Ofrecemos diferentes opciones de reembolso según tu preferencia:</p>
+                    <ul class="returns-list split-list">
+                        <li><strong>Reembolso completo:</strong> Devolución del 100% del valor pagado</li>
+                        <li><strong>Crédito en tienda:</strong> Saldo disponible para futuras compras (+ 10% bonus)</li>
+                        <li><strong>Cambio por otro producto:</strong> Intercambio directo sin costo adicional</li>
+                        <li><strong>Reembolso parcial:</strong> En caso de productos con uso mínimo (evaluación previa)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="returns-section" data-section="5">
+                <h2 class="section-title split-title">Tiempos de Procesamiento</h2>
+                <div class="section-content split-content">
+                    <p>Nuestros tiempos de procesamiento son los siguientes:</p>
+                    <ul class="returns-list split-list">
+                        <li><strong>Recolección:</strong> 1-2 días hábiles desde la solicitud</li>
+                        <li><strong>Inspección:</strong> 2-3 días hábiles para evaluar el producto</li>
+                        <li><strong>Aprobación:</strong> Notificación inmediata del estado de la devolución</li>
+                        <li><strong>Reembolso:</strong> 3-5 días hábiles para transferencias bancarias</li>
+                        <li><strong>Crédito en tienda:</strong> Disponible inmediatamente tras aprobación</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="returns-section" data-section="6">
+                <h2 class="section-title split-title">Gastos de Devolución</h2>
+                <div class="section-content split-content">
+                    <p>Los costos de devolución dependen del motivo:</p>
+                    <ul class="returns-list split-list">
+                        <li><strong>Producto defectuoso:</strong> Recolección y devolución gratuita</li>
+                        <li><strong>Error en el envío:</strong> Proceso completamente gratuito</li>
+                        <li><strong>Cambio de opinión:</strong> Cliente cubre gastos de recolección ($8.000 COP)</li>
+                        <li><strong>Producto incorrecto:</strong> Gastos cubiertos por MinimalStore</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Enlace a envíos -->
+            <div class="shipping-link-section">
+                <div class="shipping-card">
+                    <h3 class="shipping-title split-text">¿Tienes dudas sobre envíos?</h3>
+                    <p class="shipping-description split-text">
+                        Para información sobre tiempos y costos de entrega, consulta nuestra sección de
+                        <a href="envios" class="shipping-link">Información de Envíos</a>
+                        donde encontrarás todos los detalles sobre nuestro servicio de delivery.
+                    </p>
+                    <a href="envios" class="shipping-button">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M9 17l6-6-6-6v12z"/>
+                        </svg>
+                        Ver Información de Envíos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="returns-footer">
+        <div class="footer-content split-footer">
+            <p>&copy; 2025 MinimalStore. Devoluciones fáciles y reembolsos garantizados.</p>
+            <p class="footer-date">Información actualizada: Junio 2025</p>
+        </div>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="../js/devoluciones.js"></script>
+</body>
+</html>

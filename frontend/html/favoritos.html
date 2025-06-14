@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Favoritos - MinimalStore</title>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- CSS de favoritos -->
+    <link rel="stylesheet" href="../css/favoritos.css">
+</head>
+<body>
+<!-- Header de Favoritos -->
+<header class="favoritos-header">
+    <div class="header-content">
+        <button class="btn-volver" id="btnVolver">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Volver
+        </button>
+
+        <h1 class="favoritos-titulo">Mis Favoritos</h1>
+
+        <div class="favoritos-contador-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5 2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+            </svg>
+            <span id="contadorFavoritos">0</span> favoritos
+        </div>
+    </div>
+</header>
+
+<!-- Contenido Principal -->
+<main class="favoritos-main">
+    <div class="favoritos-container">
+
+        <!-- Columna Principal -->
+        <div class="contenido-principal">
+            <!-- Filtros y Ordenamiento -->
+            <section class="filtros-section">
+                <div class="filtros-header">
+                    <h2>Filtrar y Ordenar</h2>
+                    <button class="btn-limpiar-filtros" id="btnLimpiarFiltros">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                        </svg>
+                        Limpiar Filtros
+                    </button>
+                </div>
+
+                <div class="filtros-grid">
+                    <!-- Filtro por Categoría -->
+                    <div class="filtro-grupo">
+                        <label>Categoría</label>
+                        <select id="filtroCategoria" class="filtro-select">
+                            <option value="">Todas las categorías</option>
+                            <option value="tecnologia">Tecnología</option>
+                            <option value="hogar">Hogar</option>
+                            <option value="moda">Moda</option>
+                            <option value="mascotas">Mascotas</option>
+                            <option value="manualidades">Manualidades</option>
+                        </select>
+                    </div>
+
+                    <!-- Filtro por Precio -->
+                    <div class="filtro-grupo">
+                        <label>Rango de Precio</label>
+                        <div class="precio-range">
+                            <input type="number" id="precioMin" placeholder="Mín" class="precio-input">
+                            <span>-</span>
+                            <input type="number" id="precioMax" placeholder="Máx" class="precio-input">
+                        </div>
+                    </div>
+
+                    <!-- Ordenar por -->
+                    <div class="filtro-grupo">
+                        <label>Ordenar por</label>
+                        <select id="ordenarPor" class="filtro-select">
+                            <option value="reciente">Más recientes</option>
+                            <option value="precio-asc">Precio: menor a mayor</option>
+                            <option value="precio-desc">Precio: mayor a menor</option>
+                            <option value="nombre">Nombre A-Z</option>
+                            <option value="disponibilidad">Disponibilidad</option>
+                        </select>
+                    </div>
+
+                    <!-- Botón Aplicar -->
+                    <div class="filtro-grupo">
+                        <button class="btn-aplicar-filtros" id="btnAplicarFiltros">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/>
+                            </svg>
+                            Aplicar Filtros
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de Favoritos -->
+            <section class="favoritos-productos-section">
+                <div class="productos-header">
+                    <h2>Tus productos favoritos</h2>
+                    <div class="vista-toggles">
+                        <button class="vista-btn active" data-vista="grid" title="Vista en cuadrícula">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"/>
+                                <rect x="14" y="3" width="7" height="7"/>
+                                <rect x="14" y="14" width="7" height="7"/>
+                                <rect x="3" y="14" width="7" height="7"/>
+                            </svg>
+                        </button>
+                        <button class="vista-btn" data-vista="lista" title="Vista en lista">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="8" y1="6" x2="21" y2="6"/>
+                                <line x1="8" y1="12" x2="21" y2="12"/>
+                                <line x1="8" y1="18" x2="21" y2="18"/>
+                                <line x1="3" y1="6" x2="3.01" y2="6"/>
+                                <line x1="3" y1="12" x2="3.01" y2="12"/>
+                                <line x1="3" y1="18" x2="3.01" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid de Productos -->
+                <div class="favoritos-grid" id="favoritosGrid">
+                    <!-- Los productos se cargan dinámicamente -->
+                </div>
+
+                <!-- Estado Vacío -->
+                <div class="favoritos-vacio" id="favoritosVacio" style="display: none;">
+                    <div class="vacio-icon">💖</div>
+                    <h3>Aún no tienes favoritos</h3>
+                    <p>Explora nuestros productos y guarda los que más te gusten</p>
+                    <button class="btn-explorar" onclick="window.location.href='/dashboard'">
+                        Explorar Productos
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Columna Lateral -->
+        <aside class="columna-lateral">
+            <!-- Sección de Acciones Rápidas -->
+            <div class="acciones-section">
+                <div class="acciones-card">
+                    <h3>Acciones Rápidas</h3>
+
+                    <button class="accion-btn primary" id="btnAgregarTodosCarrito">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9,22 9,12 15,12 15,22"/>
+                        </svg>
+                        Agregar Todo al Carrito
+                    </button>
+
+                    <button class="accion-btn secondary" id="btnCompartirFavoritos">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                            <polyline points="16,6 12,2 8,6"/>
+                            <line x1="12" y1="2" x2="12" y2="15"/>
+                        </svg>
+                        Compartir Lista
+                    </button>
+
+                    <button class="accion-btn tertiary" id="btnCrearLista">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        Crear Lista Personalizada
+                    </button>
+
+                    <button class="accion-btn danger" id="btnLimpiarFavoritos">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                        </svg>
+                        Limpiar Favoritos
+                    </button>
+                </div>
+
+                <!-- Estadísticas -->
+                <div class="estadisticas-card">
+                    <h4>Estadísticas</h4>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-numero" id="totalFavoritos">0</span>
+                            <span class="stat-label">Total</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero" id="favoritosMes">0</span>
+                            <span class="stat-label">Este Mes</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero" id="valorTotal">$0</span>
+                            <span class="stat-label">Valor Total</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero" id="categoriaFavorita">-</span>
+                            <span class="stat-label">Categoría Favorita</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<!-- Modal de Confirmación -->
+<div class="modal-overlay" id="modalConfirmacion" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitulo">Confirmar Acción</h3>
+            <button class="modal-close" id="modalClose">×</button>
+        </div>
+        <div class="modal-body">
+            <p id="modalMensaje">¿Estás seguro de realizar esta acción?</p>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-cancelar" id="btnCancelar">Cancelar</button>
+            <button class="btn-confirmar" id="btnConfirmar">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="../js/favoritos.js"></script>
+
+<script>
+    // Inicializar favoritos cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+        window.favoritosApp = new FavoritosApp();
+    });
+</script>
+</body>
+</html>

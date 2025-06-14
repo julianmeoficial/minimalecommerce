@@ -1,0 +1,507 @@
+/* Envíos - Estilo Minimalista con Neumorphism */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --minimal-gray: #f8f9fa;
+    --minimal-dark: #2c3e50;
+    --minimal-accent: #34495e;
+    --minimal-light: #ecf0f1;
+    --primary-blue: #3498db;
+    --success-green: #27ae60;
+    --warning-orange: #f39c12;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #e5e7eb;
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --neumorphism-shadow:
+            8px 8px 16px rgba(163, 177, 198, 0.6),
+            -8px -8px 16px rgba(255, 255, 255, 0.8);
+    --neumorphism-inset:
+            inset 6px 6px 12px rgba(163, 177, 198, 0.4),
+            inset -6px -6px 12px rgba(255, 255, 255, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    position: relative;
+}
+
+/* Patrones de fondo animados para envíos */
+.shipping-bg-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.pattern-element {
+    position: absolute;
+    opacity: 0.06;
+    animation: floatPattern 20s ease-in-out infinite;
+}
+
+.truck-pattern::before {
+    content: "🚚";
+    font-size: 2rem;
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.package-pattern::before {
+    content: "📦";
+    font-size: 1.8rem;
+    position: absolute;
+    top: 30%;
+    right: 20%;
+    animation-delay: 2s;
+}
+
+.plane-pattern::before {
+    content: "✈️";
+    font-size: 2.2rem;
+    position: absolute;
+    bottom: 40%;
+    left: 25%;
+    animation-delay: 4s;
+}
+
+.map-pattern::before {
+    content: "🗺️";
+    font-size: 1.9rem;
+    position: absolute;
+    top: 60%;
+    right: 15%;
+    animation-delay: 6s;
+}
+
+.clock-pattern::before {
+    content: "⏰";
+    font-size: 1.7rem;
+    position: absolute;
+    bottom: 20%;
+    right: 30%;
+    animation-delay: 8s;
+}
+
+.route-pattern::before {
+    content: "🛣️";
+    font-size: 2rem;
+    position: absolute;
+    top: 45%;
+    left: 10%;
+    animation-delay: 10s;
+}
+
+@keyframes floatPattern {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.06;
+    }
+    25% {
+        transform: translateY(-15px) translateX(10px) rotate(5deg);
+        opacity: 0.12;
+    }
+    50% {
+        transform: translateY(0px) translateX(20px) rotate(-5deg);
+        opacity: 0.08;
+    }
+    75% {
+        transform: translateY(15px) translateX(10px) rotate(3deg);
+        opacity: 0.10;
+    }
+}
+
+/* Logo flotante */
+.floating-logo {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 50;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: translateY(-2px);
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--minimal-dark), var(--minimal-accent));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.logo-icon span {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.logo-text {
+    color: var(--minimal-dark);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Contenedor principal */
+.main-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+/* Header */
+.shipping-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-top: 2rem;
+}
+
+.shipping-title {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--minimal-dark) !important;
+    margin-bottom: 1rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.shipping-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-top: 1rem;
+}
+
+/* Contenedor con neumorphism */
+.shipping-content-container {
+    background: linear-gradient(145deg, #e6e9ef, #f8f9fa);
+    border-radius: 30px;
+    padding: 3rem;
+    box-shadow: var(--neumorphism-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+/* Sección de animación del camión */
+.truck-animation-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 240, 240, 0.8));
+    border-radius: 24px;
+    box-shadow: var(--neumorphism-inset);
+    overflow: hidden;
+}
+
+/* Animación del camión */
+.truck-loader {
+    width: 180px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.truck-wrapper {
+    width: 180px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.truck-body {
+    width: 130px;
+    height: fit-content;
+    margin-bottom: 6px;
+    animation: truckMotion 1s linear infinite;
+}
+
+@keyframes truckMotion {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(3px); }
+    100% { transform: translateY(0px); }
+}
+
+.truck-tires {
+    width: 130px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px 0px 15px;
+    position: absolute;
+    bottom: 0;
+}
+
+.tire-svg {
+    width: 24px;
+    animation: tireRotation 0.5s linear infinite;
+}
+
+@keyframes tireRotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.road {
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--minimal-dark);
+    position: relative;
+    bottom: 0;
+    align-self: flex-end;
+    border-radius: 3px;
+}
+
+.road::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    background-color: var(--minimal-dark);
+    right: -50%;
+    border-radius: 3px;
+    animation: roadAnimation 1.4s linear infinite;
+    border-left: 10px solid white;
+}
+
+.road::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background-color: var(--minimal-dark);
+    right: -65%;
+    border-radius: 3px;
+    animation: roadAnimation 1.4s linear infinite;
+    border-left: 4px solid white;
+}
+
+@keyframes roadAnimation {
+    0% { transform: translateX(0px); }
+    100% { transform: translateX(-200px); }
+}
+
+/* Texto del camión */
+.truck-text {
+    flex: 1;
+    padding-left: 2rem;
+    text-align: left;
+}
+
+.truck-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 0.5rem;
+}
+
+.truck-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* Contenido de envíos */
+.shipping-content {
+    margin-top: 2rem;
+}
+
+.shipping-section {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    box-shadow: var(--neumorphism-inset);
+    transition: all 0.3s ease;
+}
+
+.shipping-section:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-blue);
+}
+
+.section-content {
+    color: var(--text-primary);
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.section-content p {
+    margin-bottom: 1rem;
+}
+
+.shipping-list {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.shipping-list li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.shipping-list li strong {
+    color: var(--primary-blue);
+}
+
+/* Sección de devoluciones */
+.returns-link-section {
+    margin-top: 3rem;
+}
+
+.returns-card {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1));
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--neumorphism-shadow);
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.returns-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1rem;
+}
+
+.returns-description {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.returns-link {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.returns-link:hover {
+    color: var(--minimal-dark);
+    text-decoration: underline;
+}
+
+.returns-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary-blue);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-medium);
+}
+
+.returns-button:hover {
+    background: var(--minimal-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer */
+.shipping-footer {
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 3rem;
+}
+
+.footer-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-date {
+    font-weight: 300;
+    opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+
+    .shipping-title {
+        font-size: 2.5rem;
+    }
+
+    .shipping-content-container {
+        padding: 2rem;
+    }
+
+    .truck-animation-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .truck-text {
+        padding-left: 0;
+        padding-top: 1rem;
+    }
+
+    .shipping-section {
+        padding: 1.5rem;
+    }
+}
+
+/* Forzar visibilidad */
+.shipping-title,
+.section-title,
+.truck-title {
+    opacity: 1 !important;
+    visibility: visible !important;
+}

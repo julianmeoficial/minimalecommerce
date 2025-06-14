@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Notificaciones - MinimalStore</title>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- CSS de notificaciones -->
+    <link rel="stylesheet" href="../css/notificaciones.css">
+</head>
+<body>
+<!-- Header de Notificaciones -->
+<header class="notificaciones-header">
+    <div class="header-content">
+        <button class="btn-volver" id="btnVolver">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Volver
+        </button>
+
+        <h1 class="notificaciones-titulo" id="tituloSeccion">Centro de Notificaciones</h1>
+
+        <div class="notificaciones-contador-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span id="contadorNotificaciones">0</span> notificaciones
+        </div>
+    </div>
+</header>
+
+<!-- Contenido Principal -->
+<main class="notificaciones-main">
+    <div class="notificaciones-container" id="notificacionesContainer">
+
+        <!-- SECCIÓN PARA COMPRADORES: Ver Notificaciones -->
+        <section class="lecturas-section" id="lecturasSection">
+            <!-- Filtros y Acciones -->
+            <div class="acciones-header">
+                <h2>Mis Notificaciones</h2>
+                <div class="acciones-grupo">
+                    <button class="btn-filtro active" data-filtro="todas" id="btnTodas">
+                        Todas (<span id="totalTodas">0</span>)
+                    </button>
+                    <button class="btn-filtro" data-filtro="no-leidas" id="btnNoLeidas">
+                        No Leídas (<span id="totalNoLeidas">0</span>)
+                    </button>
+                    <button class="btn-filtro" data-filtro="leidas" id="btnLeidas">
+                        Leídas (<span id="totalLeidas">0</span>)
+                    </button>
+                    <button class="btn-accion secondary" id="btnMarcarTodasLeidas">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        Marcar Todas Leídas
+                    </button>
+                    <button class="btn-accion danger" id="btnEliminarTodasLeidas">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                        </svg>
+                        Eliminar Leídas
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lista de Notificaciones -->
+            <div class="notificaciones-lista" id="notificacionesLista">
+                <!-- Las notificaciones se cargan dinámicamente -->
+            </div>
+
+            <!-- Estado Vacío -->
+            <div class="notificaciones-vacio" id="notificacionesVacio" style="display: none;">
+                <div class="vacio-icon">🔔</div>
+                <h3>No tienes notificaciones</h3>
+                <p>Cuando recibas notificaciones aparecerán aquí</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN PARA VENDEDORES: Crear Notificaciones -->
+        <section class="creacion-section" id="creacionSection" style="display: none;">
+            <!-- Estadísticas Rápidas -->
+            <div class="stats-section">
+                <h2>Estadísticas de Notificaciones</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📨</div>
+                        <div class="stat-content">
+                            <span class="stat-numero" id="totalEnviadas">0</span>
+                            <span class="stat-label">Enviadas Hoy</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <span class="stat-numero" id="totalUsuarios">0</span>
+                            <span class="stat-label">Usuarios Activos</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <span class="stat-numero" id="tasaLectura">0%</span>
+                            <span class="stat-label">Tasa de Lectura</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario de Creación -->
+            <div class="formulario-section">
+                <h2>Crear Nueva Notificación</h2>
+
+                <form class="formulario-notificacion" id="formularioNotificacion">
+                    <!-- Tipo de Notificación -->
+                    <div class="form-grupo">
+                        <label for="tipoNotificacion">Tipo de Notificación</label>
+                        <select id="tipoNotificacion" class="form-input" required>
+                            <option value="">Selecciona un tipo</option>
+                            <option value="PROMOCION">🏷️ Promoción</option>
+                            <option value="NUEVO_PRODUCTO">🆕 Nuevo Producto</option>
+                            <option value="DESCUENTO">💰 Descuento</option>
+                            <option value="STOCK">📦 Disponibilidad de Stock</option>
+                            <option value="EVENTO">🎉 Evento Especial</option>
+                            <option value="INFORMATIVA">ℹ️ Información General</option>
+                            <option value="URGENTE">🚨 Urgente</option>
+                            <option value="PRODUCTO">🛍️ Producto</option>
+                            <option value="PEDIDO">📋 Pedido</option>
+                            <option value="CARRITO">🛒 Carrito</option>
+                            <option value="SISTEMA">⚙️ Sistema</option>
+                        </select>
+                    </div>
+
+                    <!-- Destinatarios -->
+                    <div class="form-grupo">
+                        <label for="destinatarios">Destinatarios</label>
+                        <select id="destinatarios" class="form-input" required>
+                            <option value="">Selecciona destinatarios</option>
+                            <option value="todos">📢 Todos los Usuarios</option>
+                            <option value="compradores">🛒 Solo Compradores</option>
+                            <option value="compradores-recientes">🔥 Compradores Recientes</option>
+                            <option value="nuevos-usuarios">🆕 Usuarios Nuevos</option>
+                            <option value="usuarios-activos">⭐ Usuarios Activos</option>
+                            <option value="personalizado">👤 Selección Personalizada</option>
+                        </select>
+                    </div>
+
+                    <!-- Usuarios Específicos (solo si es personalizado) -->
+                    <div class="form-grupo" id="usuariosPersonalizados" style="display: none;">
+                        <label for="usuariosSelector">Usuarios Específicos</label>
+                        <div class="usuarios-selector" id="usuariosSelector">
+                            <!-- Se cargan dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Título -->
+                    <div class="form-grupo">
+                        <label for="tituloNotificacion">Título de la Notificación</label>
+                        <input type="text" id="tituloNotificacion" class="form-input"
+                               placeholder="Ej: ¡Nueva promoción disponible!" maxlength="100" required>
+                        <small class="char-counter"><span id="tituloCounter">0</span>/100</small>
+                    </div>
+
+                    <!-- Mensaje -->
+                    <div class="form-grupo">
+                        <label for="mensajeNotificacion">Mensaje</label>
+                        <textarea id="mensajeNotificacion" class="form-textarea"
+                                  placeholder="Describe el contenido de tu notificación..."
+                                  maxlength="500" rows="4" required></textarea>
+                        <small class="char-counter"><span id="mensajeCounter">0</span>/500</small>
+                    </div>
+
+                    <!-- Enlace Opcional -->
+                    <div class="form-grupo">
+                        <label for="enlaceNotificacion">Enlace (Opcional)</label>
+                        <input type="url" id="enlaceNotificacion" class="form-input"
+                               placeholder="https://ejemplo.com/producto">
+                        <small class="form-help">Si agregas un enlace, los usuarios podrán hacer clic en la notificación</small>
+                    </div>
+
+                    <!-- Programar Envío -->
+                    <div class="form-grupo">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="programarEnvio">
+                            <span class="checkbox-custom"></span>
+                            Programar envío para más tarde
+                        </label>
+                    </div>
+
+                    <div class="form-grupo" id="fechaProgramada" style="display: none;">
+                        <label for="fechaEnvio">Fecha y Hora de Envío</label>
+                        <input type="datetime-local" id="fechaEnvio" class="form-input">
+                    </div>
+
+                    <!-- Preview -->
+                    <div class="form-grupo">
+                        <label>Vista Previa</label>
+                        <div class="preview-notificacion" id="previewNotificacion">
+                            <div class="preview-header">
+                                <span class="preview-tipo" id="previewTipo">📨</span>
+                                <span class="preview-titulo" id="previewTitulo">Título de la notificación</span>
+                                <span class="preview-fecha">Ahora</span>
+                            </div>
+                            <div class="preview-mensaje" id="previewMensaje">
+                                El mensaje de tu notificación aparecerá aquí...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="form-acciones">
+                        <button type="button" class="btn-accion secondary" id="btnGuardarBorrador">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            Guardar Borrador
+                        </button>
+                        <button type="submit" class="btn-accion primary" id="btnEnviarNotificacion">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13L2 22L22 2Z"/>
+                                <path d="M22 2L15 22L11 13L22 2Z"/>
+                            </svg>
+                            Enviar Notificación
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Historial de Notificaciones Enviadas -->
+            <div class="historial-section">
+                <h2>Historial de Notificaciones Enviadas</h2>
+                <div class="historial-lista" id="historialLista">
+                    <!-- Se cargan dinámicamente -->
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Modal de Confirmación -->
+<div class="modal-overlay" id="modalConfirmacion" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitulo">Confirmar Acción</h3>
+            <button class="modal-close" id="modalClose">×</button>
+        </div>
+        <div class="modal-body">
+            <p id="modalMensaje">¿Estás seguro de realizar esta acción?</p>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-cancelar" id="btnCancelar">Cancelar</button>
+            <button class="btn-confirmar" id="btnConfirmar">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Detalle de Notificación -->
+<div class="modal-overlay" id="modalDetalle" style="display: none;">
+    <div class="modal-content modal-detalle">
+        <div class="modal-header">
+            <h3 id="detalleModalTitulo">Detalle de Notificación</h3>
+            <button class="modal-close" id="detalleModalClose">×</button>
+        </div>
+        <div class="modal-body">
+            <div class="detalle-content" id="detalleContent">
+                <!-- Contenido del detalle se carga dinámicamente -->
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-accion secondary" id="btnMarcarLeida">Marcar como Leída</button>
+            <button class="btn-accion danger" id="btnEliminarNotificacion">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="../js/notificaciones.js"></script>
+
+<script>
+    // Inicializar notificaciones cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+        window.notificacionesApp = new NotificacionesApp();
+    });
+</script>
+</body>
+</html>

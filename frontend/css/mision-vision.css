@@ -1,0 +1,843 @@
+/* Misión y Visión - Neumorphism con Fondo de Ondas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --minimal-gray: #f8f9fa;
+    --minimal-dark: #2c3e50;
+    --minimal-accent: #34495e;
+    --minimal-light: #ecf0f1;
+    --primary-blue: #3498db;
+    --mission-blue: #74b9ff;
+    --vision-purple: #a29bfe;
+    --accent-green: #00b894;
+    --soft-pink: #fd79a8;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #e5e7eb;
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --neumorphism-shadow:
+            12px 12px 24px rgba(163, 177, 198, 0.6),
+            -12px -12px 24px rgba(255, 255, 255, 0.8);
+    --neumorphism-inset:
+            inset 8px 8px 16px rgba(163, 177, 198, 0.4),
+            inset -8px -8px 16px rgba(255, 255, 255, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 50%, #74b9ff 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Fondo animado con ondas concéntricas */
+.ripple-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+}
+
+.ripple-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.ripple-circle {
+    display: block;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: rippleScale 4s infinite linear;
+    background: radial-gradient(circle, rgba(116, 185, 255, 0.3), rgba(162, 155, 254, 0.2));
+    box-shadow: 0px 0px 30px rgba(116, 185, 255, 0.4);
+}
+
+.ripple-circle:nth-child(1) { animation-delay: 0.4s; }
+.ripple-circle:nth-child(2) { animation-delay: 0.8s; }
+.ripple-circle:nth-child(3) { animation-delay: 1.2s; }
+.ripple-circle:nth-child(4) { animation-delay: 1.6s; }
+.ripple-circle:nth-child(5) { animation-delay: 2.0s; }
+.ripple-circle:nth-child(6) { animation-delay: 2.4s; }
+.ripple-circle:nth-child(7) { animation-delay: 2.8s; }
+.ripple-circle:nth-child(8) { animation-delay: 3.2s; }
+.ripple-circle:nth-child(9) { animation-delay: 3.6s; }
+.ripple-circle:nth-child(10) { animation-delay: 4.0s; }
+
+@keyframes rippleScale {
+    0% {
+        transform: scale(3);
+        opacity: 0;
+        box-shadow: 0px 0px 60px rgba(116, 185, 255, 0.6);
+    }
+    30% {
+        transform: scale(1.5) translate(0px, -10px);
+        opacity: 0.8;
+        box-shadow: 0px 15px 40px rgba(116, 185, 255, 0.4);
+    }
+    70% {
+        transform: scale(1) translate(0px, -5px);
+        opacity: 0.6;
+        box-shadow: 0px 10px 30px rgba(162, 155, 254, 0.3);
+    }
+    100% {
+        transform: scale(0.2) translate(0px, 10px);
+        opacity: 0;
+        box-shadow: 0px 20px 40px rgba(116, 185, 255, 0);
+    }
+}
+
+/* Logo flotante */
+.floating-logo {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 50;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: translateY(-2px);
+}
+
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--mission-blue), var(--vision-purple));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.logo-icon span {
+    color: white;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.logo-text {
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor principal */
+.main-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+}
+
+/* Header */
+.mission-header {
+    text-align: center;
+    margin-bottom: 6rem;
+    padding-top: 3rem;
+}
+
+.mission-title {
+    font-size: 5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--mission-blue), var(--vision-purple), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.mission-subtitle {
+    font-size: 1.4rem;
+    color: white;
+    font-weight: 300;
+    margin-top: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor principal con neumorphism */
+.mission-content-container {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 4rem 2rem;
+    box-shadow: var(--neumorphism-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 4rem;
+    width: 100%;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Secciones de misión y visión */
+.mission-section,
+.vision-section {
+    margin-bottom: 4rem;
+}
+
+.mission-card,
+.vision-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: var(--neumorphism-inset);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-card:hover,
+.vision-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.mission-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--mission-blue), var(--accent-green));
+    border-radius: 24px 24px 0 0;
+}
+
+.vision-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--vision-purple), var(--soft-pink));
+    border-radius: 24px 24px 0 0;
+}
+
+/* Headers de las cards */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(116, 185, 255, 0.2);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.mission-icon {
+    background: linear-gradient(135deg, var(--mission-blue), var(--accent-green));
+}
+
+.vision-icon {
+    background: linear-gradient(135deg, var(--vision-purple), var(--soft-pink));
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+}
+
+/* Contenido de las cards */
+.card-content {
+    line-height: 1.8;
+}
+
+.highlight-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--mission-blue);
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(116, 185, 255, 0.1);
+    border-radius: 12px;
+    border-left: 4px solid var(--mission-blue);
+}
+
+.vision-text .highlight-text {
+    color: var(--vision-purple);
+    background: rgba(162, 155, 254, 0.1);
+    border-left-color: var(--vision-purple);
+}
+
+.mission-text p,
+.vision-text p {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 400;
+}
+
+/* Puntos de misión */
+.mission-points {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.point-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    box-shadow: var(--neumorphism-inset);
+    transition: all 0.3s ease;
+}
+
+.point-item:hover {
+    transform: translateX(10px);
+    background: rgba(116, 185, 255, 0.1);
+}
+
+.point-icon {
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--mission-blue), var(--accent-green));
+    border-radius: 50%;
+    color: white;
+    box-shadow: var(--shadow-medium);
+}
+
+.point-text {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Metas de visión */
+.vision-goals {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.goal-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    box-shadow: var(--neumorphism-inset);
+    transition: all 0.3s ease;
+}
+
+.goal-item:hover {
+    transform: translateX(10px);
+    background: rgba(162, 155, 254, 0.1);
+}
+
+.goal-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, var(--vision-purple), var(--soft-pink));
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: var(--shadow-medium);
+}
+
+.goal-text {
+    font-weight: 500;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+/* Sección conectora */
+.connector-section {
+    margin: 3rem 0 5rem 0;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.connector-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.9));
+    border-radius: 24px;
+    padding: 3rem 4rem 4rem 4rem;
+    box-shadow: var(--neumorphism-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+}
+
+.connector-title {
+    font-size: 2.4rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 3.5rem;
+    color: var(--minimal-dark);
+    background: linear-gradient(135deg, var(--mission-blue), var(--vision-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    padding: 0 2rem;
+}
+
+.connector-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--mission-blue), var(--vision-purple));
+    border-radius: 2px;
+}
+
+.connector-grid {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.connector-item {
+    flex: 1;
+    max-width: 280px;
+}
+
+/* FORZAR CENTRADO PERFECTO */
+.connector-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.connector-grid {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+    text-align: center !important;
+}
+
+@media (max-width: 768px) {
+    .connector-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .connector-item {
+        max-width: 350px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .connector-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .connector-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+.connector-item {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(245, 247, 250, 0.8));
+    border-radius: 20px;
+    box-shadow: var(--neumorphism-inset);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 300px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    position: relative;
+    width: 100%;
+}
+
+.connector-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+            16px 16px 32px rgba(163, 177, 198, 0.8),
+            -16px -16px 32px rgba(255, 255, 255, 0.9),
+            0 0 40px rgba(116, 185, 255, 0.2);
+    border-color: rgba(116, 185, 255, 0.3);
+}
+
+.connector-item:hover .connector-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow:
+            8px 8px 16px rgba(163, 177, 198, 0.6),
+            -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+.connector-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--mission-blue), var(--vision-purple));
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--neumorphism-shadow);
+    filter: grayscale(0);
+}
+
+.connector-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.connector-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+/* Navegación */
+.navigation-section {
+    margin: 4rem 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.nav-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.nav-card {
+    display: block !important;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--neumorphism-shadow);
+    transition: all 0.4s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.nav-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+            16px 16px 32px rgba(163, 177, 198, 0.8),
+            -16px -16px 32px rgba(255, 255, 255, 0.9);
+}
+
+.nav-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.nav-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1rem;
+}
+
+.nav-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Footer */
+.mission-footer {
+    text-align: center;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 4rem;
+}
+
+.footer-content p {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.footer-quote {
+    font-style: italic;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+
+    .mission-title {
+        font-size: 3rem;
+    }
+
+    .mission-content-container {
+        padding: 2rem;
+    }
+
+    .mission-card,
+    .vision-card {
+        padding: 2rem;
+    }
+
+    .card-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .connector-grid,
+    .nav-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .goal-item,
+    .point-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+        max-width: 400px;
+    }
+
+    .connector-card {
+        padding: 2rem 1.5rem 3rem 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .navigation-section {
+        margin: 3rem 0 2rem 0;
+    }
+}
+
+/* Responsive específico para conectores */
+@media (max-width: 1600px) {
+    .connector-card {
+        padding: 3rem 3rem;
+        max-width: 1100px;
+    }
+
+    .connector-grid {
+        gap: 2.5rem;
+        max-width: 950px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .connector-card {
+        padding: 2.5rem 2rem;
+        max-width: 1000px;
+    }
+
+    .connector-grid {
+        gap: 2rem;
+        max-width: 850px;
+    }
+
+    .connector-item {
+        padding: 2rem 1.5rem;
+        min-height: 280px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .mission-content-container {
+        max-width: 98%;
+        padding: 3rem 1.5rem;
+    }
+
+    .connector-card {
+        padding: 2rem;
+        max-width: 100%;
+    }
+
+    .connector-grid {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .connector-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .connector-item:nth-child(3) {
+        grid-column: 1 / -1;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .connector-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .connector-item:nth-child(3) {
+        grid-column: auto;
+        max-width: none;
+    }
+
+    .connector-item {
+        min-height: 220px;
+        padding: 2rem 1.5rem;
+    }
+
+    .connector-icon {
+        font-size: 2.5rem;
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* Forzar visibilidad */
+.mission-title,
+.card-title,
+.connector-title {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* FORZAR VISIBILIDAD DE TODO EL TEXTO */
+.mission-text p,
+.vision-text p,
+.point-text,
+.goal-text,
+.connector-name,
+.connector-description,
+.highlight-text {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Asegurar que los elementos de misión sean visibles */
+.mission-points .point-item,
+.vision-goals .goal-item,
+.connector-grid .connector-item {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+/* Texto completo sin cortes */
+.split-content p {
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow: visible !important;
+}
+
+/* FORZAR VISIBILIDAD DE NAVEGACIÓN FINAL */
+.navigation-section,
+.nav-grid,
+.nav-card,
+.nav-title,
+.nav-description {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.nav-grid {
+    display: grid !important;
+}
+
+.nav-card {
+    display: block !important;
+}
+
+/* Espaciado mejorado para contenedor principal */
+.mission-content-container {
+    margin-bottom: 2rem !important;
+}
+
+/* Asegurar que el footer también sea visible */
+.mission-footer {
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-top: 2rem !important;
+}

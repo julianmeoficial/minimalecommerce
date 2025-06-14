@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/privacidad.css">
+
+    <!-- Configuración Tailwind personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'minimal-gray': '#f8f9fa',
+                        'minimal-dark': '#2c3e50',
+                        'minimal-accent': '#34495e',
+                        'minimal-light': '#ecf0f1'
+                    },
+                    fontFamily: {
+                        'minimal': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-minimal-gray min-h-screen font-minimal">
+
+<!-- Fondo animado con íconos de seguridad -->
+<div class="animated-background">
+    <div class="bg-layer"></div>
+    <div class="security-icons">
+        <span class="security-icon lock-icon"></span>
+        <span class="security-icon shield-icon"></span>
+        <span class="security-icon key-icon"></span>
+        <span class="security-icon secure-icon"></span>
+        <span class="security-icon privacy-icon"></span>
+        <span class="security-icon protection-icon"></span>
+        <span class="security-icon lock-icon"></span>
+        <span class="security-icon shield-icon"></span>
+        <span class="security-icon key-icon"></span>
+        <span class="security-icon secure-icon"></span>
+    </div>
+</div>
+
+<!-- Logo flotante -->
+<div class="floating-logo">
+    <a href="../html/index.html" class="logo-link">
+        <div class="logo-icon">
+            <span>M</span>
+        </div>
+        <span class="logo-text">MinimalStore</span>
+    </a>
+</div>
+
+<!-- Contenedor principal -->
+<div class="main-container">
+
+    <!-- Header con título ScrambleText -->
+    <div class="privacy-header">
+        <h1 class="privacy-title" id="scramble-title">
+            <span class="title-text">Política de Privacidad</span>
+        </h1>
+        <p class="privacy-subtitle split-subtitle">
+            Protegemos tu información personal con total transparencia
+        </p>
+    </div>
+
+    <!-- Contenedor del contenido -->
+    <div class="privacy-content-container">
+
+        <!-- Sección de contenido principal -->
+        <div class="privacy-content">
+
+            <section class="privacy-section" data-section="1">
+                <h2 class="section-title split-title">1. Información que Recopilamos</h2>
+                <div class="section-content split-content">
+                    <p>En MinimalStore recopilamos únicamente la información necesaria para brindarte el mejor servicio de ecommerce:</p>
+                    <ul class="privacy-list split-list">
+                        <li>Información personal: nombre completo, correo electrónico, teléfono y dirección de entrega</li>
+                        <li>Datos de navegación: preferencias de productos, historial de búsquedas y categorías visitadas</li>
+                        <li>Información de transacciones: historial de compras y métodos de pago (sin almacenar datos sensibles)</li>
+                        <li>Cookies técnicas: para mejorar la funcionalidad del sitio y personalizar tu experiencia</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="privacy-section" data-section="2">
+                <h2 class="section-title split-title">2. Cómo Utilizamos tu Información</h2>
+                <div class="section-content split-content">
+                    <p>Tu información se utiliza exclusivamente para los siguientes propósitos legítimos:</p>
+                    <ul class="privacy-list split-list">
+                        <li>Procesar tus pedidos y gestionar entregas de productos</li>
+                        <li>Proporcionarte soporte al cliente y resolver consultas</li>
+                        <li>Mejorar nuestros servicios y personalizar recomendaciones de productos</li>
+                        <li>Enviar notificaciones importantes sobre tu cuenta y pedidos</li>
+                        <li>Cumplir con obligaciones legales y fiscales</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="privacy-section" data-section="3">
+                <h2 class="section-title split-title">3. Protección y Seguridad de Datos</h2>
+                <div class="section-content split-content">
+                    <p>Implementamos las siguientes medidas de seguridad para proteger tu información:</p>
+                    <ul class="privacy-list split-list">
+                        <li>Encriptación SSL de extremo a extremo para todas las transacciones</li>
+                        <li>Servidores seguros con acceso restringido y monitoreo constante</li>
+                        <li>Políticas internas estrictas de manejo de datos personales</li>
+                        <li>Auditorías regulares de seguridad y actualización de protocolos</li>
+                        <li>Cumplimiento con estándares internacionales de protección de datos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="privacy-section" data-section="4">
+                <h2 class="section-title split-title">4. Cookies y Tecnologías Similares</h2>
+                <div class="section-content split-content">
+                    <p>MinimalStore utiliza cookies para mejorar tu experiencia de navegación:</p>
+                    <ul class="privacy-list split-list">
+                        <li>Cookies esenciales: necesarias para el funcionamiento básico del sitio</li>
+                        <li>Cookies de preferencias: recordar tus configuraciones y preferencias</li>
+                        <li>Cookies de análisis: entender cómo interactúas con nuestro sitio (datos anónimos)</li>
+                        <li>Puedes gestionar tus preferencias de cookies en cualquier momento desde tu navegador</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="privacy-section" data-section="5">
+                <h2 class="section-title split-title">5. Tus Derechos de Privacidad</h2>
+                <div class="section-content split-content">
+                    <p>Como usuario de MinimalStore, tienes los siguientes derechos sobre tu información personal:</p>
+                    <ul class="privacy-list split-list">
+                        <li>Acceso: solicitar una copia de la información personal que tenemos sobre ti</li>
+                        <li>Rectificación: corregir información inexacta o desactualizada</li>
+                        <li>Eliminación: solicitar la eliminación de tu información personal</li>
+                        <li>Portabilidad: obtener tus datos en un formato estructurado y legible</li>
+                        <li>Oposición: oponerte al procesamiento de tus datos para fines específicos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="privacy-section" data-section="6">
+                <h2 class="section-title split-title">6. Compartir Información con Terceros</h2>
+                <div class="section-content split-content">
+                    <p>Solo compartimos tu información con terceros en las siguientes circunstancias:</p>
+                    <ul class="privacy-list split-list">
+                        <li>Proveedores de servicios de pago para procesar transacciones de forma segura</li>
+                        <li>Empresas de logística para gestionar entregas de productos</li>
+                        <li>Servicios de análisis web (con datos anonimizados)</li>
+                        <li>Autoridades competentes cuando sea requerido por ley</li>
+                        <li>Nunca vendemos ni alquilamos tu información personal a terceros</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="privacy-section" data-section="7">
+                <h2 class="section-title split-title">7. Retención de Datos</h2>
+                <div class="section-content split-content">
+                    <p>Conservamos tu información personal durante el tiempo necesario para:</p>
+                    <ul class="privacy-list split-list">
+                        <li>Cumplir con los propósitos para los que fue recopilada</li>
+                        <li>Satisfacer obligaciones legales, contables y de reporting</li>
+                        <li>Resolver disputas y hacer cumplir nuestros acuerdos</li>
+                        <li>Datos de cuenta: mientras mantengas una cuenta activa con nosotros</li>
+                        <li>Datos de transacciones: hasta 7 años por requisitos fiscales</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="privacy-section" data-section="8">
+                <h2 class="section-title split-title">8. Menores de Edad</h2>
+                <div class="section-content split-content">
+                    <p>MinimalStore está comprometido con la protección de la privacidad de los menores:</p>
+                    <ul class="privacy-list split-list">
+                        <li>Nuestro servicio está dirigido a personas mayores de 18 años</li>
+                        <li>No recopilamos conscientemente información de menores de 18 años</li>
+                        <li>Si descubrimos que hemos recopilado información de un menor, la eliminaremos inmediatamente</li>
+                        <li>Los padres pueden contactarnos para revisar o eliminar información de sus hijos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="privacy-section" data-section="9">
+                <h2 class="section-title split-title">9. Actualizaciones de esta Política</h2>
+                <div class="section-content split-content">
+                    <p>Esta política de privacidad puede actualizarse ocasionalmente:</p>
+                    <ul class="privacy-list split-list">
+                        <li>Te notificaremos sobre cambios significativos por correo electrónico</li>
+                        <li>Los cambios menores se publicarán en esta página con fecha de actualización</li>
+                        <li>Te recomendamos revisar esta política periódicamente</li>
+                        <li>El uso continuado del servicio implica aceptación de los cambios</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="privacy-section" data-section="10">
+                <h2 class="section-title split-title">10. Contacto</h2>
+                <div class="section-content split-content">
+                    <p>Para cualquier consulta sobre esta política de privacidad o ejercer tus derechos, contáctanos:</p>
+                    <ul class="privacy-list split-list">
+                        <li>Email: privacidad@minimalstore.com</li>
+                        <li>Teléfono: +57 (4) 123-4567</li>
+                        <li>Dirección: CALLE 22, Montería, Córdoba, Colombia, 230001</li>
+                        <li>Responsable de protección de datos: DataProtection@minimalstore.com</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- Navegación lateral -->
+        <div class="privacy-navigation">
+            <div class="nav-container">
+                <h3 class="nav-title">Índice de Privacidad</h3>
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link" data-target="1">Información que Recopilamos</a></li>
+                    <li><a href="#" class="nav-link" data-target="2">Cómo Utilizamos tu Información</a></li>
+                    <li><a href="#" class="nav-link" data-target="3">Protección y Seguridad</a></li>
+                    <li><a href="#" class="nav-link" data-target="4">Cookies y Tecnologías</a></li>
+                    <li><a href="#" class="nav-link" data-target="5">Tus Derechos</a></li>
+                    <li><a href="#" class="nav-link" data-target="6">Compartir con Terceros</a></li>
+                    <li><a href="#" class="nav-link" data-target="7">Retención de Datos</a></li>
+                    <li><a href="#" class="nav-link" data-target="8">Menores de Edad</a></li>
+                    <li><a href="#" class="nav-link" data-target="9">Actualizaciones</a></li>
+                    <li><a href="#" class="nav-link" data-target="10">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="privacy-footer">
+        <div class="footer-content split-footer">
+            <p>&copy; 2025 MinimalStore. Tu privacidad es nuestra prioridad.</p>
+            <p class="footer-date">Última actualización: Junio 2025</p>
+        </div>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="../js/privacidad.js"></script>
+</body>
+</html>

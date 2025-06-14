@@ -2,7 +2,7 @@
 
 class AuthSystem {
     constructor() {
-        this.apiBaseURL = 'http://localhost:3000/api';
+        this.apiBaseURL = 'http://localhost:8080/api';
         this.init();
     }
 
@@ -917,6 +917,8 @@ class AuthSystem {
         this.setButtonLoadingWithAnimation(button, true);
 
         try {
+            console.log('Intentando login con:', { email, password: '***' });
+
             const response = await fetch(`${this.apiBaseURL}/auth/login`, {
                 method: 'POST',
                 headers: {
@@ -925,18 +927,38 @@ class AuthSystem {
                 body: JSON.stringify({ email, password })
             });
 
-            const data = await response.json();
+            console.log('Status de respuesta:', response.status);
 
-            if (response.ok) {
-                // Guardar sesión
+            const data = await response.json();
+            console.log('Datos recibidos:', data);
+
+            if (response.ok && data.success) {
+                console.log('Login exitoso, procesando datos...');
+
+                // Guardar token
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('usuarioId', data.user.id.toString());
+
+                // Normalizar el objeto usuario (ajustar según respuesta del backend)
+                const usuarioNormalizado = {
+                    id: data.user.id,
+                    nombre: data.user.nombre,
+                    email: data.user.email,
+                    telefono: data.user.telefono || '',
+                    direccion: data.user.direccion || '',
+                    tipousuario: data.user.tipousuario || 'COMPRADOR'
+                };
+
+                localStorage.setItem('usuario', JSON.stringify(usuarioNormalizado));
+
+                console.log('Datos guardados correctamente');
+
                 if (remember) {
                     localStorage.setItem('userSession', JSON.stringify(data));
-                } else {
-                    sessionStorage.setItem('userSession', JSON.stringify(data));
                 }
 
                 // Animación de éxito
-                this.showSuccessWithAnimation('¡Bienvenido! Redirigiendo...');
+                this.showSuccessWithAnimation('¡Bienvenido! Redirigiendo al dashboard...');
 
                 // Animación de salida
                 gsap.to('.form-container', {
@@ -947,22 +969,19 @@ class AuthSystem {
                     ease: "power2.in"
                 });
 
-                gsap.to('.dark-overlay', {
-                    duration: 1,
-                    opacity: 0,
-                    ease: "power2.in"
-                });
-
+                // REDIRECCIÓN AL DASHBOARD
                 setTimeout(() => {
-                    window.location.href = '../html/index.html';
+                    console.log('Redirigiendo al dashboard...');
+                    window.location.href = 'dashboard';
                 }, 1500);
 
             } else {
+                console.error('Error en login:', data);
                 this.showGeneralErrorWithAnimation(data.message || 'Error al iniciar sesión');
             }
         } catch (error) {
-            console.error('Error de login:', error);
-            this.showGeneralErrorWithAnimation('Error de conexión. Intenta nuevamente.');
+            console.error('Error de conexión:', error);
+            this.showGeneralErrorWithAnimation('Error de conexión. Verifica que el servidor esté ejecutándose.');
         } finally {
             this.setButtonLoadingWithAnimation(button, false);
         }

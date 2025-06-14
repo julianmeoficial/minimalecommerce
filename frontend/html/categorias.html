@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorías - MinimalStore</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" href="../css/categorias.css">
+
+  <!-- Configuración Tailwind personalizada -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'minimal-gray': '#f8f9fa',
+            'minimal-dark': '#2c3e50',
+            'minimal-accent': '#34495e',
+            'minimal-light': '#ecf0f1'
+          },
+          fontFamily: {
+            'minimal': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-minimal-gray min-h-screen font-minimal">
+
+<!-- Header -->
+<header class="header-container">
+  <div class="header-content">
+    <!-- Logo y Nombre -->
+    <div class="logo-section">
+      <div class="logo-icon" id="animated-logo">
+        <span>M</span>
+      </div>
+      <span class="logo-text" id="logo-text">MinimalStore</span>
+    </div>
+
+    <!-- Navegación de Breadcrumb -->
+    <nav class="breadcrumb-nav">
+      <button class="breadcrumb-item" onclick="window.location.href='/dashboard'">
+        <svg viewBox="0 0 24 24" width="16" height="16">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        </svg>
+        Inicio
+      </button>
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-current">Categorías</span>
+    </nav>
+
+    <!-- Acciones de Usuario -->
+    <div class="user-actions">
+      <!-- Buscador -->
+      <div class="search-section">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="Buscar productos..." class="search-input">
+          <button class="search-button" id="search-btn">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Perfil -->
+      <div class="profile-section">
+        <button class="profile-button-simple" id="profile-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="user-icon">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+          <span class="profile-text" id="user-name">Usuario</span>
+        </button>
+      </div>
+
+      <!-- Carrito -->
+      <div class="cart-section">
+        <button data-quantity="0" class="cart-button" id="cart-btn">
+          <svg class="cart-icon" viewBox="0 0 24.38 30.52" height="30.52" width="24.38">
+            <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.74-.64H23.58l-.46-2.73a.75.75,0,0,0-.74-.64H4.11a.75.75,0,0,0,0,1.5H21.8l.39,2.27H5.49a.75.75,0,0,0-.74.64L2.89,27.3a.75.75,0,0,0,.74.86H27.28A.75.75,0,0,0,28,27.3ZM4.11,9H24.73l1.61,18.41H5.72Zm7.47,5a.75.75,0,0,0-1.5,0v8a.75.75,0,0,0,1.5,0Zm8,0a.75.75,0,0,0-1.5,0v8a.75.75,0,0,0,1.5,0Z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Favoritos -->
+      <div class="favorites-section">
+        <button class="favorites-button" id="favorites-btn">
+          <svg class="heart-empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5 2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+          </svg>
+          <svg class="heart-filled" height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5 2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Notificaciones -->
+      <div class="notifications-section">
+        <button class="notification-button" id="notification-btn">
+          <svg viewBox="0 0 448 512" class="bell-icon">
+            <path d="M224 0c-17.7 0-32 14.3-32 32v19.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416h384c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.8 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Contenido Principal -->
+<main class="main-container">
+  <!-- Sidebar de Categorías -->
+  <aside class="categories-sidebar">
+    <div class="sidebar-header">
+      <h2 class="sidebar-title">Categorías</h2>
+      <button class="sidebar-toggle" id="sidebar-toggle">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="categories-list">
+      <button class="category-filter active" data-category="all">
+        <div class="category-icon">🛍️</div>
+        <span class="category-name">Todos</span>
+        <span class="category-count" id="count-all">0</span>
+      </button>
+
+      <button class="category-filter" data-category="tecnologia">
+        <div class="category-icon">📱</div>
+        <span class="category-name">Tecnología</span>
+        <span class="category-count" id="count-tecnologia">0</span>
+      </button>
+
+      <button class="category-filter" data-category="hogar">
+        <div class="category-icon">🏠</div>
+        <span class="category-name">Hogar</span>
+        <span class="category-count" id="count-hogar">0</span>
+      </button>
+
+      <button class="category-filter" data-category="moda">
+        <div class="category-icon">👗</div>
+        <span class="category-name">Moda</span>
+        <span class="category-count" id="count-moda">0</span>
+      </button>
+
+      <button class="category-filter" data-category="mascotas">
+        <div class="category-icon">🐕</div>
+        <span class="category-name">Mascotas</span>
+        <span class="category-count" id="count-mascotas">0</span>
+      </button>
+
+      <button class="category-filter" data-category="manualidades">
+        <div class="category-icon">🎨</div>
+        <span class="category-name">Manualidades</span>
+        <span class="category-count" id="count-manualidades">0</span>
+      </button>
+    </div>
+
+    <!-- Botón Agregar Producto (Solo Vendedores) -->
+    <div class="nuevo-producto-section vendedor-only" id="nuevoProductoSection" style="display: none;">
+      <button class="nuevo-producto-btn" id="btnNuevoProductoCategoria">
+        <div class="producto-icon-container">
+          <div class="producto-icon">📦</div>
+          <div class="liquid-glass-effect"></div>
+        </div>
+        <span class="btn-text">Agregar Producto</span>
+        <div class="floating-particles">
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+        </div>
+      </button>
+    </div>
+    </div>
+  </aside>
+    <!-- Fin Sidebar de Categorías -->
+  </aside>
+
+  <!-- Área de Productos -->
+  <section class="products-area">
+    <!-- Toolbar de Filtros -->
+    <div class="products-toolbar">
+      <div class="toolbar-left">
+        <h1 class="page-title" id="page-title">Todos los Productos</h1>
+        <span class="products-count" id="products-count">0 productos</span>
+      </div>
+
+      <div class="toolbar-right">
+        <!-- Ordenamiento -->
+        <div class="sort-section">
+          <select class="sort-select" id="sort-select">
+            <option value="relevancia">Más Relevantes</option>
+            <option value="precio-asc">Precio: Menor a Mayor</option>
+            <option value="precio-desc">Precio: Mayor a Menor</option>
+            <option value="nombre">Nombre A-Z</option>
+            <option value="fecha">Más Recientes</option>
+          </select>
+        </div>
+
+        <!-- Vista -->
+        <div class="view-section">
+          <button class="view-btn active" data-view="grid" title="Vista Grid">
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+            </svg>
+          </button>
+          <button class="view-btn" data-view="list" title="Vista Lista">
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid de Productos -->
+    <div class="products-grid" id="products-grid">
+      <!-- Los productos se cargan dinámicamente -->
+      <div class="loading-container" id="loading-container">
+        <div class="loading-spinner"></div>
+        <p>Cargando productos...</p>
+      </div>
+    </div>
+
+    <!-- Paginación -->
+    <div class="pagination-container" id="pagination-container">
+      <!-- Se genera dinámicamente -->
+    </div>
+  </section>
+</main>
+
+<!-- Scripts -->
+<script src="../js/categorias.js"></script>
+
+<!-- Modal Editar Producto para Vendedores -->
+<div id="modalEditarProducto" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Editar Producto</h3>
+      <button type="button" class="close-btn" onclick="categoriasInstance.cerrarModalEdicion()">×</button>
+    </div>
+
+    <form id="formEditarProductoCategoria" class="modal-form">
+      <input type="hidden" id="editarProductoId">
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="editarProductoNombre">Nombre del Producto</label>
+          <input type="text" id="editarProductoNombre" required>
+        </div>
+
+        <div class="form-group">
+          <label for="editarProductoPrecio">Precio</label>
+          <input type="number" id="editarProductoPrecio" step="0.01" min="0" required>
+        </div>
+
+        <div class="form-group">
+          <label for="editarProductoStock">Stock</label>
+          <input type="number" id="editarProductoStock" min="0" required>
+        </div>
+
+        <div class="form-group">
+          <label for="editarProductoCategoria">Categoría</label>
+          <select id="editarProductoCategoria" required>
+            <option value="">Seleccionar categoría</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="editarProductoDescripcion">Descripción</label>
+        <textarea id="editarProductoDescripcion" rows="3"></textarea>
+      </div>
+
+      <!-- Sección de Imágenes -->
+      <div class="form-group">
+        <label>Imágenes del Producto</label>
+        <div class="image-section">
+          <!-- Imágenes actuales -->
+          <div id="imagenesActualesContainer" class="imagenes-actuales">
+            <h4>Imágenes Actuales</h4>
+            <div id="imagenesActualesList" class="imagenes-actuales-list">
+              <!-- Se llenan dinámicamente -->
+            </div>
+          </div>
+
+          <!-- Área para nuevas imágenes -->
+          <div class="nuevas-imagenes">
+            <h4>Agregar Nuevas Imágenes</h4>
+            <div id="editarImageUploadArea" class="image-upload-area">
+              <div class="upload-content">
+                <div class="upload-icon">📁</div>
+                <p>Arrastra imágenes aquí o haz clic para seleccionar</p>
+                <span class="upload-hint">Máximo 3 imágenes, 5MB cada una</span>
+              </div>
+              <input type="file" id="editarProductoImagenes" multiple accept="image/*" style="display: none;">
+            </div>
+            <div id="editarImagePreviewContainer" class="image-preview-container">
+              <!-- Previews de nuevas imágenes -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="categoriasInstance.cerrarModalEdicion()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primary">
+          <span class="btn-icon">💾</span>
+          Guardar Cambios
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal Nuevo Producto -->
+<div id="modalNuevoProductoCategoria" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Nuevo Producto</h3>
+      <button class="close-btn" onclick="categoriasInstance.cerrarModalProducto()">×</button>
+    </div>
+
+    <form id="formNuevoProductoCategoria" class="modal-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nuevoProductoNombre">Nombre del Producto</label>
+          <input type="text" id="nuevoProductoNombre" required>
+        </div>
+
+        <div class="form-group">
+          <label for="nuevoProductoPrecio">Precio</label>
+          <input type="number" id="nuevoProductoPrecio" step="0.01" min="0" required>
+        </div>
+
+        <div class="form-group">
+          <label for="nuevoProductoStock">Stock</label>
+          <input type="number" id="nuevoProductoStock" min="0" required>
+        </div>
+
+        <div class="form-group">
+          <label for="nuevoProductoCategoria">Categoría</label>
+          <select id="nuevoProductoCategoria" required>
+            <option value="">Seleccionar categoría</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="nuevoProductoDescripcion">Descripción</label>
+        <textarea id="nuevoProductoDescripcion" rows="3" required></textarea>
+      </div>
+
+      <!-- Sección de Imágenes -->
+      <div class="form-group">
+        <label>Imágenes del Producto (máximo 3)</label>
+        <div class="image-upload-area" id="nuevoImageUploadArea">
+          <div class="upload-content">
+            <div class="upload-icon">📁</div>
+            <p>Arrastra imágenes aquí o haz clic para seleccionar</p>
+            <span class="upload-hint">Máximo 3 imágenes, 5MB cada una</span>
+          </div>
+          <input type="file" id="nuevoProductoImagenes" multiple accept="image/*" style="display: none;">
+        </div>
+        <div id="nuevoImagePreviewContainer" class="image-preview-container">
+          <!-- Previews de imágenes -->
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="categoriasInstance.cerrarModalProducto()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primary">
+          <span class="btn-icon">💾</span>
+          Crear Producto
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto - BDDI</title>
+    <link rel="stylesheet" href="css/producto.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p>Cargando producto...</p>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-container">
+        <div class="logo-section" onclick="window.location.href='/dashboard'">
+            <h1>Minimal Store</h1>
+        </div>
+
+        <nav class="breadcrumb">
+            <a href="/" class="breadcrumb-link">Inicio</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="/categorias" class="breadcrumb-link">Categorías</a>
+            <span class="breadcrumb-separator">›</span>
+            <span id="product-category" class="breadcrumb-current">Categoría</span>
+            <span class="breadcrumb-separator">›</span>
+            <span id="product-name" class="breadcrumb-current">Producto</span>
+        </nav>
+
+        <div class="header-actions">
+            <button id="back-btn" class="action-btn secondary">
+                <span class="btn-icon">←</span>
+                Volver
+            </button>
+            <!-- Botón de carrito se agrega dinámicamente para compradores -->
+            <div id="cart-button-container"></div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="product-main">
+    <div class="product-container">
+        <!-- Galería de Imágenes -->
+        <section class="product-gallery-section">
+            <div id="product-gallery" class="product-gallery">
+                <div class="main-image-container">
+                    <img id="main-image" src="" alt="Producto" class="main-image">
+                    <div class="image-zoom-overlay" id="zoom-overlay"></div>
+                </div>
+                <div class="thumbnail-container" id="thumbnail-container">
+                    <!-- Thumbnails se generan dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Información del Producto -->
+        <section class="product-info-section">
+            <div class="product-info-container liquid-glass">
+                <div class="product-header">
+                    <h1 id="product-title" class="product-title">Cargando...</h1>
+                    <div class="product-rating">
+                        <div class="stars" id="product-stars">★★★★☆</div>
+                        <span class="rating-count" id="rating-count">(0 reseñas)</span>
+                    </div>
+                </div>
+
+                <div class="product-price-section">
+                    <div class="price-container">
+                        <span id="current-price" class="current-price">$0</span>
+                        <span id="original-price" class="original-price" style="display: none">$0</span>
+                        <span id="discount-badge" class="discount-badge" style="display: none">-0%</span>
+                    </div>
+                    <div class="stock-info">
+                        <span id="stock-status" class="stock-status">Stock: 0</span>
+                    </div>
+                </div>
+
+                <div class="product-description">
+                    <h3>Descripción</h3>
+                    <p id="product-description">Cargando descripción...</p>
+                </div>
+
+                <!-- Acciones del Producto -->
+                <div id="product-actions" class="product-actions">
+                    <!-- Se genera dinámicamente según tipo de usuario -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Sección de Reseñas -->
+    <section class="reviews-section">
+        <div class="reviews-container neumorphic-card">
+            <div class="reviews-header">
+                <h2>Reseñas del Producto</h2>
+                <button id="write-review-btn" class="action-btn primary">
+                    <span class="btn-icon">✍️</span>
+                    Escribir Reseña
+                </button>
+            </div>
+            <div id="reviews-content" class="reviews-content">
+                <!-- Reseñas se cargan dinámicamente -->
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container"></div>
+
+<script src="js/producto.js"></script>
+</body>
+</html>

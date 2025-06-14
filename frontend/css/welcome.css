@@ -1,0 +1,41 @@
+/* MinimalStore - Página de Bienvenida */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --minimal-gray: #f8f9fa;
+    --minimal-dark: #2c3e50;
+    --minimal-accent: #34495e;
+    --minimal-light: #ecf0f1;
+    --primary-blue: #3498db;
+    --success-green: #27ae60;
+    --warning-orange: #f39c12;
+    --danger-red: #e74c3c;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #e5e7eb;
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --shadow-inner: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 4px 4px 8px rgba(0, 0, 0, 0.1);
+    --shadow-outer: -8px -8px 16px rgba(255, 255, 255, 0.8), 8px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--minimal-gray);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Continúa con todo el CSS que te envié anteriormente... */

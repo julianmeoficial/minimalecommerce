@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cupones - MinimalStore</title>
+
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/cupones.css">
+</head>
+<body>
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+        <div class="loading-spinner-premium"></div>
+        <p>Cargando cupones exclusivos...</p>
+    </div>
+</div>
+
+<!-- Navigation Header -->
+<nav class="nav-header">
+    <div class="nav-container">
+        <div class="nav-left">
+            <button class="nav-btn back-btn" onclick="window.location.href='/'">
+                <span class="btn-icon">←</span>
+                <span>Inicio</span>
+            </button>
+        </div>
+        <div class="nav-center">
+            <h1 class="page-title">
+                <span class="title-icon">🎫</span>
+                <span class="title-text">Cupones Premium</span>
+            </h1>
+        </div>
+        <div class="nav-right">
+            <button class="nav-btn profile-btn" onclick="window.location.href='/perfil'">
+                <span class="btn-icon">👤</span>
+                <span>Perfil</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Container -->
+<main class="cupones-container">
+
+    <!-- Hero Section Premium -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-animation-bg">
+                <div class="floating-coupon coupon-1">🎟️</div>
+                <div class="floating-coupon coupon-2">💰</div>
+                <div class="floating-coupon coupon-3">🏆</div>
+                <div class="floating-coupon coupon-4">✨</div>
+            </div>
+
+            <div class="hero-text">
+                <h2 class="hero-title">Ofertas Exclusivas</h2>
+                <p class="hero-subtitle">Descubre descuentos increíbles y ofertas especiales</p>
+            </div>
+
+            <div class="motivation-box" id="motivationBox">
+                <div class="motivation-content">
+                    <div class="motivation-icon">🚀</div>
+                    <div class="motivation-text">
+                        <h3>¡No te pierdas las mejores ofertas!</h3>
+                        <p>Explora nuestro catálogo y aprovecha estos cupones exclusivos</p>
+                    </div>
+                    <button class="motivation-btn" id="motivationBtn">
+                        <span class="btn-text">Explorar Productos</span>
+                        <span class="btn-effect"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Dashboard (Solo Vendedores) -->
+    <section class="stats-dashboard vendedor-only" id="statsDashboard">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalCupones">0</span>
+                    <span class="stat-label">Total Cupones</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="cuponesActivos">0</span>
+                    <span class="stat-label">Activos</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalUsos">0</span>
+                    <span class="stat-label">Total Usos</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💎</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="ahorroGenerado">$0</span>
+                    <span class="stat-label">Ahorro Generado</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Section -->
+    <section class="action-section">
+        <div class="action-container">
+            <!-- Filtros Avanzados -->
+            <div class="filters-premium">
+                <div class="filters-header">
+                    <h3>Filtros Inteligentes</h3>
+                    <button class="reset-filters-btn" id="resetFilters">
+                        <span class="btn-icon">🔄</span>
+                        <span>Limpiar</span>
+                    </button>
+                </div>
+
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label for="filtroTipo">Tipo de Descuento</label>
+                        <select id="filtroTipo" class="filter-select premium">
+                            <option value="">Todos los tipos</option>
+                            <option value="PORCENTAJE">Porcentaje (%)</option>
+                            <option value="MONTO_FIJO">Monto Fijo ($)</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filtroValor">Valor Mínimo</label>
+                        <input type="number" id="filtroValor" class="filter-input premium" placeholder="0" min="0">
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filtroEstado">Estado</label>
+                        <select id="filtroEstado" class="filter-select premium">
+                            <option value="">Todos los estados</option>
+                            <option value="activo">Activos</option>
+                            <option value="proximo-vencer">Próximos a vencer</option>
+                            <option value="agotados">Agotados</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="buscarCupon">Buscar Cupón</label>
+                        <div class="search-container premium">
+                            <input type="text" id="buscarCupon" class="search-input" placeholder="Código o descripción...">
+                            <span class="search-icon">🔍</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón Crear Cupón (Solo Vendedores) -->
+            <div class="create-coupon-section vendedor-only">
+                <button class="create-coupon-btn" id="btnCrearCupon">
+                    <span class="btn-icon">✨</span>
+                    <span class="btn-text">Crear Cupón Premium</span>
+                    <span class="btn-glow"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cupones Grid -->
+    <section class="cupones-section">
+        <div class="section-header">
+            <h2>Cupones Disponibles</h2>
+            <div class="view-controls">
+                <button class="view-btn active" data-view="grid">
+                    <span class="btn-icon">⊞</span>
+                </button>
+                <button class="view-btn" data-view="list">
+                    <span class="btn-icon">☰</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="cuponesContainer" class="cupones-grid">
+            <!-- Los cupones se cargarán dinámicamente -->
+        </div>
+
+        <!-- Paginación Premium -->
+        <div class="pagination-premium" id="paginationContainer">
+            <!-- Se genera dinámicamente -->
+        </div>
+    </section>
+</main>
+
+<!-- Modal Crear/Editar Cupón -->
+<div id="modalCupon" class="modal premium-modal">
+    <div class="modal-content">
+        <div class="modal-header premium">
+            <h3>
+                <span class="modal-icon">🎯</span>
+                <span id="modalTitle">Crear Cupón Premium</span>
+            </h3>
+            <button class="modal-close premium" onclick="cerrarModalCupon()">×</button>
+        </div>
+
+        <form id="formCupon" class="modal-form premium">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cuponCodigo">Código del Cupón*</label>
+                    <input type="text" id="cuponCodigo" maxlength="50" required>
+                    <small class="form-hint">Ej: DESCUENTO20, VERANO2025</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="cuponTipo">Tipo de Descuento*</label>
+                    <select id="cuponTipo" required>
+                        <option value="">Seleccionar tipo</option>
+                        <option value="PORCENTAJE">Porcentaje (%)</option>
+                        <option value="MONTO_FIJO">Monto Fijo ($)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cuponValor">Valor del Descuento*</label>
+                    <div class="value-input-container">
+                        <input type="number" id="cuponValor" step="0.01" min="0" required>
+                        <span class="value-indicator" id="valorIndicador">$</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cuponUsosMaximo">Usos Máximos*</label>
+                    <input type="number" id="cuponUsosMaximo" min="1" value="100" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cuponDescripcion">Descripción*</label>
+                <textarea id="cuponDescripcion" maxlength="200" required placeholder="Describe las condiciones de uso del cupón..."></textarea>
+                <div class="char-counter">
+                    <span id="descripcionCounter">0</span>/200
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cuponFechaInicio">Fecha de Inicio*</label>
+                    <input type="datetime-local" id="cuponFechaInicio" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cuponFechaVencimiento">Fecha de Vencimiento*</label>
+                    <input type="datetime-local" id="cuponFechaVencimiento" required>
+                </div>
+            </div>
+
+            <div class="preview-section" id="cuponPreview">
+                <h4>Vista Previa</h4>
+                <div class="coupon-preview-card">
+                    <div class="preview-header">
+                        <span class="preview-code" id="previewCodigo">CODIGO</span>
+                        <span class="preview-value" id="previewValor">0%</span>
+                    </div>
+                    <div class="preview-description" id="previewDescripcion">Descripción del cupón</div>
+                    <div class="preview-validity" id="previewValidez">Válido hasta: --</div>
+                </div>
+            </div>
+
+            <div class="form-actions premium">
+                <button type="button" class="btn-secondary" onclick="cerrarModalCupon()">
+                    Cancelar
+                </button>
+                <button type="submit" class="btn-primary premium" id="btnGuardarCupon">
+                    <span class="btn-text">Crear Cupón</span>
+                    <span class="btn-loader"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Detalle Cupón -->
+<div id="modalDetalleCupon" class="modal premium-modal">
+    <div class="modal-content large">
+        <div class="modal-header premium">
+            <h3>
+                <span class="modal-icon">🎫</span>
+                <span>Detalle del Cupón</span>
+            </h3>
+            <button class="modal-close premium" onclick="cerrarModalDetalle()">×</button>
+        </div>
+
+        <div class="detalle-content" id="detalleContent">
+            <!-- Se carga dinámicamente -->
+        </div>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" class="toast-container premium"></div>
+
+<!-- Floating Action Button (Solo Vendedores) -->
+<div class="fab-container vendedor-only">
+    <button class="fab-main" id="fabMain">
+        <span class="fab-icon">✨</span>
+    </button>
+    <div class="fab-options">
+        <button class="fab-option" data-action="crear" title="Crear Cupón">
+            <span class="fab-icon">➕</span>
+        </button>
+        <button class="fab-option" data-action="estadisticas" title="Ver Estadísticas">
+            <span class="fab-icon">📊</span>
+        </button>
+        <button class="fab-option" data-action="exportar" title="Exportar Datos">
+            <span class="fab-icon">📥</span>
+        </button>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script src="/js/cupones.js"></script>
+</body>
+</html>

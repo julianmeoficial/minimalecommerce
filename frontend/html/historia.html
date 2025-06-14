@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/historia.css">
+
+    <!-- Configuración Tailwind personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'minimal-gray': '#f8f9fa',
+                        'minimal-dark': '#2c3e50',
+                        'minimal-accent': '#34495e',
+                        'minimal-light': '#ecf0f1'
+                    },
+                    fontFamily: {
+                        'minimal': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-minimal-gray min-h-screen font-minimal">
+
+<!-- Fondo animado con agujero negro -->
+<div class="black-hole-background">
+    <div class="cosmic-container">
+        <div class="ring-3">
+            <div class="ring-2">
+                <div class="ring-1">
+                    <div class="black-hole"></div>
+                    <div class="glow"></div>
+                </div>
+            </div>
+        </div>
+        <div class="crescent-container">
+            <svg class="crescent crescent-1" viewBox="0 0 50 50">
+                <path d="M 0 0 C 54 50 185 57 226 0 C 198 39 35 32 0 0" fill="#ffffff55" />
+            </svg>
+            <svg class="crescent crescent-2" viewBox="0 0 50 50">
+                <path d="M 0 0 C 54 50 185 57 226 0 C 198 39 35 32 0 0" fill="#ffffff55" />
+            </svg>
+            <svg class="crescent crescent-3" viewBox="0 0 50 50">
+                <path d="M 0 0 C 54 50 185 57 226 0 C 198 39 35 32 0 0" fill="#ffffff55" />
+            </svg>
+            <svg class="crescent crescent-4" viewBox="0 0 50 50">
+                <path d="M 0 0 C 54 50 185 57 226 0 C 198 39 35 32 0 0" fill="#ffffff55" />
+            </svg>
+            <svg class="crescent crescent-5" viewBox="0 0 50 50">
+                <path d="M 0 0 C 54 50 185 57 226 0 C 198 39 35 32 0 0" fill="#ffffff55" />
+            </svg>
+            <svg class="crescent crescent-6" viewBox="0 0 50 50">
+                <path d="M 0 0 C 54 50 185 57 226 0 C 198 39 35 32 0 0" fill="#ffffff55" />
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- Logo flotante -->
+<div class="floating-logo">
+    <a href="dashboard" class="logo-link">
+        <div class="logo-icon">
+            <span>M</span>
+        </div>
+        <span class="logo-text">MinimalStore</span>
+    </a>
+</div>
+
+<!-- Contenedor principal -->
+<div class="main-container">
+
+    <!-- Header con título ScrambleText -->
+    <div class="history-header">
+        <h1 class="history-title" id="scramble-title">
+            <span class="title-text">Nuestra Historia</span>
+        </h1>
+        <p class="history-subtitle split-subtitle">
+            El viaje hacia la simplicidad y elegancia en el ecommerce
+        </p>
+    </div>
+
+    <!-- Timeline de la historia -->
+    <div class="timeline-container">
+
+        <!-- Línea de tiempo central -->
+        <div class="timeline-line"></div>
+
+        <!-- Eventos de la timeline -->
+        <div class="timeline-events">
+
+            <!-- Evento 1: El Inicio -->
+            <div class="timeline-event timeline-left" data-year="2024">
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-icon">
+                            <span>💡</span>
+                        </div>
+                        <div class="timeline-year-badge">2024</div>
+                        <h3 class="timeline-title split-text">El Nacimiento de una Idea</h3>
+                        <div class="timeline-text split-content">
+                            <p>En un mundo saturado de complejidad digital, nació la visión de MinimalStore: crear un ecommerce que priorizara la simplicidad sin sacrificar la funcionalidad. La idea surgió al observar cómo los usuarios se sentían abrumados por interfaces sobrecargadas y procesos de compra complicados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evento 2: La Filosofía -->
+            <div class="timeline-event timeline-right" data-year="2024">
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-icon">
+                            <span>🎨</span>
+                        </div>
+                        <div class="timeline-year-badge">2024</div>
+                        <h3 class="timeline-title split-text">El Poder del Minimalismo</h3>
+                        <div class="timeline-text split-content">
+                            <p>Descubrimos que el diseño minimalista no es solo una tendencia estética, sino una filosofía que mejora la experiencia del usuario. Los estudios demuestran que los diseños limpios aumentan la conversión en un 35% y reducen la fatiga visual, permitiendo a los usuarios enfocarse en lo que realmente importa: encontrar y comprar productos de calidad.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evento 3: La Innovación -->
+            <div class="timeline-event timeline-left" data-year="2025">
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-icon">
+                            <span>✨</span>
+                        </div>
+                        <div class="timeline-year-badge">2025</div>
+                        <h3 class="timeline-title split-text">La Era del Neumorphism</h3>
+                        <div class="timeline-text split-content">
+                            <p>En 2025, adoptamos el diseño neumórfico como nuestro distintivo visual. Este estilo combina la profundidad táctil con la elegancia digital, creando interfaces que se sienten naturales e intuitivas. El neumorphism no solo es visualmente atractivo, sino que mejora la usabilidad al proporcionar retroalimentación visual clara sobre elementos interactivos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evento 4: La Comunidad -->
+            <div class="timeline-event timeline-right" data-year="2025">
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-icon">
+                            <span>🤝</span>
+                        </div>
+                        <div class="timeline-year-badge">2025</div>
+                        <h3 class="timeline-title split-text">Usuarios y Vendedores Unidos</h3>
+                        <div class="timeline-text split-content">
+                            <p>Creamos una plataforma que beneficia tanto a compradores como vendedores. Los compradores disfrutan de una experiencia de compra sin fricciones, mientras que los vendedores acceden a herramientas poderosas pero simples para gestionar sus tiendas. Esta dualidad es el corazón de nuestro ecosistema minimalista.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evento 5: El Futuro -->
+            <div class="timeline-event timeline-left" data-year="2026">
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-icon">
+                            <span>🚀</span>
+                        </div>
+                        <div class="timeline-year-badge">2026</div>
+                        <h3 class="timeline-title split-text">Tendencias que Definen el Futuro</h3>
+                        <div class="timeline-text split-content">
+                            <p>Para 2026, el diseño neumórfico y la simplicidad radical se consolidan como estándares de la industria. Los usuarios ya no toleran interfaces complejas; buscan experiencias que combinen belleza, funcionalidad y velocidad. MinimalStore lidera esta revolución, demostrando que menos realmente es más.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evento 6: La Visión -->
+            <div class="timeline-event timeline-right" data-year="Futuro">
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-icon">
+                            <span>🌟</span>
+                        </div>
+                        <div class="timeline-year-badge infinite">∞</div>
+                        <h3 class="timeline-title split-text">Más Allá del Ecommerce</h3>
+                        <div class="timeline-text split-content">
+                            <p>Nuestra visión trasciende las ventas online. Aspiramos a redefinir cómo las personas interactúan con la tecnología comercial, creando experiencias que sean memorables por su simplicidad, no por su complejidad. Cada pixel tiene un propósito, cada animación cuenta una historia, cada interacción acerca al usuario a su objetivo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!-- Sección de valores -->
+    <div class="values-section">
+        <div class="values-container">
+            <h2 class="values-title split-title">Nuestros Valores Fundamentales</h2>
+
+            <div class="values-grid">
+                <div class="value-card" data-value="1">
+                    <div class="value-icon">🎯</div>
+                    <h3 class="value-name split-text">Simplicidad</h3>
+                    <p class="value-description split-text">Cada elemento tiene un propósito claro. Eliminamos lo innecesario para destacar lo esencial.</p>
+                </div>
+
+                <div class="value-card" data-value="2">
+                    <div class="value-icon">⚡</div>
+                    <h3 class="value-name split-text">Velocidad</h3>
+                    <p class="value-description split-text">Las experiencias rápidas generan satisfacción. Optimizamos cada interacción para la máxima eficiencia.</p>
+                </div>
+
+                <div class="value-card" data-value="3">
+                    <div class="value-icon">🎨</div>
+                    <h3 class="value-name split-text">Elegancia</h3>
+                    <p class="value-description split-text">La belleza no es superficial; es funcional. El buen diseño hace que lo complejo se sienta simple.</p>
+                </div>
+
+                <div class="value-card" data-value="4">
+                    <div class="value-icon">🔄</div>
+                    <h3 class="value-name split-text">Adaptabilidad</h3>
+                    <p class="value-description split-text">Evolucionamos con las necesidades del usuario, manteniéndonos siempre relevantes y útiles.</p>
+                </div>
+
+                <div class="value-card" data-value="5">
+                    <div class="value-icon">🤝</div>
+                    <h3 class="value-name split-text">Confianza</h3>
+                    <p class="value-description split-text">Construimos relaciones duraderas basadas en transparencia, seguridad y compromiso con nuestros usuarios.</p>
+                </div>
+
+                <div class="value-card" data-value="6">
+                    <div class="value-icon">🌱</div>
+                    <h3 class="value-name split-text">Sostenibilidad</h3>
+                    <p class="value-description split-text">Promovemos prácticas responsables que beneficien tanto al comercio como al medio ambiente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="history-footer">
+        <div class="footer-content split-footer">
+            <p>&copy; 2025 MinimalStore. Redefiniendo el ecommerce a través del diseño.</p>
+            <p class="footer-quote">"La simplicidad es la máxima sofisticación" - Leonardo da Vinci</p>
+        </div>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="../js/historia.js"></script>
+</div>
+
+</body>
+</html>

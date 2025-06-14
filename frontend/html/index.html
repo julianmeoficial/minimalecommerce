@@ -3,60 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MinimalEcommerce - En Construcción</title>
+    <title>Bienvenido a MinimalStore</title>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CSS con cache busting -->
+    <link rel="stylesheet" href="welcome.css?v=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- GSAP CDN -->
+    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-    <!-- CSS personalizado -->
-    <link rel="stylesheet" href="../css/loader.css">
+    <!-- CSS de respaldo inline -->
+    <style>
+        /* CSS crítico inline para evitar FOUC */
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .welcome-container {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            box-shadow: -8px -8px 16px rgba(255,255,255,0.8), 8px 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .logo-icon span {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .brand-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0.5rem 0;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .welcome-btn {
+            background: #f8f9fa;
+            border: none;
+            border-radius: 15px;
+            padding: 1.2rem 2rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            box-shadow: -8px -8px 16px rgba(255,255,255,0.8), 8px 8px 16px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .welcome-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: -12px -12px 20px rgba(255,255,255,0.9), 12px 12px 20px rgba(0,0,0,0.2);
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            color: #3498db;
+        }
+
+        .register-btn:hover {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+            color: #27ae60;
+        }
+
+        .about-btn:hover {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            color: #f39c12;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .brand-title { font-size: 2rem; }
+            .main-title { font-size: 1.8rem; }
+            .description { font-size: 1rem; }
+            .welcome-container { padding: 1rem; }
+        }
+    </style>
 </head>
 <body>
-
-<!-- Pantalla de Carga Principal (TU CSS ORIGINAL) -->
-<div id="loader-container">
-    <main>
-        <div class="preloader">
-            <div class="preloader__square"></div>
-            <div class="preloader__square"></div>
-            <div class="preloader__square"></div>
-            <div class="preloader__square"></div>
-        </div>
-        <div class="status">Cargando MinimalStore<span class="status__dot">.</span><span class="status__dot">.</span><span class="status__dot">.</span></div>
-    </main>
-</div>
-
-<!-- Pantalla de Construcción (oculta inicialmente) -->
-<div id="construction-container" style="display: none;">
-    <main>
-        <!-- TU LOADER ORIGINAL PERO MÁS PEQUEÑO -->
-        <div class="construction-preloader">
-            <div class="preloader__square"></div>
-            <div class="preloader__square"></div>
-            <div class="preloader__square"></div>
-            <div class="preloader__square"></div>
-        </div>
-
-        <!-- Texto de Construcción -->
-        <div class="construction-text">
-            <h1 class="construction-title">MinimalStore</h1>
-            <p class="construction-subtitle">Sitio en proceso de construcción</p>
-            <div class="construction-dots">
-                <span class="construction-dot"></span>
-                <span class="construction-dot"></span>
-                <span class="construction-dot"></span>
+<div class="welcome-container">
+    <div class="welcome-header">
+        <div class="logo-section">
+            <div class="logo-icon">
+                <span>M</span>
             </div>
-            <p class="construction-info">
-                Estamos trabajando para ofrecerte la mejor experiencia de compra minimalista
+            <h1 class="brand-title">MinimalStore</h1>
+        </div>
+        <p class="welcome-subtitle">¡Sencillez, diseño y ganancias!</p>
+    </div>
+
+    <div class="welcome-content">
+        <div class="welcome-text">
+            <h2 class="main-title">Bienvenido a tu tienda digital</h2>
+            <p class="description">
+                Ingresa a MinimalStore como <strong>comprador</strong> o <strong>vendedor</strong>.
+                El mejor sitio para realizar compra y venta de artículos de calidad.
             </p>
         </div>
-    </main>
+
+        <div class="action-buttons">
+            <button class="welcome-btn login-btn" onclick="handleLogin()">
+                👤 Iniciar Sesión
+            </button>
+            <button class="welcome-btn register-btn" onclick="handleRegister()">
+                ➕ Registrarse
+            </button>
+            <button class="welcome-btn about-btn" onclick="handleAbout()">
+                ℹ️ Sobre MinimalStore
+            </button>
+        </div>
+    </div>
 </div>
 
-<!-- Scripts -->
-<script src="../js/loader.js"></script>
+<script>
+    // Verificar si el CSS externo se cargó
+    function checkCSSLoaded() {
+        const testElement = document.createElement('div');
+        testElement.className = 'floating-particles';
+        document.body.appendChild(testElement);
+
+        const styles = window.getComputedStyle(testElement);
+        const isLoaded = styles.position === 'fixed';
+
+        document.body.removeChild(testElement);
+
+        if (isLoaded) {
+            console.log('✅ CSS externo cargado correctamente');
+            document.body.classList.add('css-loaded');
+        } else {
+            console.log('⚠️ CSS externo no se cargó, usando estilos inline');
+        }
+    }
+
+    // Funciones de los botones
+    function handleLogin() {
+        console.log('Redirigiendo a login...');
+        window.location.href = '/login';
+    }
+
+    function handleRegister() {
+        console.log('Redirigiendo a registro...');
+        window.location.href = '/registro';
+    }
+
+    function handleAbout() {
+        console.log('Redirigiendo a historia...');
+        window.location.href = 'http://localhost:3000/historia';
+    }
+
+    // Inicializar cuando la página esté lista
+    document.addEventListener('DOMContentLoaded', function() {
+        checkCSSLoaded();
+
+        // Inicializar GSAP si está disponible
+        if (typeof gsap !== 'undefined') {
+            console.log('✅ GSAP cargado');
+            // Aquí puedes agregar las animaciones GSAP
+        } else {
+            console.log('⚠️ GSAP no disponible');
+        }
+    });
+</script>
 </body>
 </html>

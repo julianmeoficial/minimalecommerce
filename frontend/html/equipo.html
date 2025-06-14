@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Equipo - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/equipo.css">
+
+    <!-- Configuración Tailwind personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'minimal-gray': '#f8f9fa',
+                        'minimal-dark': '#2c3e50',
+                        'minimal-accent': '#34495e',
+                        'minimal-light': '#ecf0f1'
+                    },
+                    fontFamily: {
+                        'minimal': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-minimal-gray min-h-screen font-minimal">
+
+<!-- Fondo animado con partículas -->
+<div class="particles-background">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<!-- Logo flotante -->
+<div class="floating-logo">
+    <a href="dashboard" class="logo-link">
+        <div class="logo-icon">
+            <span>M</span>
+        </div>
+        <span class="logo-text">MinimalStore</span>
+    </a>
+</div>
+
+<!-- Contenedor principal -->
+<div class="main-container">
+
+    <!-- Header con título ScrambleText -->
+    <div class="team-header">
+        <h1 class="team-title" id="scramble-title">
+            <span class="title-text">Nuestro Equipo</span>
+        </h1>
+        <p class="team-subtitle split-subtitle">
+            Donde la creatividad se encuentra con la innovación tecnológica
+        </p>
+    </div>
+
+    <!-- Sección de introducción -->
+    <div class="team-intro-section">
+        <div class="intro-container">
+            <h2 class="intro-title split-title">La Fuerza Detrás de MinimalStore</h2>
+
+            <div class="intro-content">
+                <div class="text-card primary-card split-card" data-card="1">
+                    <p class="card-text split-text">Un proyecto ambicioso como MinimalStore no surge por casualidad. Detrás de cada línea de código, cada pixel perfectamente posicionado y cada experiencia de usuario cuidadosamente diseñada, hay un equipo que combina pasión, expertise técnico y visión compartida.</p>
+                </div>
+
+                <div class="text-card secondary-card split-card" data-card="2">
+                    <p class="card-text split-text">En el mundo del desarrollo de software, especialmente en proyectos universitarios que buscan trascender las expectativas académicas, la sinergia entre diseño y desarrollo es fundamental. Nuestro equipo representa esta fusión perfecta: donde el arte del diseño UX/UI se encuentra con la precisión de la ingeniería de software backend.</p>
+                </div>
+
+                <div class="text-card tertiary-card split-card" data-card="3">
+                    <p class="card-text split-text">Esta colaboración no es solo sobre dividir tareas; es sobre crear una experiencia unificada donde cada decisión de diseño tiene su contraparte técnica perfectamente ejecutada, y cada implementación backend está pensada para soportar la elegancia visual que caracteriza a MinimalStore.</p>
+                </div>
+            </div>
+
+            <div class="intro-stats">
+                <div class="stat-item split-stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Dedicación al proyecto</span>
+                </div>
+                <div class="stat-item split-stat">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Mentes brillantes</span>
+                </div>
+                <div class="stat-item split-stat">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Posibilidades creativas</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección del equipo -->
+    <div class="team-members-section">
+        <div class="members-container">
+            <!-- Icono animado sobre el título -->
+            <div class="team-icon-container">
+                <div class="team-icon-card">
+                    <div class="icon-align">
+                        <span class="red-dot"></span>
+                        <span class="yellow-dot"></span>
+                        <span class="green-dot"></span>
+                    </div>
+                    <h3 class="icon-title">TEAM</h3>
+                    <p class="icon-description">
+                        Diseñadores y desarrolladores trabajando en sinergia para crear experiencias excepcionales.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="members-title split-title">Conoce a los Creadores</h2>
+
+            <div class="team-grid">
+
+                <!-- Card de Julián -->
+                <div class="team-card julian-card" data-member="julian">
+                    <div class="card-glow"></div>
+                    <div class="profile-img">
+                        <span class="emoji-avatar">😼</span>
+                    </div>
+                    <div class="member-info">
+                    <span class="member-name split-name">Julián Espitia</span>
+                    <p class="member-role split-role">Frontend & UX Architect</p>
+                </div>
+                    <div class="member-skills">
+                        <div class="skill-tag split-skill">UI/UX Design</div>
+                        <div class="skill-tag split-skill">Motion Design</div>
+                        <div class="skill-tag split-skill">Frontend Dev</div>
+                        <div class="skill-tag split-skill">Optimización</div>
+                    </div>
+                    <div class="member-description split-description">
+                        <p>Visionario del diseño que transforma ideas abstractas en experiencias digitales tangibles. Su expertise en motion design y desarrollo frontend crea la magia visual que caracteriza a MinimalStore.</p>
+                    </div>
+                    <a href="#" class="member-button julian-button">
+                        <span>Founder</span>
+                    </a>
+                </div>
+
+                <!-- Card de Mónica -->
+                <div class="team-card monica-card" data-member="monica">
+                    <div class="card-glow"></div>
+                    <div class="profile-img">
+                        <span class="emoji-avatar">🕯</span>
+                    </div>
+                    <div class="member-info">
+                        <span class="member-name split-name">Mónica Vellojín</span>
+                        <p class="member-role split-role">Backend & Database Architect</p>
+                    </div>
+                    <div class="member-skills">
+                        <div class="skill-tag split-skill">Backend Dev</div>
+                        <div class="skill-tag split-skill">Bases de Datos</div>
+                        <div class="skill-tag split-skill">Arquitectura</div>
+                        <div class="skill-tag split-skill">Soluciones</div>
+                    </div>
+                    <div class="member-description split-description">
+                        <p>Maestra de la lógica de negocio y arquitectura de datos. Su enfoque minimalista en soluciones backend garantiza que la complejidad técnica se traduzca en simplicidad para el usuario final.</p>
+                    </div>
+                    <a href="#" class="member-button monica-button">
+                        <span>Cofounder</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de colaboración -->
+    <div class="collaboration-section">
+        <div class="collaboration-container">
+            <h2 class="collaboration-title split-title">Sinergia Perfecta</h2>
+
+            <div class="collaboration-content">
+                <div class="collaboration-card left-card" data-side="left">
+                    <div class="collab-icon">🎨</div>
+                    <h3 class="collab-title split-text">Creatividad & Diseño</h3>
+                    <p class="collab-description split-text">Julián aporta la visión estética y la experiencia de usuario, asegurando que cada interfaz sea intuitiva, atractiva y funcionalmente elegante.</p>
+                </div>
+
+                <div class="collaboration-bridge">
+                    <div class="bridge-line"></div>
+                    <div class="bridge-center">
+                        <span class="bridge-icon">⚡</span>
+                    </div>
+                </div>
+
+                <div class="collaboration-card right-card" data-side="right">
+                    <div class="collab-icon">⚙️</div>
+                    <h3 class="collab-title split-text">Tecnología & Lógica</h3>
+                    <p class="collab-description split-text">Mónica construye la arquitectura robusta que sustenta cada característica, garantizando rendimiento, escalabilidad y seguridad en el backend.</p>
+                </div>
+            </div>
+
+            <div class="collaboration-result">
+                <div class="result-card split-result">
+                    <h4 class="result-title">El Resultado</h4>
+                    <p class="result-description">Una plataforma de ecommerce que no solo se ve increíble, sino que funciona de manera impecable, donde cada detalle visual tiene su contraparte técnica perfectamente optimizada.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación a páginas relacionadas -->
+    <div class="navigation-section">
+        <div class="nav-grid">
+            <a href="historia" class="nav-card">
+                <div class="nav-icon">📚</div>
+                <h3 class="nav-title split-text">Nuestra Historia</h3>
+                <p class="nav-description split-text">Descubre el viaje que nos trajo hasta aquí</p>
+            </a>
+
+            <a href="mision-vision" class="nav-card">
+                <div class="nav-icon">🎯</div>
+                <h3 class="nav-title split-text">Misión y Visión</h3>
+                <p class="nav-description split-text">Conoce nuestros objetivos y aspiraciones</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="team-footer">
+        <div class="footer-content split-footer">
+            <p>&copy; 2025 MinimalStore. Creado con pasión por un equipo dedicado a la excelencia.</p>
+            <p class="footer-quote">"Individualmente somos una gota, juntos somos un océano" - Ryunosuke Satoro</p>
+        </div>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="../js/equipo.js"></script>
+</body>
+</html>

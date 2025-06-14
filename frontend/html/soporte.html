@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte al Cliente - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/soporte.css">
+
+    <!-- Configuración Tailwind personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'minimal-gray': '#f8f9fa',
+                        'minimal-dark': '#2c3e50',
+                        'minimal-accent': '#34495e',
+                        'minimal-light': '#ecf0f1'
+                    },
+                    fontFamily: {
+                        'minimal': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-minimal-gray min-h-screen font-minimal">
+
+<!-- Logo flotante -->
+<div class="floating-logo">
+    <a href="dashboard" class="logo-link">
+        <div class="logo-icon">
+            <span>M</span>
+        </div>
+        <span class="logo-text">MinimalStore</span>
+    </a>
+</div>
+
+<!-- Contenedor principal -->
+<div class="main-container">
+
+    <!-- Header con título ScrambleText -->
+    <div class="support-header">
+        <h1 class="support-title" id="scramble-title">
+            <span class="title-text">Centro de Soporte</span>
+        </h1>
+        <p class="support-subtitle split-subtitle">
+            Estamos aquí para ayudarte con cualquier consulta o problema
+        </p>
+    </div>
+
+    <!-- Índice de navegación -->
+    <div class="support-navigation">
+        <div class="nav-container">
+            <h3 class="nav-title">¿Cómo podemos ayudarte?</h3>
+            <div class="nav-buttons">
+                <button class="nav-btn active" data-target="compradores">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    Soy Comprador
+                </button>
+                <button class="nav-btn" data-target="vendedores">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+                    </svg>
+                    Soy Vendedor
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Compradores -->
+    <div class="support-section active" id="compradores-section">
+        <div class="section-container">
+            <h2 class="section-title split-title">Soporte para Compradores</h2>
+
+            <div class="faq-container">
+
+                <div class="faq-item" data-faq="1">
+                    <div class="faq-question">
+                        <h3>Mi preorden no aparece ¿qué hago?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si tu preorden no aparece en tu cuenta, verifica lo siguiente:</p>
+                        <ul>
+                            <li>Revisa tu correo electrónico para confirmar que recibiste el correo de confirmación</li>
+                            <li>Inicia sesión en tu cuenta y verifica la sección "Mis Pedidos"</li>
+                            <li>Si pagaste con tarjeta, verifica que el pago se haya procesado correctamente</li>
+                            <li>Las preórdenes pueden tardar hasta 24 horas en aparecer en el sistema</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="2">
+                    <div class="faq-question">
+                        <h3>¿Cómo puedo rastrear mi pedido?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para rastrear tu pedido:</p>
+                        <ul>
+                            <li>Ve a tu perfil y selecciona "Mis Pedidos"</li>
+                            <li>Busca el pedido que deseas rastrear</li>
+                            <li>Haz clic en "Ver detalles" para obtener el número de seguimiento</li>
+                            <li>Recibirás notificaciones por correo cuando tu pedido cambie de estado</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="3">
+                    <div class="faq-question">
+                        <h3>¿Puedo cancelar mi pedido?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, puedes cancelar tu pedido bajo las siguientes condiciones:</p>
+                        <ul>
+                            <li>El pedido aún no ha sido enviado (estado: "Preparando")</li>
+                            <li>Han pasado menos de 2 horas desde la confirmación</li>
+                            <li>Ve a "Mis Pedidos" y selecciona "Cancelar pedido"</li>
+                            <li>El reembolso se procesará en 3-5 días hábiles</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="4">
+                    <div class="faq-question">
+                        <h3>¿Qué métodos de pago aceptan?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Aceptamos los siguientes métodos de pago:</p>
+                        <ul>
+                            <li>Tarjetas de crédito (Visa, MasterCard, American Express)</li>
+                            <li>Tarjetas de débito</li>
+                            <li>PayPal</li>
+                            <li>Transferencias bancarias</li>
+                            <li>Pago en efectivo (algunas ubicaciones)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="5">
+                    <div class="faq-question">
+                        <h3>Mi producto llegó dañado ¿qué hago?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si recibiste un producto dañado:</p>
+                        <ul>
+                            <li>Toma fotos del producto y el empaque</li>
+                            <li>Conserva todos los materiales de envío</li>
+                            <li>Reporta el problema dentro de las primeras 48 horas</li>
+                            <li>Te enviaremos un reemplazo o procesaremos el reembolso completo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="other-problems-section">
+                <button class="other-problems-btn" data-user-type="compradores">
+                    <span>¿Otros problemas?</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Vendedores -->
+    <div class="support-section" id="vendedores-section">
+        <div class="section-container">
+            <h2 class="section-title split-title">Soporte para Vendedores</h2>
+
+            <div class="faq-container">
+
+                <div class="faq-item" data-faq="6">
+                    <div class="faq-question">
+                        <h3>¿Cómo publico un nuevo producto?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para publicar un nuevo producto:</p>
+                        <ul>
+                            <li>Ve a tu panel de vendedor y selecciona "Agregar Producto"</li>
+                            <li>Completa toda la información requerida (nombre, descripción, precio)</li>
+                            <li>Sube imágenes de alta calidad (mínimo 3, máximo 10)</li>
+                            <li>Selecciona la categoría apropiada</li>
+                            <li>Tu producto será revisado y publicado en 24-48 horas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="7">
+                    <div class="faq-question">
+                        <h3>¿Cuándo recibo mis pagos?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Los pagos se procesan de la siguiente manera:</p>
+                        <ul>
+                            <li>Los pagos se liberan cuando el producto se marca como "Entregado"</li>
+                            <li>Período de retención: 7 días después de la entrega</li>
+                            <li>Transferencias cada viernes a tu cuenta bancaria registrada</li>
+                            <li>Puedes ver tus ganancias pendientes en el panel de vendedor</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="8">
+                    <div class="faq-question">
+                        <h3>¿Cómo gestiono mi inventario?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para gestionar tu inventario:</p>
+                        <ul>
+                            <li>Accede a "Mis Productos" en tu panel de vendedor</li>
+                            <li>Actualiza las cantidades disponibles regularmente</li>
+                            <li>Marca productos como "Agotado" cuando sea necesario</li>
+                            <li>Configura alertas de stock bajo para recibir notificaciones</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="9">
+                    <div class="faq-question">
+                        <h3>¿Qué comisión cobra MinimalStore?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nuestra estructura de comisiones es transparente:</p>
+                        <ul>
+                            <li>Comisión estándar: 8% del precio de venta</li>
+                            <li>Sin cargos por listado de productos</li>
+                            <li>Sin tarifas mensuales o anuales</li>
+                            <li>Vendedores premium: 5% de comisión (más de 100 ventas/mes)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="10">
+                    <div class="faq-question">
+                        <h3>¿Cómo manejo las devoluciones?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para manejar devoluciones:</p>
+                        <ul>
+                            <li>Las solicitudes aparecerán en "Devoluciones Pendientes"</li>
+                            <li>Tienes 48 horas para responder a una solicitud</li>
+                            <li>Puedes aprobar, rechazar o negociar con el comprador</li>
+                            <li>MinimalStore mediará en caso de disputas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="other-problems-section">
+                <button class="other-problems-btn" data-user-type="vendedores">
+                    <span>¿Otros problemas?</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup de contacto -->
+<div class="popup-overlay" id="popup-overlay">
+    <div class="wave-animation"></div>
+    <div class="wave-animation"></div>
+    <div class="wave-animation"></div>
+
+    <div class="support-card" id="support-card">
+        <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon">
+                <path fill="currentColor" d="M19.4133 4.89862L14.5863 2.17544C12.9911 1.27485 11.0089 1.27485 9.41368 2.17544L4.58674 4.89862C2.99153 5.7992 2 7.47596 2 9.2763V14.7235C2 16.5238 2.99153 18.2014 4.58674 19.1012L9.41368 21.8252C10.2079 22.2734 11.105 22.5 12.0046 22.5C12.6952 22.5 13.3874 22.3657 14.0349 22.0954C14.2204 22.018 14.4059 21.9273 14.5872 21.8252L19.4141 19.1012C19.9765 18.7831 20.4655 18.3728 20.8651 17.8825C21.597 16.9894 22 15.8671 22 14.7243V9.27713C22 7.47678 21.0085 5.7992 19.4133 4.89862ZM4.10784 14.7235V9.2763C4.10784 8.20928 4.6955 7.21559 5.64066 6.68166L10.4676 3.95848C10.9398 3.69152 11.4701 3.55804 11.9996 3.55804C12.5291 3.55804 13.0594 3.69152 13.5324 3.95848L18.3593 6.68166C19.3045 7.21476 19.8922 8.20928 19.8922 9.2763V9.75997C19.1426 9.60836 18.377 9.53091 17.6022 9.53091C14.7929 9.53091 12.1041 10.5501 10.0309 12.3999C8.36735 13.8847 7.21142 15.8012 6.68783 17.9081L5.63981 17.3165C4.69466 16.7834 4.10699 15.7897 4.10699 14.7235H4.10784ZM10.4676 20.0413L8.60933 18.9924C8.94996 17.0479 9.94402 15.2665 11.4515 13.921C13.1353 12.4181 15.3198 11.5908 17.6022 11.5908C18.3804 11.5908 19.1477 11.6864 19.8922 11.8742V14.7235C19.8922 15.2278 19.7589 15.7254 19.5119 16.1662C18.7615 15.3596 17.6806 14.8528 16.4783 14.8528C14.2136 14.8528 12.3781 16.6466 12.3781 18.8598C12.3781 19.3937 12.4861 19.9021 12.68 20.3676C11.9347 20.5316 11.1396 20.4203 10.4684 20.0413H10.4676Z" />
+            </svg>
+        </div>
+        <div class="card-title" id="card-title">Soporte Compradores</div>
+        <div class="card-email" id="card-email">soporte-compradores@minimalstore.com</div>
+        <div class="card-info">
+            <p>Nuestro equipo te responderá en menos de 24 horas</p>
+            <p>Horario: Lunes a Viernes 9:00 AM - 6:00 PM</p>
+        </div>
+        <button class="close-popup-btn" id="close-popup">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="../js/soporte.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito - MinimalStore</title>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- CSS del carrito -->
+    <link rel="stylesheet" href="../css/carrito.css">
+</head>
+<body>
+<!-- Header del Carrito -->
+<header class="carrito-header">
+    <div class="header-content">
+        <button class="btn-volver" id="btnVolver">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Volver
+        </button>
+
+        <h1 class="carrito-titulo">Mi Carrito</h1>
+
+        <div class="carrito-contador-header">
+            <span id="contadorItems">0</span> productos
+        </div>
+    </div>
+</header>
+
+<!-- Contenido Principal del Carrito -->
+<main class="carrito-main">
+    <div class="carrito-container">
+
+        <!-- Sección de Productos -->
+        <section class="carrito-productos-section">
+            <div class="productos-header">
+                <h2>Productos en tu carrito</h2>
+                <button class="btn-limpiar-carrito" id="btnLimpiarCarrito">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                    </svg>
+                    Limpiar Todo
+                </button>
+            </div>
+
+            <!-- Lista de Productos -->
+            <div class="productos-lista" id="productosLista">
+                <!-- Los productos se cargan dinámicamente -->
+            </div>
+
+            <!-- Estado Vacío -->
+            <div class="carrito-vacio" id="carritoVacio" style="display: none;">
+                <div class="vacio-icon">🛒</div>
+                <h3>Tu carrito está vacío</h3>
+                <p>Agrega productos para comenzar tu compra</p>
+                <button class="btn-explorar" onclick="window.location.href='/dashboard'">
+                    Explorar Productos
+                </button>
+            </div>
+        </section>
+
+        <!-- Sección de Resumen -->
+        <aside class="carrito-resumen-section">
+            <div class="resumen-card">
+                <h3>Resumen de Compra</h3>
+
+                <div class="resumen-detalles">
+                    <div class="detalle-linea">
+                        <span>Subtotal</span>
+                        <span id="subtotalMonto">$0</span>
+                    </div>
+                    <div class="detalle-linea">
+                        <span>Envío</span>
+                        <span id="envioMonto">$0</span>
+                        <small class="envio-info">Gratis en compras +$50.000</small>
+                    </div>
+
+                    <!-- Código de Descuento Mejorado -->
+                    <div class="cupon-section-enhanced">
+                        <div class="cupon-input-container">
+                            <input type="text"
+                                   id="inputCupon"
+                                   placeholder="Código de descuento"
+                                   class="cupon-input">
+                            <button class="btn-aplicar-cupon" id="btnAplicarCupon">
+                                <span class="btn-text">Aplicar</span>
+                                <span class="btn-loader" style="display: none;">⏳</span>
+                            </button>
+                        </div>
+
+                        <!-- Cupón Aplicado -->
+                        <div class="cupon-aplicado" id="cuponAplicado" style="display: none;">
+                            <div class="cupon-info">
+                                <span class="cupon-codigo" id="cuponCodigo"></span>
+                                <span class="cupon-descripcion" id="cuponDescripcion"></span>
+                            </div>
+                            <button class="btn-remover-cupon" id="btnRemoverCupon">×</button>
+                        </div>
+
+                        <!-- Mensaje de Error/Éxito -->
+                        <div class="cupon-mensaje" id="cuponMensaje" style="display: none;"></div>
+                    </div>
+
+                    <div class="detalle-linea descuento-line" id="descuentoLine" style="display: none;">
+                        <span>Descuentos</span>
+                        <span id="descuentoMonto" class="descuento">-$0</span>
+                    </div>
+
+                    <div class="detalle-separador"></div>
+                    <div class="detalle-total">
+                        <span>Total</span>
+                        <span id="totalMonto">$0</span>
+                    </div>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="acciones-compra">
+                    <button class="btn-guardar-lista" id="btnGuardarLista">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        Guardar Lista
+                    </button>
+
+                    <button class="btn-proceder-pago" id="btnProcederPago">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/>
+                        </svg>
+                        Proceder al Pago
+                    </button>
+
+                    <button class="btn-ver-historial" id="btnVerHistorial">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3zM9 9h6m-6 4h6"/>
+                        </svg>
+                        Ver Historial de Pedidos
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cupones Disponibles -->
+            <div class="cupones-disponibles-card" id="cuponesDisponibles">
+                <h4>🎫 Cupones Disponibles</h4>
+                <div class="cupones-lista" id="cuponesLista">
+                    <!-- Se cargan dinámicamente -->
+                </div>
+                <button class="btn-ver-mas-cupones" onclick="window.location.href='/cupones'">
+                    Ver Todos los Cupones
+                </button>
+            </div>
+
+            <!-- Productos Sugeridos -->
+            <div class="sugerencias-card">
+                <h4>Te puede interesar</h4>
+                <div class="sugerencias-lista" id="sugerenciasLista">
+                    <!-- Productos sugeridos se cargan dinámicamente -->
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<!-- Modal de Confirmación -->
+<div class="modal-overlay" id="modalConfirmacion" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitulo">Confirmar Acción</h3>
+            <button class="modal-close" id="modalClose">×</button>
+        </div>
+        <div class="modal-body">
+            <p id="modalMensaje">¿Estás seguro de realizar esta acción?</p>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-cancelar" id="btnCancelar">Cancelar</button>
+            <button class="btn-confirmar" id="btnConfirmar">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Scripts -->
+<script src="../js/carrito.js"></script>
+
+<script>
+    // Inicializar carrito cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+        window.carritoApp = new CarritoApp();
+    });
+</script>
+</body>
+</html>

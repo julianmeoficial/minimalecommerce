@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - MinimalStore</title>
+
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/perfil.css">
+</head>
+<body>
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p>Cargando tu perfil...</p>
+    </div>
+</div>
+
+<!-- Main Container -->
+<div class="perfil-container">
+
+    <!-- Header del Perfil -->
+    <header class="perfil-header">
+        <div class="user-welcome">
+            <div class="user-avatar" id="userAvatar">
+                <span id="avatarText">U</span>
+            </div>
+            <div class="user-info">
+                <h1 id="userName">Cargando...</h1>
+                <span class="user-badge" id="userBadge">Comprador</span>
+                <p id="userEmail">email@ejemplo.com</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="action-btn primary" id="btnExplorar">
+                <span class="btn-icon">🛍️</span>
+                <span>Explorar Productos</span>
+            </button>
+            <button class="action-btn secondary" id="btnCarrito">
+                <span class="btn-icon">🛒</span>
+                <span>Mi Carrito</span>
+                <span class="badge" id="cartCount">0</span>
+            </button>
+            <button class="action-btn tertiary" id="btnLogout">
+                <span class="btn-icon">🚪</span>
+                <span>Salir</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="perfil-nav">
+        <div class="nav-container" id="navContainer">
+            <!-- La navegación se genera dinámicamente -->
+        </div>
+    </nav>
+
+    <!-- Content Sections -->
+    <main class="perfil-content">
+
+        <!-- Sección: Mi Información -->
+        <section id="seccionInformacion" class="content-section active">
+            <div class="section-header">
+                <h2>Mi Información Personal</h2>
+                <button class="edit-btn" id="btnEditarInfo">
+                    <span class="btn-icon">✏️</span>
+                    <span>Editar</span>
+                </button>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="inputNombre" readonly>
+                    <div class="field-line"></div>
+                </div>
+
+                <div class="info-card">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="inputEmail" readonly>
+                    <div class="field-line"></div>
+                </div>
+
+                <div class="info-card">
+                    <label>Teléfono</label>
+                    <input type="tel" id="inputTelefono" readonly>
+                    <div class="field-line"></div>
+                </div>
+
+                <div class="info-card full-width">
+                    <label>Dirección Principal</label>
+                    <textarea id="inputDireccion" rows="3" readonly></textarea>
+                    <div class="field-line"></div>
+                </div>
+            </div>
+
+            <div class="form-actions hidden" id="formActions">
+                <button class="action-btn secondary" id="btnCancelar">
+                    <span>Cancelar</span>
+                </button>
+                <button class="action-btn primary" id="btnGuardar">
+                    <span class="btn-icon">💾</span>
+                    <span>Guardar Cambios</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Sección: Mis Pedidos -->
+        <section id="seccionPedidos" class="content-section">
+            <div class="section-header">
+                <h2>Mis Pedidos</h2>
+                <div class="filters">
+                    <select id="filtroEstado" class="filter-select">
+                        <option value="">Todos los estados</option>
+                        <option value="PENDIENTE">Pendiente</option>
+                        <option value="CONFIRMADO">Confirmado</option>
+                        <option value="ENVIADO">Enviado</option>
+                        <option value="ENTREGADO">Entregado</option>
+                        <option value="CANCELADO">Cancelado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="pedidosContainer" class="pedidos-container">
+                <!-- Los pedidos se cargan dinámicamente -->
+            </div>
+        </section>
+
+        <!-- Sección: Preórdenes -->
+        <section id="seccionPreordenes" class="content-section">
+            <div class="section-header">
+                <h2>Mis Preórdenes</h2>
+                <div class="info-text">
+                    <span>🔔 Te notificaremos cuando estén disponibles</span>
+                </div>
+            </div>
+
+            <div id="preordenesContainer" class="preordenes-container">
+                <!-- Las preórdenes se cargan dinámicamente -->
+            </div>
+        </section>
+
+        <!-- Sección: Direcciones -->
+        <section id="seccionDirecciones" class="content-section">
+            <div class="section-header">
+                <h2>Mis Direcciones</h2>
+                <button class="action-btn primary" id="btnNuevaDireccion">
+                    <span class="btn-icon">➕</span>
+                    <span>Nueva Dirección</span>
+                </button>
+            </div>
+
+            <div id="direccionesContainer" class="direcciones-container">
+                <!-- Las direcciones se cargan dinámicamente -->
+            </div>
+        </section>
+
+        <!-- Sección: Favoritos (Solo Compradores) -->
+        <section id="seccionFavoritos" class="content-section">
+            <div class="section-header">
+                <h2>Productos Favoritos</h2>
+                <div class="view-options">
+                    <button class="view-btn active" data-view="grid">
+                        <span>⊞</span>
+                    </button>
+                    <button class="view-btn" data-view="list">
+                        <span>☰</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="favoritosContainer" class="favoritos-container grid-view">
+                <!-- Los favoritos se cargan dinámicamente -->
+            </div>
+        </section>
+
+        <!-- ==================== SECCIONES PARA VENDEDORES ==================== -->
+
+        <!-- Sección: Mis Productos (Solo Vendedores) -->
+        <section id="seccionProductos" class="content-section">
+            <div class="section-header">
+                <h2>Mis Productos</h2>
+                <button class="action-btn primary" id="btnNuevoProducto">
+                    <span class="btn-icon">➕</span>
+                    <span>Nuevo Producto</span>
+                </button>
+            </div>
+
+            <!-- Stats Generales -->
+            <div class="productos-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="totalProductos">0</span>
+                        <span class="stat-label">Total Productos</span>
+                    </div>
+                </div>
+                <div class="stat-card activos">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="productosActivos">0</span>
+                        <span class="stat-label">Activos</span>
+                    </div>
+                </div>
+                <div class="stat-card pausados">
+                    <div class="stat-icon">⏸️</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="productosPausados">0</span>
+                        <span class="stat-label">Pausados</span>
+                    </div>
+                </div>
+                <div class="stat-card alerta">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="productosBajoStock">0</span>
+                        <span class="stat-label">Bajo Stock</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Principal: Activos vs Pausados -->
+            <div class="productos-control-principal">
+                <div class="estado-selector-container">
+                    <h3 class="control-title">Estado de Productos</h3>
+                    <div class="estado-toggle-switch">
+                        <input type="radio" id="mostrarActivos" name="estadoProductos" value="activos" checked>
+                        <input type="radio" id="mostrarPausados" name="estadoProductos" value="pausados">
+
+                        <div class="toggle-wrapper">
+                            <label for="mostrarActivos" class="toggle-option activos-option">
+                                <span class="toggle-icon">✅</span>
+                                <span class="toggle-text">Activos</span>
+                                <span class="toggle-count" id="activosCount">0</span>
+                            </label>
+
+                            <label for="mostrarPausados" class="toggle-option pausados-option">
+                                <span class="toggle-icon">⏸️</span>
+                                <span class="toggle-text">Pausados</span>
+                                <span class="toggle-count" id="pausadosCount">0</span>
+                            </label>
+
+                            <div class="toggle-slider-background"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros por Categoría -->
+            <div class="productos-filtros-categoria">
+                <div class="filtros-header">
+                    <h4>Filtrar por Categoría</h4>
+                    <div class="filtros-actions">
+                        <button class="filter-reset-btn" id="resetFiltros">
+                            <span class="btn-icon">🔄</span>
+                            <span>Todas</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="categorias-grid" id="categoriasFilterGrid">
+                    <!-- Se llenan dinámicamente con categorías -->
+                </div>
+            </div>
+
+            <!-- Container de Productos -->
+            <div class="productos-container-wrapper">
+                <div class="productos-section-header" id="productosSectionHeader">
+                    <h4 id="seccionActualTitulo">Productos Activos</h4>
+                    <div class="productos-counter">
+                        <span id="productosVisiblesCount">0</span> productos
+                    </div>
+                </div>
+
+                <div id="productosVendedorContainer" class="productos-vendedor-container">
+                    <!-- Los productos se cargan dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Métricas (Solo Vendedores) -->
+        <section id="seccionMetricas" class="content-section">
+            <div class="section-header">
+                <h2>Métricas de Ventas</h2>
+                <div class="periodo-selector">
+                    <button class="periodo-btn active" data-periodo="7">7 días</button>
+                    <button class="periodo-btn" data-periodo="30">30 días</button>
+                    <button class="periodo-btn" data-periodo="90">90 días</button>
+                </div>
+            </div>
+
+            <div class="metricas-grid">
+                <div class="metrica-card ventas">
+                    <div class="metrica-icon">💰</div>
+                    <div class="metrica-info">
+                        <span class="metrica-number" id="ventasTotales">$0</span>
+                        <span class="metrica-label">Ventas Totales</span>
+                        <span class="metrica-trend" id="ventasTrend">+0%</span>
+                    </div>
+                </div>
+
+                <div class="metrica-card pedidos">
+                    <div class="metrica-icon">📋</div>
+                    <div class="metrica-info">
+                        <span class="metrica-number" id="pedidosVendidos">0</span>
+                        <span class="metrica-label">Pedidos Completados</span>
+                        <span class="metrica-trend" id="pedidosTrend">+0%</span>
+                    </div>
+                </div>
+
+                <div class="metrica-card calificacion">
+                    <div class="metrica-icon">⭐</div>
+                    <div class="metrica-info">
+                        <span class="metrica-number" id="calificacionPromedio">0.0</span>
+                        <span class="metrica-label">Calificación</span>
+                        <div class="estrellas" id="estrellasPromedio">
+                            <span>☆☆☆☆☆</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metrica-card visitantes">
+                    <div class="metrica-icon">👥</div>
+                    <div class="metrica-info">
+                        <span class="metrica-number" id="visitasTienda">0</span>
+                        <span class="metrica-label">Visitas Tienda</span>
+                        <span class="metrica-trend" id="visitasTrend">+0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metricas-detalle">
+                <div class="chart-container">
+                    <h3>Tendencia de Ventas</h3>
+                    <div id="chartVentas" class="chart-placeholder">
+                        <span>📈 Gráfico de ventas</span>
+                        <p>Los datos de tendencias aparecerán aquí</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Reseñas (Solo Vendedores) -->
+        <section id="seccionResenas" class="content-section">
+            <div class="section-header">
+                <h2>Reseñas de Mis Productos</h2>
+                <div class="resenas-filter">
+                    <select id="filtroCalificacion" class="filter-select">
+                        <option value="">Todas las calificaciones</option>
+                        <option value="5">5 estrellas</option>
+                        <option value="4">4 estrellas</option>
+                        <option value="3">3 estrellas</option>
+                        <option value="2">2 estrellas</option>
+                        <option value="1">1 estrella</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="resenas-resumen">
+                <div class="resumen-card">
+                    <div class="resumen-header">
+                        <h3>Resumen de Calificaciones</h3>
+                        <div class="calificacion-general">
+                            <span class="numero-grande" id="promedioGeneral">0.0</span>
+                            <div class="estrellas-grandes" id="estrellasGenerales">☆☆☆☆☆</div>
+                            <span class="total-resenas" id="totalResenas">0 reseñas</span>
+                        </div>
+                    </div>
+
+                    <div class="distribucion-estrellas">
+                        <div class="estrella-fila">
+                            <span>5★</span>
+                            <div class="barra-progreso">
+                                <div class="progreso" data-estrella="5" style="width: 0%"></div>
+                            </div>
+                            <span class="contador" id="count5">0</span>
+                        </div>
+                        <div class="estrella-fila">
+                            <span>4★</span>
+                            <div class="barra-progreso">
+                                <div class="progreso" data-estrella="4" style="width: 0%"></div>
+                            </div>
+                            <span class="contador" id="count4">0</span>
+                        </div>
+                        <div class="estrella-fila">
+                            <span>3★</span>
+                            <div class="barra-progreso">
+                                <div class="progreso" data-estrella="3" style="width: 0%"></div>
+                            </div>
+                            <span class="contador" id="count3">0</span>
+                        </div>
+                        <div class="estrella-fila">
+                            <span>2★</span>
+                            <div class="barra-progreso">
+                                <div class="progreso" data-estrella="2" style="width: 0%"></div>
+                            </div>
+                            <span class="contador" id="count2">0</span>
+                        </div>
+                        <div class="estrella-fila">
+                            <span>1★</span>
+                            <div class="barra-progreso">
+                                <div class="progreso" data-estrella="1" style="width: 0%"></div>
+                            </div>
+                            <span class="contador" id="count1">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="resenasContainer" class="resenas-container">
+                <!-- Las reseñas se cargan dinámicamente -->
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Modal Nuevo Producto -->
+<div id="modalProducto" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Nuevo Producto</h3>
+            <button class="close-btn" onclick="cerrarModal('modalProducto')">&times;</button>
+        </div>
+
+        <form id="formProducto" class="modal-form" enctype="multipart/form-data">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="productoNombre">Nombre del Producto</label>
+                    <input type="text" id="productoNombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productoPrecio">Precio</label>
+                    <input type="number" id="productoPrecio" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productoStock">Stock</label>
+                    <input type="number" id="productoStock" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productoCategoria">Categoría</label>
+                    <select id="productoCategoria" required>
+                        <option value="">Seleccionar categoría</option>
+                        <!-- Se cargan dinámicamente -->
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="productoDescripcion">Descripción</label>
+                    <textarea id="productoDescripcion" rows="4" required></textarea>
+                </div>
+
+                <!-- NUEVA SECCIÓN PARA IMÁGENES -->
+                <div class="form-group full-width">
+                    <label for="productoImagenes">Imágenes del Producto (máximo 3)</label>
+                    <div class="image-upload-area" id="imageUploadArea">
+                        <input type="file" id="productoImagenes" multiple accept="image/*" style="display: none;">
+                        <div class="upload-placeholder" onclick="document.getElementById('productoImagenes').click()">
+                            <div class="upload-icon">📷</div>
+                            <p>Haz clic para seleccionar imágenes</p>
+                            <span>O arrastra las imágenes aquí (máximo 3)</span>
+                        </div>
+                    </div>
+                    <div id="imagePreviewContainer" class="image-preview-container">
+                        <!-- Previews se mostrarán aquí -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="action-btn secondary" onclick="cerrarModal('modalProducto')">
+                    Cancelar
+                </button>
+                <button type="submit" class="action-btn primary">
+                    <span class="btn-icon">💾</span>
+                    Guardar Producto
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    </main>
+</div>
+
+<!-- Modal Editar Producto -->
+<div id="modalEditarProducto" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Editar Producto</h3>
+            <button class="close-btn" onclick="cerrarModal('modalEditarProducto')">&times;</button>
+        </div>
+        <form id="formEditarProducto" class="modal-form" enctype="multipart/form-data">
+            <input type="hidden" id="editarProductoId">
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="editarProductoNombre">Nombre del Producto</label>
+                    <input type="text" id="editarProductoNombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editarProductoPrecio">Precio</label>
+                    <input type="number" id="editarProductoPrecio" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editarProductoStock">Stock</label>
+                    <input type="number" id="editarProductoStock" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editarProductoCategoria">Categoría</label>
+                    <select id="editarProductoCategoria" required>
+                        <option value="">Seleccionar categoría</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="toggle-label">
+                        <span>Estado del Producto</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="editarProductoActivo" class="toggle-input">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-text">
+                                <span class="toggle-active">Activo</span>
+                                <span class="toggle-inactive">Inactivo</span>
+                            </span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="editarProductoDescripcion">Descripción</label>
+                    <textarea id="editarProductoDescripcion" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Imágenes Actuales</label>
+                    <div id="imagenesActualesContainer" class="imagenes-actuales-container"></div>
+
+                    <!-- Botón simple para eliminar todas -->
+                    <div class="imagenes-acciones">
+                        <button type="button" class="action-btn danger-secondary" onclick="perfil.eliminarTodasImagenesProducto(document.getElementById('editarProductoId').value)">
+                            <span class="btn-icon">🗑️</span>
+                            Eliminar Todas las Imágenes
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="editarProductoImagenes">Nuevas Imágenes (máximo 3)</label>
+                    <div class="image-upload-area" id="editarImageUploadArea">
+                        <input type="file" id="editarProductoImagenes" multiple accept="image/*" style="display: none;">
+                        <div class="upload-placeholder" onclick="document.getElementById('editarProductoImagenes').click()">
+                            <div class="upload-icon">📷</div>
+                            <p>Haz clic para seleccionar nuevas imágenes</p>
+                            <span>O arrastra las imágenes aquí (máximo 3)</span>
+                        </div>
+                    </div>
+                    <div id="editarImagePreviewContainer" class="image-preview-container"></div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="action-btn danger" onclick="perfil.eliminarProducto()">
+                    <span class="btn-icon">🗑️</span>
+                    Eliminar
+                </button>
+                <button type="button" class="action-btn secondary" onclick="cerrarModal('modalEditarProducto')">
+                    Cancelar
+                </button>
+                <button type="submit" class="action-btn primary">
+                    <span class="btn-icon">💾</span>
+                    Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Estadísticas Producto -->
+<div id="modalStatsProducto" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Estadísticas del Producto</h3>
+            <button class="close-btn" onclick="cerrarModal('modalStatsProducto')">&times;</button>
+        </div>
+
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="statsVentas">0</span>
+                        <span class="stat-label">Ventas Totales</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">👁️</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="statsVistas">0</span>
+                        <span class="stat-label">Vistas</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="statsRating">0.0</span>
+                        <span class="stat-label">Rating Promedio</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="statsIngresos">$0</span>
+                        <span class="stat-label">Ingresos</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-message">
+                <div class="stats-icon">📈</div>
+                <h4>Las estadísticas aparecerán aquí</h4>
+                <p>A medida que se registren ventas y actividad en tu producto, podrás ver métricas detalladas como vistas, conversiones, rating promedio y más.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Nueva Dirección -->
+<div id="modalDireccion" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Nueva Dirección</h3>
+            <button class="close-btn" onclick="cerrarModal('modalDireccion')">&times;</button>
+        </div>
+
+        <form id="formDireccion" class="modal-form">
+            <div class="form-group">
+                <label for="direccionNombre">Nombre de la dirección</label>
+                <input type="text" id="direccionNombre" placeholder="Casa, Trabajo, etc." required>
+            </div>
+
+            <div class="form-group">
+                <label for="direccionCompleta">Dirección completa</label>
+                <textarea id="direccionCompleta" rows="3" placeholder="Calle, número, ciudad..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="direccionReferencia">Referencia</label>
+                <input type="text" id="direccionReferencia" placeholder="Cerca de...">
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="action-btn secondary" onclick="cerrarModal('modalDireccion')">
+                    Cancelar
+                </button>
+                <button type="submit" class="action-btn primary">
+                    <span class="btn-icon">💾</span>
+                    Guardar Dirección
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- Scripts -->
+<script src="../js/perfil.js"></script>
+</body>
+</html>

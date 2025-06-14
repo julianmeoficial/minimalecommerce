@@ -1,0 +1,1103 @@
+/* Equipo - Neumorphism con Cards Interactivas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+        --minimal-gray: #f8f9fa;
+        --minimal-dark: #2c3e50;
+        --minimal-accent: #34495e;
+        --minimal-light: #ecf0f1;
+        --primary-blue: #3498db;
+        --team-purple: #3498db;
+        --team-orange: #2c3e50;
+        --team-green: #27ae60;
+        --team-pink: #6c5ce7;
+
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #e5e7eb;
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --neumorphism-shadow:
+            12px 12px 24px rgba(163, 177, 198, 0.6),
+            -12px -12px 24px rgba(255, 255, 255, 0.8);
+    --neumorphism-inset:
+            inset 8px 8px 16px rgba(163, 177, 198, 0.4),
+            inset -8px -8px 16px rgba(255, 255, 255, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 50%, #dfe6e9 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Fondo animado con partículas */
+.particles-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(52, 152, 219, 0.4);
+    border-radius: 50%;
+    animation: particleFloat 15s infinite linear;
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 18s; }
+.particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 14s; }
+.particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 16s; }
+.particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 13s; }
+.particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 17s; }
+.particle:nth-child(7) { left: 70%; animation-delay: 0.5s; animation-duration: 15s; }
+.particle:nth-child(8) { left: 80%; animation-delay: 2.5s; animation-duration: 19s; }
+.particle:nth-child(9) { left: 15%; animation-delay: 4.5s; animation-duration: 11s; }
+.particle:nth-child(10) { left: 85%; animation-delay: 1.5s; animation-duration: 20s; }
+.particle:nth-child(11) { left: 25%; animation-delay: 3.5s; animation-duration: 12s; }
+.particle:nth-child(12) { left: 75%; animation-delay: 0.8s; animation-duration: 16s; }
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) translateX(0px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) translateX(30px);
+        opacity: 0;
+    }
+}
+
+/* Logo flotante */
+.floating-logo {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 50;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: translateY(-2px);
+}
+
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--team-purple), var(--team-orange));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.logo-icon span {
+    color: white;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.logo-text {
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor principal */
+.main-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+/* Header */
+.team-header {
+    text-align: center;
+    margin-bottom: 6rem;
+    padding-top: 3rem;
+}
+
+.team-title {
+    font-size: 5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #2c3e50, #3498db, #6c5ce7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.team-subtitle {
+    font-size: 1.4rem;
+    color: white;
+    font-weight: 300;
+    margin-top: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Sección de introducción */
+.team-intro-section {
+    margin-bottom: 6rem;
+}
+
+.intro-container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 4rem;
+    box-shadow: var(--neumorphism-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.intro-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, var(--team-purple), var(--team-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.intro-content {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Containers neumórficos para los textos */
+.text-card {
+    background: #f0f0f3;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow:
+            8px 8px 16px rgba(163, 177, 198, 0.6),
+            -8px -8px 16px rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.text-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+            12px 12px 24px rgba(163, 177, 198, 0.8),
+            -12px -12px 24px rgba(255, 255, 255, 0.9);
+}
+
+/* Card principal con tono azul */
+.primary-card {
+    background: linear-gradient(145deg, #e8f4fd, #dbeafe);
+    border-left: 4px solid #3498db;
+    position: relative;
+}
+
+.primary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3498db, #74b9ff);
+    border-radius: 20px 20px 0 0;
+}
+
+/* Cards secundarias */
+.secondary-card {
+    background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+    border-left: 4px solid #6c757d;
+}
+
+.tertiary-card {
+    background: linear-gradient(145deg, #f1f3f4, #e8eaed);
+    border-left: 4px solid #495057;
+}
+
+/* Texto dentro de las cards */
+.card-text {
+    color: #2c3e50 !important;
+    font-weight: 500;
+    line-height: 1.8;
+    font-family: 'Georgia', 'Times New Roman', serif !important;
+    margin: 0;
+    font-size: 1rem;
+    text-align: justify;
+}
+
+.primary-card .card-text {
+    color: #1e3a8a !important;
+    font-weight: 600;
+}
+
+.intro-content p {
+    margin-bottom: 1.5rem;
+    color: #2c3e50 !important;
+    font-weight: 500;
+    line-height: 1.8;
+    font-family: 'Georgia', 'Times New Roman', serif !important;
+    text-shadow: none;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.intro-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: var(--neumorphism-inset);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.stat-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--team-orange), var(--team-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: white;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Sección de miembros del equipo */
+.team-members-section {
+    margin-bottom: 6rem;
+}
+
+.members-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 4rem;
+    box-shadow: var(--neumorphism-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Icono animado para la sección de equipo */
+.team-icon-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.team-icon-card {
+    width: 220px;
+    height: 140px;
+    padding: 0.8rem;
+    background: rgba(52, 152, 219, 0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+    border-left: 2px rgba(255, 255, 255, 0.545) outset;
+    box-shadow:
+            -20px 25px 20px rgba(0, 0, 0, 0.180),
+            8px 8px 16px rgba(163, 177, 198, 0.4),
+            -8px -8px 16px rgba(255, 255, 255, 0.6);
+    transform: skewX(8deg);
+    transition: all 0.5s ease;
+    overflow: hidden;
+    color: #2c3e50;
+    cursor: pointer;
+    position: relative;
+}
+
+.team-icon-card:hover {
+    height: 280px;
+    transform: skew(0deg);
+    background: rgba(52, 152, 219, 0.25);
+    box-shadow:
+            -30px 40px 30px rgba(0, 0, 0, 0.220),
+            12px 12px 24px rgba(163, 177, 198, 0.6),
+            -12px -12px 24px rgba(255, 255, 255, 0.8);
+}
+
+.icon-align {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-self: flex-start;
+    justify-content: center;
+}
+
+.red-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ff605c;
+    box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.280);
+    transition: all 0.3s ease;
+}
+
+.yellow-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ffbd44;
+    box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.280);
+    transition: all 0.3s ease;
+}
+
+.green-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #00ca4e;
+    box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.280);
+    transition: all 0.3s ease;
+}
+
+.team-icon-card:hover .red-dot,
+.team-icon-card:hover .yellow-dot,
+.team-icon-card:hover .green-dot {
+    transform: scale(1.2);
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.380);
+}
+
+.icon-title {
+    text-align: center;
+    margin: 1rem 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: none;
+    letter-spacing: 2px;
+}
+
+.icon-description {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    padding: 0 1rem;
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #34495e;
+    margin-top: 1rem;
+}
+
+.team-icon-card:hover .icon-description {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efecto de brillo */
+.team-icon-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.team-icon-card:hover::before {
+    opacity: 1;
+}
+
+.members-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center !important;
+    margin-bottom: 4rem;
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 4rem;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Cards del equipo */
+.team-card {
+    width: 350px;
+    height: auto;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f2f2f3;
+    border-radius: 24px;
+    box-shadow: var(--neumorphism-inset);
+    transition: all 0.4s ease;
+    position: relative;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.team-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow:
+            20px 20px 40px rgba(163, 177, 198, 0.8),
+            -20px -20px 40px rgba(255, 255, 255, 0.9);
+}
+
+.card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.julian-card .card-glow {
+    background: radial-gradient(circle, rgba(142, 68, 173, 0.3) 0%, transparent 70%);
+}
+
+.monica-card .card-glow {
+    background: radial-gradient(circle, rgba(230, 126, 34, 0.3) 0%, transparent 70%);
+}
+
+.team-card:hover .card-glow {
+    opacity: 1;
+}
+
+.profile-img {
+    height: 120px;
+    width: 120px;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 50%;
+    background: #f2f2f3;
+    box-shadow: var(--neumorphism-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.team-card:hover .profile-img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.emoji-avatar {
+    font-size: 4rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.member-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.member-name {
+    font-weight: 700;
+    font-size: 1.4rem;
+    background: linear-gradient(120deg, var(--team-purple), var(--team-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.member-role {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.member-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.skill-tag {
+    background: rgba(142, 68, 173, 0.1);
+    color: var(--team-purple);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(142, 68, 173, 0.2);
+    transition: all 0.3s ease;
+}
+
+.monica-card .skill-tag {
+    background: rgba(230, 126, 34, 0.1);
+    color: var(--team-orange);
+    border-color: rgba(230, 126, 34, 0.2);
+}
+
+.skill-tag:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(142, 68, 173, 0.3);
+}
+
+.member-description {
+    text-align: center;
+    margin-bottom: 2rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.member-description p {
+    color: #2c3e50 !important;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    font-family: 'Georgia', 'Times New Roman', serif !important;
+    font-weight: 400;
+}
+
+.member-button {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.8rem 2.5rem;
+    border-radius: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.julian-button {
+    background: linear-gradient(90deg, var(--team-purple), var(--team-pink));
+}
+
+.monica-button {
+    background: linear-gradient(90deg, var(--team-orange), var(--team-green));
+}
+
+.member-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.member-button:active {
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Sección de colaboración */
+.collaboration-section {
+    margin-bottom: 5rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.collaboration-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 4rem;
+    box-shadow: var(--neumorphism-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.collaboration-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 4rem;
+    background: linear-gradient(135deg, var(--team-purple), var(--team-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.collaboration-content {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.collaboration-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: var(--neumorphism-inset);
+    transition: all 0.4s ease;
+}
+
+.collaboration-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.collab-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.collab-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1rem;
+}
+
+.collab-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.collaboration-bridge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.bridge-line {
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(180deg, var(--team-purple), var(--team-orange));
+    border-radius: 1px;
+}
+
+.bridge-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.bridge-icon {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #3498db, #6c5ce7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.collaboration-result {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.result-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: var(--neumorphism-shadow);
+}
+
+.result-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1rem;
+}
+
+.result-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Navegación */
+.navigation-section {
+    margin: 4rem 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.nav-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.nav-card {
+    display: block !important;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--neumorphism-shadow);
+    transition: all 0.4s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.nav-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+            16px 16px 32px rgba(163, 177, 198, 0.8),
+            -16px -16px 32px rgba(255, 255, 255, 0.9);
+}
+
+.nav-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.nav-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--minimal-dark);
+    margin-bottom: 1rem;
+}
+
+.nav-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Footer */
+.team-footer {
+    text-align: center;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 4rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.footer-content p {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.footer-quote {
+    font-style: italic;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .team-icon-card {
+        width: 180px;
+        height: 120px;
+        transform: skewX(5deg);
+    }
+
+    .team-icon-card:hover {
+        height: 240px;
+    }
+
+    .icon-title {
+        font-size: 1rem;
+        margin: 0.8rem 0 0.3rem 0;
+    }
+
+    .icon-description {
+        font-size: 0.8rem;
+        padding: 0 0.8rem;
+    }
+
+    .red-dot, .yellow-dot, .green-dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-icon-card {
+        width: 160px;
+        height: 100px;
+    }
+
+    .team-icon-card:hover {
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .text-card {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .intro-content {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .text-card {
+        padding: 1rem;
+        margin: 0 0.5rem;
+    }
+
+    .primary-card::before {
+        height: 2px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+
+    .team-title {
+        font-size: 3rem;
+    }
+
+    .intro-container,
+    .members-container,
+    .collaboration-container {
+        padding: 2rem;
+    }
+
+    .intro-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .team-card {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .collaboration-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .bridge-line {
+        width: 100px;
+        height: 2px;
+    }
+
+    .nav-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Forzar visibilidad de elementos críticos */
+.team-title,
+.intro-title,
+.members-title,
+.collaboration-title,
+.navigation-section,
+.nav-grid,
+.nav-card,
+.team-footer {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* FORZAR VISIBILIDAD DE CREADORES */
+.team-members-section,
+.members-container,
+.team-grid,
+.team-card,
+.julian-card,
+.monica-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+.team-grid {
+    display: grid !important;
+}
+
+.team-card {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Asegurar que las cards sean visibles */
+.profile-img,
+.member-info,
+.member-skills,
+.member-description,
+.member-button {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* FORZAR VISIBILIDAD DE NOMBRES DE CREADORES */
+.member-name {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    color: #2c3e50 !important;
+}
+
+.member-role {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    color: #7f8c8d !important;
+}
+
+/* Centrado perfecto del título */
+.members-container {
+    text-align: center;
+}
+
+.members-title {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Efectos especiales para la card azul */
+.primary-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.primary-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.primary-card:hover::after {
+    opacity: 1;
+}
+
+/* Animación de pulso sutil */
+@keyframes subtlePulse {
+    0%, 100% {
+        box-shadow:
+                8px 8px 16px rgba(163, 177, 198, 0.6),
+                -8px -8px 16px rgba(255, 255, 255, 0.8);
+    }
+    50% {
+        box-shadow:
+                10px 10px 20px rgba(163, 177, 198, 0.7),
+                -10px -10px 20px rgba(255, 255, 255, 0.9);
+    }
+}
+
+.text-card {
+    animation: subtlePulse 6s ease-in-out infinite;
+}
+
+.primary-card {
+    animation-delay: 0s;
+}
+
+.secondary-card {
+    animation-delay: 2s;
+}
+
+.tertiary-card {
+    animation-delay: 4s;
+}
+
+/* Ocultar solo el texto del título manteniendo el espaciado */
+.members-title {
+    color: transparent !important;
+    text-shadow: none !important;
+    background: none !important;
+    -webkit-text-fill-color: transparent !important;
+}

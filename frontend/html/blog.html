@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Premium - MinimalStore</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Descubre artículos exclusivos, tendencias y consejos de nuestros expertos vendedores">
+    <meta name="keywords" content="blog, artículos, tendencias, consejos, ecommerce">
+    <meta name="author" content="MinimalStore">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Blog Premium - MinimalStore">
+    <meta property="og:description" content="Descubre artículos exclusivos y tendencias">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/blog">
+
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Fonts Optimizadas para Lectura -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/blog.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "MinimalStore Blog",
+            "description": "Blog premium de e-commerce con artículos de expertos",
+            "url": "/blog",
+            "publisher": {
+                "@type": "Organization",
+                "name": "MinimalStore"
+            }
+        }
+    </script>
+</head>
+<body class="paper-theme" data-user-type="COMPRADOR">
+
+<!-- Loading Screen Optimizado -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+        <div class="loading-spinner-blog"></div>
+        <h3>Cargando Blog Premium</h3>
+        <p class="loading-text">Preparando experiencia de lectura...</p>
+    </div>
+</div>
+
+<!-- Navigation Header -->
+<nav class="nav-header" role="navigation" aria-label="Navegación principal">
+    <div class="nav-container">
+        <div class="nav-left">
+            <button class="nav-btn back-btn" onclick="window.location.href='/dashboard'" aria-label="Volver al dashboard">
+                <span class="btn-icon" aria-hidden="true">←</span>
+                <span>Dashboard</span>
+            </button>
+        </div>
+
+        <div class="nav-center">
+            <h1 class="page-title">
+                <span class="title-icon" aria-hidden="true">📰</span>
+                <span class="title-text">Blog Premium</span>
+            </h1>
+        </div>
+
+        <div class="nav-right">
+            <button class="nav-btn profile-btn" onclick="window.location.href='/perfil'" aria-label="Ir al perfil">
+                <span class="btn-icon" aria-hidden="true">👤</span>
+                <span>Perfil</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Breadcrumbs -->
+<nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <div class="breadcrumbs-container">
+        <ol class="breadcrumbs-list" id="breadcrumbsList">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li class="current">Blog</li>
+        </ol>
+    </div>
+</nav>
+
+<!-- Main Container -->
+<main class="blog-container" role="main">
+
+    <!-- Hero Section del Blog -->
+    <section class="blog-hero" role="banner">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2 class="hero-title">Descubre Contenido Exclusivo</h2>
+                <p class="hero-subtitle">Artículos premium creados por nuestros expertos vendedores</p>
+            </div>
+
+            <!-- Motivation Box Contextual -->
+            <div class="motivation-box-blog" id="motivationBoxBlog">
+                <div class="motivation-content">
+                    <div class="motivation-icon" aria-hidden="true">✨</div>
+                    <div class="motivation-text">
+                        <h3 id="motivationTitle">¡Explora y aprende algo nuevo!</h3>
+                        <p id="motivationDesc">Descubre productos increíbles inspirados en nuestros artículos</p>
+                    </div>
+                    <button class="motivation-btn" id="motivationBtnBlog" onclick="window.location.href='/categorias'">
+                        <span class="btn-text" id="motivationBtnText">Explorar Categorías</span>
+                        <span class="btn-effect"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Vendedor (Solo Vendedores) -->
+    <section class="vendor-dashboard vendedor-only" id="vendorDashboard" role="region" aria-label="Panel de control del vendedor">
+        <div class="dashboard-header">
+            <div class="header-left">
+                <h2>📊 Dashboard Editorial</h2>
+                <p class="dashboard-subtitle">Gestiona tu contenido</p>
+            </div>
+            <div class="header-right">
+                <button class="btn-primary-blog" id="btnNuevoArticulo">
+                    <span class="btn-icon">✍️</span>
+                    <span>Nuevo Artículo</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card-blog">
+                <div class="stat-icon">📝</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalArticulos">0</span>
+                    <span class="stat-label">Artículos Totales</span>
+                </div>
+            </div>
+            <div class="stat-card-blog">
+                <div class="stat-icon">👁️</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalVistas">0</span>
+                    <span class="stat-label">Total Vistas</span>
+                </div>
+            </div>
+            <div class="stat-card-blog">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="articulosPublicados">0</span>
+                    <span class="stat-label">Publicados</span>
+                </div>
+            </div>
+            <div class="stat-card-blog">
+                <div class="stat-icon">📈</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="engagementPromedio">0%</span>
+                    <span class="stat-label">Engagement</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Layout Principal -->
+    <div class="content-layout">
+
+        <!-- Sidebar Izquierdo -->
+        <aside class="sidebar-left" role="complementary" aria-label="Navegación y filtros">
+
+            <!-- Búsqueda Inteligente -->
+            <div class="search-section">
+                <h3>Búsqueda Inteligente</h3>
+                <div class="search-container-blog">
+                    <input type="search"
+                           id="searchInput"
+                           class="search-input-blog"
+                           placeholder="Buscar artículos..."
+                           aria-label="Buscar artículos"
+                           autocomplete="off">
+                    <span class="search-icon" aria-hidden="true">🔍</span>
+                    <div class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="Sugerencias de búsqueda">
+                        <!-- Sugerencias dinámicas -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros de Categorías -->
+            <div class="categories-section">
+                <h3>Categorías</h3>
+                <div id="categoriesFilter" class="categories-filter" role="group" aria-label="Filtros de categoría">
+                    <button class="category-btn active" data-category="all" aria-pressed="true">
+                        <span class="category-icon">📚</span>
+                        <span class="category-name">Todas</span>
+                        <span class="category-count" id="countAll">0</span>
+                    </button>
+                    <!-- Categorías dinámicas se cargarán aquí -->
+                </div>
+            </div>
+
+            <!-- Artículos Populares -->
+            <div class="popular-section comprador-only">
+                <h3>Más Leídos</h3>
+                <div class="popular-articles" id="popularArticles">
+                    <!-- Se cargan dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Mis Artículos (Solo Vendedores) -->
+            <div class="my-articles-section vendedor-only">
+                <h3>Mis Artículos</h3>
+                <div class="quick-actions">
+                    <button class="quick-action-btn" data-filter="draft">
+                        <span class="action-icon">📝</span>
+                        <span>Borradores</span>
+                        <span class="action-count" id="countDrafts">0</span>
+                    </button>
+                    <button class="quick-action-btn" data-filter="published">
+                        <span class="action-icon">✅</span>
+                        <span>Publicados</span>
+                        <span class="action-count" id="countPublished">0</span>
+                    </button>
+                    <button class="quick-action-btn" data-filter="scheduled">
+                        <span class="action-icon">⏰</span>
+                        <span>Programados</span>
+                        <span class="action-count" id="countScheduled">0</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Área Principal de Contenido -->
+        <div class="main-content" role="main">
+
+            <!-- Controles de Vista -->
+            <div class="content-controls">
+                <div class="view-controls">
+                    <div class="controls-left">
+                        <h2 id="contentTitle">Artículos Recientes</h2>
+                        <div class="active-filters" id="activeFilters"></div>
+                    </div>
+                    <div class="controls-right">
+                        <div class="sort-controls">
+                            <label for="sortSelect" class="visually-hidden">Ordenar por</label>
+                            <select id="sortSelect" class="sort-select" aria-label="Ordenar artículos">
+                                <option value="recent">Más Recientes</option>
+                                <option value="popular">Más Populares</option>
+                                <option value="title">Alfabético</option>
+                                <option value="author">Por Autor</option>
+                            </select>
+                        </div>
+
+                        <div class="view-mode-controls" role="group" aria-label="Modo de vista">
+                            <button class="view-mode-btn active" data-view="grid" aria-pressed="true" title="Vista de cuadrícula">
+                                <span aria-hidden="true">⊞</span>
+                            </button>
+                            <button class="view-mode-btn" data-view="list" aria-pressed="false" title="Vista de lista">
+                                <span aria-hidden="true">☰</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid de Artículos -->
+            <div class="articles-container">
+                <div id="articlesGrid" class="articles-grid grid-view" role="feed" aria-label="Lista de artículos">
+                    <!-- Los artículos se cargarán dinámicamente -->
+                </div>
+
+                <!-- Estado de Carga -->
+                <div class="loading-articles" id="loadingArticles" aria-hidden="true">
+                    <div class="loading-articles-spinner"></div>
+                    <p>Cargando artículos...</p>
+                </div>
+
+                <!-- Estado Vacío -->
+                <div class="empty-state-blog" id="emptyState" style="display: none;" role="status">
+                    <div class="empty-icon" aria-hidden="true">📖</div>
+                    <h3>No hay artículos disponibles</h3>
+                    <p id="emptyStateMessage">No se encontraron artículos que coincidan con tu búsqueda</p>
+                    <button class="btn-primary-blog vendedor-only" id="emptyStateAction" style="display: none;">
+                        <span class="btn-icon">✍️</span>
+                        <span>Crear Primer Artículo</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paginación Inteligente -->
+            <nav class="pagination-blog" id="paginationContainer" role="navigation" aria-label="Navegación de páginas" style="display: none;">
+                <!-- Se genera dinámicamente -->
+            </nav>
+        </div>
+
+        <!-- Sidebar Derecho -->
+        <aside class="sidebar-right comprador-only" role="complementary" aria-label="Contenido relacionado">
+
+            <!-- Autor Destacado -->
+            <div class="featured-author-section">
+                <h3>Autor Destacado</h3>
+                <div class="featured-author" id="featuredAuthor">
+                    <!-- Se carga dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Categorías Trending -->
+            <div class="trending-section">
+                <h3>Trending</h3>
+                <div class="trending-topics" id="trendingTopics">
+                    <!-- Se cargan dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="newsletter-section">
+                <h3>Mantente Actualizado</h3>
+                <div class="newsletter-box">
+                    <p>Recibe los mejores artículos directo en tu email</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="tu@email.com" required aria-label="Email para newsletter">
+                        <button type="submit" class="btn-newsletter">
+                            <span>Suscribirse</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<!-- Vista Individual de Artículo -->
+<div class="article-view-container" id="articleViewContainer" style="display: none;" role="main">
+
+    <!-- Barra de Progreso de Lectura -->
+    <div class="reading-progress-bar" id="readingProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-fill"></div>
+    </div>
+
+    <!-- Header del Artículo -->
+    <header class="article-header">
+        <div class="article-nav">
+            <button class="btn-back-blog" id="btnBackToBlog" aria-label="Volver al blog">
+                <span class="btn-icon">←</span>
+                <span>Volver al Blog</span>
+            </button>
+
+            <div class="article-actions">
+                <button class="action-btn-blog" id="btnShareArticle" title="Compartir artículo">
+                    <span aria-hidden="true">📤</span>
+                </button>
+                <button class="action-btn-blog" id="btnBookmarkArticle" title="Marcar como favorito">
+                    <span aria-hidden="true">🔖</span>
+                </button>
+                <button class="action-btn-blog vendedor-only" id="btnEditArticle" title="Editar artículo">
+                    <span aria-hidden="true">✏️</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido del Artículo -->
+    <article class="article-content" id="articleContent">
+        <!-- Se carga dinámicamente -->
+    </article>
+
+    <!-- Artículos Relacionados -->
+    <section class="related-articles-section" role="region" aria-label="Artículos relacionados">
+        <h2>Artículos Relacionados</h2>
+        <div class="related-articles-grid" id="relatedArticlesGrid">
+            <!-- Se cargan dinámicamente -->
+        </div>
+    </section>
+</div>
+
+<!-- Modal Editor de Artículos (Solo Vendedores) -->
+<div id="editorModal" class="modal-editor vendedor-only" role="dialog" aria-labelledby="editorModalTitle" aria-hidden="true">
+    <div class="modal-content-editor">
+        <header class="modal-header-editor">
+            <h2 id="editorModalTitle">✍️ Editor de Artículos Premium</h2>
+            <button class="modal-close-editor" id="closeEditorModal" aria-label="Cerrar editor">×</button>
+        </header>
+
+        <form class="editor-form" id="editorForm">
+            <!-- Pestañas del Editor -->
+            <div class="editor-tabs" role="tablist">
+                <button type="button" class="editor-tab active" role="tab" aria-selected="true" data-tab="content" id="tabContent">
+                    <span class="tab-icon">📝</span>
+                    <span>Contenido</span>
+                </button>
+                <button type="button" class="editor-tab" role="tab" aria-selected="false" data-tab="settings" id="tabSettings">
+                    <span class="tab-icon">⚙️</span>
+                    <span>Configuración</span>
+                </button>
+                <button type="button" class="editor-tab" role="tab" aria-selected="false" data-tab="preview" id="tabPreview">
+                    <span class="tab-icon">👁️</span>
+                    <span>Vista Previa</span>
+                </button>
+            </div>
+
+            <!-- Panel de Contenido -->
+            <div class="editor-panel active" id="panelContent" role="tabpanel" aria-labelledby="tabContent">
+                <div class="editor-layout">
+                    <div class="editor-main">
+                        <!-- Metadatos básicos -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="articleTitle">Título del Artículo*</label>
+                                <input type="text" id="articleTitle" maxlength="250" required placeholder="Escribe un título atractivo...">
+                                <div class="field-hint">
+                                    <span>Máximo 250 caracteres</span>
+                                    <span class="char-counter"><span id="titleCounter">0</span>/250</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="articleSummary">Resumen del Artículo*</label>
+                                <textarea id="articleSummary" maxlength="500" required placeholder="Escribe un resumen que enganche a los lectores..."></textarea>
+                                <div class="field-hint">
+                                    <span>Máximo 500 caracteres</span>
+                                    <span class="char-counter"><span id="summaryCounter">0</span>/500</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Editor de Contenido WYSIWYG -->
+                        <div class="form-group">
+                            <label for="articleContent">Contenido del Artículo*</label>
+                            <div class="wysiwyg-toolbar" id="wysiwygToolbar">
+                                <button type="button" class="toolbar-btn" data-action="bold" title="Negrita">
+                                    <strong>B</strong>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-action="italic" title="Cursiva">
+                                    <em>I</em>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-action="underline" title="Subrayado">
+                                    <u>U</u>
+                                </button>
+                                <div class="toolbar-separator"></div>
+                                <button type="button" class="toolbar-btn" data-action="h2" title="Título 2">H2</button>
+                                <button type="button" class="toolbar-btn" data-action="h3" title="Título 3">H3</button>
+                                <div class="toolbar-separator"></div>
+                                <button type="button" class="toolbar-btn" data-action="link" title="Enlace">🔗</button>
+                                <button type="button" class="toolbar-btn" data-action="image" title="Imagen">🖼️</button>
+                                <button type="button" class="toolbar-btn" data-action="list" title="Lista">📝</button>
+                            </div>
+                            <div class="wysiwyg-editor" id="wysiwygEditor" contenteditable="true"
+                                 role="textbox" aria-multiline="true" aria-label="Contenido del artículo"
+                                 placeholder="Comienza a escribir tu artículo aquí...">
+                            </div>
+                            <div class="editor-stats">
+                                <span id="wordCount">0 palabras</span>
+                                <span id="readingTime">0 min de lectura</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar del Editor -->
+                    <div class="editor-sidebar">
+                        <!-- Subida de Imagen Destacada -->
+                        <div class="form-group">
+                            <label>Imagen Destacada</label>
+                            <div class="image-upload-area" id="imageUploadArea">
+                                <div class="upload-placeholder" id="uploadPlaceholder">
+                                    <span class="upload-icon">📷</span>
+                                    <p>Arrastra una imagen aquí o <button type="button" class="btn-link" id="selectImageBtn">selecciona un archivo</button></p>
+                                </div>
+                                <div class="image-preview" id="imagePreview" style="display: none;">
+                                    <img id="previewImage" alt="Vista previa de imagen destacada">
+                                    <button type="button" class="btn-remove-image" id="removeImageBtn">×</button>
+                                </div>
+                                <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+
+                        <!-- Autoguardado -->
+                        <div class="autosave-status">
+                            <span class="autosave-indicator" id="autosaveIndicator">
+                                <span class="status-icon">💾</span>
+                                <span class="status-text">Guardado automáticamente</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel de Configuración -->
+            <div class="editor-panel" id="panelSettings" role="tabpanel" aria-labelledby="tabSettings">
+                <div class="settings-layout">
+                    <div class="settings-section">
+                        <h3>Publicación</h3>
+                        <div class="form-row">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="articleCategory">Categoría</label>
+                                <select id="articleCategory" required>
+                                    <option value="">Seleccionar categoría</option>
+                                    <!-- Se cargan dinámicamente -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group-checkbox">
+                                <input type="checkbox" id="isPublished" name="isPublished">
+                                <label for="isPublished">Publicar inmediatamente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>SEO y Metadatos</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel de Vista Previa -->
+            <div class="editor-panel" id="panelPreview" role="tabpanel" aria-labelledby="tabPreview">
+                <div class="preview-container">
+                    <div class="preview-article" id="previewArticle">
+                        <!-- Vista previa se genera dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones del Editor -->
+            <div class="editor-actions">
+                <div class="actions-left">
+                    <button type="button" class="btn-secondary-blog" id="saveAsDraft">
+                        <span class="btn-icon">💾</span>
+                        <span>Guardar Borrador</span>
+                    </button>
+                </div>
+
+                <div class="actions-right">
+                    <button type="button" class="btn-tertiary-blog" id="cancelEditor">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn-primary-blog" id="publishArticle">
+                        <span class="btn-icon">🚀</span>
+                        <span id="publishBtnText">Publicar Artículo</span>
+                        <span class="btn-loader-blog"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Compartir -->
+<div id="shareModal" class="modal-share" role="dialog" aria-labelledby="shareModalTitle" aria-hidden="true">
+    <div class="modal-content-share">
+        <header class="modal-header-share">
+            <h3 id="shareModalTitle">📤 Compartir Artículo</h3>
+            <button class="modal-close-share" id="closeShareModal" aria-label="Cerrar modal de compartir">×</button>
+        </header>
+
+        <div class="share-options">
+            <button class="share-btn" data-platform="twitter">
+                <span class="share-icon">🐦</span>
+                <span>Twitter</span>
+            </button>
+            <button class="share-btn" data-platform="facebook">
+                <span class="share-icon">📘</span>
+                <span>Facebook</span>
+            </button>
+            <button class="share-btn" data-platform="linkedin">
+                <span class="share-icon">💼</span>
+                <span>LinkedIn</span>
+            </button>
+            <button class="share-btn" data-platform="whatsapp">
+                <span class="share-icon">💬</span>
+                <span>WhatsApp</span>
+            </button>
+        </div>
+
+        <div class="share-link">
+            <label for="shareUrl">Enlace directo:</label>
+            <div class="link-container">
+                <input type="text" id="shareUrl" readonly>
+                <button class="btn-copy-link" id="copyLinkBtn" title="Copiar enlace">
+                    📋
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" class="toast-container-blog"></div>
+
+<!-- Floating Reading Tools (Solo en vista de artículo) -->
+<div class="floating-tools" id="floatingTools" style="display: none;">
+    <button class="tool-btn" id="toggleToc" title="Índice del artículo">
+        <span aria-hidden="true">📑</span>
+    </button>
+    <button class="tool-btn" id="toggleDarkMode" title="Modo oscuro">
+        <span aria-hidden="true">🌙</span>
+    </button>
+    <button class="tool-btn" id="adjustFontSize" title="Tamaño de fuente">
+        <span aria-hidden="true">🔤</span>
+    </button>
+    <button class="tool-btn" id="shareFloating" title="Compartir">
+        <span aria-hidden="true">📤</span>
+    </button>
+</div>
+
+<!-- Table of Contents (TOC) Flotante -->
+<nav class="toc-floating" id="tocFloating" style="display: none;" role="navigation" aria-label="Índice del artículo">
+    <div class="toc-header">
+        <h4>Índice</h4>
+        <button class="toc-close" id="closeToc" aria-label="Cerrar índice">×</button>
+    </div>
+    <ol class="toc-list" id="tocList">
+        <!-- Se genera dinámicamente -->
+    </ol>
+</nav>
+
+<!-- JavaScript -->
+<script src="/js/blog.js"></script>
+</body>
+</html>

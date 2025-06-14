@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de Envíos - MinimalStore</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/envios.css">
+
+    <!-- Configuración Tailwind personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'minimal-gray': '#f8f9fa',
+                        'minimal-dark': '#2c3e50',
+                        'minimal-accent': '#34495e',
+                        'minimal-light': '#ecf0f1'
+                    },
+                    fontFamily: {
+                        'minimal': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-minimal-gray min-h-screen font-minimal">
+
+<!-- Patrones de fondo animados -->
+<div class="shipping-bg-pattern">
+    <div class="pattern-element truck-pattern"></div>
+    <div class="pattern-element package-pattern"></div>
+    <div class="pattern-element plane-pattern"></div>
+    <div class="pattern-element map-pattern"></div>
+    <div class="pattern-element clock-pattern"></div>
+    <div class="pattern-element route-pattern"></div>
+</div>
+
+<!-- Logo flotante -->
+<div class="floating-logo">
+    <a href="dashboard" class="logo-link">
+        <div class="logo-icon">
+            <span>M</span>
+        </div>
+        <span class="logo-text">MinimalStore</span>
+    </a>
+</div>
+
+<!-- Contenedor principal -->
+<div class="main-container">
+
+    <!-- Header con título ScrambleText -->
+    <div class="shipping-header">
+        <h1 class="shipping-title" id="scramble-title">
+            <span class="title-text">Información de Envíos</span>
+        </h1>
+        <p class="shipping-subtitle split-subtitle">
+            Entregamos tus productos de forma rápida y segura
+        </p>
+    </div>
+
+    <!-- Contenedor del contenido con neumorphism -->
+    <div class="shipping-content-container">
+
+        <!-- Animación del camión -->
+        <div class="truck-animation-section">
+            <div class="truck-loader">
+                <div class="truck-wrapper">
+                    <div class="truck-body">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 198 93" class="truck-svg">
+                            <path stroke-width="3" stroke="#2c3e50" fill="#3498db" d="M135 22.5H177.264C178.295 22.5 179.22 23.133 179.594 24.0939L192.33 56.8443C192.442 57.1332 192.5 57.4404 192.5 57.7504V89C192.5 90.3807 191.381 91.5 190 91.5H135C133.619 91.5 132.5 90.3807 132.5 89V25C132.5 23.6193 133.619 22.5 135 22.5Z" />
+                            <path stroke-width="3" stroke="#2c3e50" fill="#34495e" d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.16 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z" />
+                            <path stroke-width="2" stroke="#2c3e50" fill="#2c3e50" d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65.39 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z" />
+                            <rect stroke-width="2" stroke="#2c3e50" fill="#f39c12" rx="1" height="7" width="5" y="63" x="187" />
+                            <rect stroke-width="2" stroke="#2c3e50" fill="#2c3e50" rx="1" height="11" width="4" y="81" x="193" />
+                            <rect stroke-width="3" stroke="#2c3e50" fill="#ecf0f1" rx="2.5" height="90" width="121" y="1.5" x="6.5" />
+                            <rect stroke-width="2" stroke="#2c3e50" fill="#ecf0f1" rx="2" height="4" width="6" y="84" x="1" />
+                        </svg>
+                    </div>
+                    <div class="truck-tires">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 30 30" class="tire-svg">
+                            <circle stroke-width="3" stroke="#2c3e50" fill="#2c3e50" r="13.5" cy="15" cx="15" />
+                            <circle fill="#ecf0f1" r="7" cy="15" cx="15" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 30 30" class="tire-svg">
+                            <circle stroke-width="3" stroke="#2c3e50" fill="#2c3e50" r="13.5" cy="15" cx="15" />
+                            <circle fill="#ecf0f1" r="7" cy="15" cx="15" />
+                        </svg>
+                    </div>
+                    <div class="road"></div>
+                </div>
+            </div>
+            <div class="truck-text">
+                <h3 class="truck-title split-text">¡En camino hacia ti!</h3>
+                <p class="truck-description split-text">Nuestros envíos son rápidos y seguros</p>
+            </div>
+        </div>
+
+        <!-- Contenido de información -->
+        <div class="shipping-content">
+
+            <section class="shipping-section" data-section="1">
+                <h2 class="section-title split-title">Tiempos de Entrega</h2>
+                <div class="section-content split-content">
+                    <p>En MinimalStore nos comprometemos a entregar tus productos en los siguientes tiempos:</p>
+                    <ul class="shipping-list split-list">
+                        <li><strong>Envío Express:</strong> 1-2 días hábiles (disponible en ciudades principales)</li>
+                        <li><strong>Envío Estándar:</strong> 3-5 días hábiles (cobertura nacional)</li>
+                        <li><strong>Envío Económico:</strong> 5-8 días hábiles (ideal para compras no urgentes)</li>
+                        <li><strong>Productos especiales:</strong> 7-15 días hábiles (muebles y artículos grandes)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="shipping-section" data-section="2">
+                <h2 class="section-title split-title">Costos de Envío</h2>
+                <div class="section-content split-content">
+                    <p>Nuestras tarifas de envío son transparentes y competitivas:</p>
+                    <ul class="shipping-list split-list">
+                        <li><strong>Envío gratis:</strong> En compras superiores a $150.000 COP</li>
+                        <li><strong>Envío Express:</strong> $15.000 COP (1-2 días)</li>
+                        <li><strong>Envío Estándar:</strong> $8.000 COP (3-5 días)</li>
+                        <li><strong>Envío Económico:</strong> $5.000 COP (5-8 días)</li>
+                        <li><strong>Productos especiales:</strong> Calculado según peso y dimensiones</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="shipping-section" data-section="3">
+                <h2 class="section-title split-title">Zonas de Cobertura</h2>
+                <div class="section-content split-content">
+                    <p>Llegamos a todo el territorio nacional colombiano:</p>
+                    <ul class="shipping-list split-list">
+                        <li><strong>Bogotá y alrededores:</strong> Entrega al día siguiente disponible</li>
+                        <li><strong>Ciudades principales:</strong> Medellín, Cali, Barranquilla, Cartagena</li>
+                        <li><strong>Ciudades intermedias:</strong> Bucaramanga, Pereira, Manizales, Cúcuta</li>
+                        <li><strong>Municipios y zonas rurales:</strong> Cobertura extendida disponible</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="shipping-section" data-section="4">
+                <h2 class="section-title split-title">Seguimiento de Pedidos</h2>
+                <div class="section-content split-content">
+                    <p>Mantente informado sobre el estado de tu pedido:</p>
+                    <ul class="shipping-list split-list">
+                        <li><strong>Confirmación inmediata:</strong> Recibirás un email con los detalles</li>
+                        <li><strong>Preparación:</strong> Te notificaremos cuando esté siendo empacado</li>
+                        <li><strong>En tránsito:</strong> Código de seguimiento para rastrear en tiempo real</li>
+                        <li><strong>Entregado:</strong> Confirmación de entrega exitosa</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="shipping-section" data-section="5">
+                <h2 class="section-title split-title">Políticas de Entrega</h2>
+                <div class="section-content split-content">
+                    <p>Para garantizar una entrega exitosa, ten en cuenta:</p>
+                    <ul class="shipping-list split-list">
+                        <li><strong>Dirección correcta:</strong> Verifica que todos los datos sean exactos</li>
+                        <li><strong>Alguien debe recibir:</strong> Se requiere presencia en la dirección</li>
+                        <li><strong>Identificación:</strong> El receptor debe presentar cédula de identidad</li>
+                        <li><strong>Horarios de entrega:</strong> Lunes a viernes 8:00 AM - 6:00 PM</li>
+                        <li><strong>Intentos de entrega:</strong> Máximo 2 intentos, luego se devuelve a oficina</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="shipping-section" data-section="6">
+                <h2 class="section-title split-title">Empaque y Protección</h2>
+                <div class="section-content split-content">
+                    <p>Nos aseguramos de que tus productos lleguen en perfecto estado:</p>
+                    <ul class="shipping-list split-list">
+                        <li><strong>Empaque ecológico:</strong> Materiales reciclables y biodegradables</li>
+                        <li><strong>Protección extra:</strong> Bubble wrap y material de relleno</li>
+                        <li><strong>Productos frágiles:</strong> Empaque especializado con señalización</li>
+                        <li><strong>Sellado hermético:</strong> Protección contra humedad y polvo</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Enlace a devoluciones -->
+            <div class="returns-link-section">
+                <div class="returns-card">
+                    <h3 class="returns-title split-text">¿Necesitas devolver un producto?</h3>
+                    <p class="returns-description split-text">
+                        Para devoluciones te recomendamos leer nuestra sección de
+                        <a href="devoluciones" class="returns-link">Políticas de Devoluciones</a>
+                        donde encontrarás toda la información detallada sobre el proceso.
+                    </p>
+                    <a href="devoluciones" class="returns-button">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M9 17l6-6-6-6v12z"/>
+                        </svg>
+                        Ver Políticas de Devoluciones
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="shipping-footer">
+        <div class="footer-content split-footer">
+            <p>&copy; 2025 MinimalStore. Envíos rápidos y seguros a toda Colombia.</p>
+            <p class="footer-date">Información actualizada: Junio 2025</p>
+        </div>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="../js/envios.js"></script>
+</body>
+</html>
